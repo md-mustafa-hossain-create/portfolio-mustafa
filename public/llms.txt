@@ -1,0 +1,14 @@
+# MD Mustafa Hossain - Frontend Developer Portfolio
+
+Information about MD Mustafa Hossain, a Frontend Web Developer specializing in React.js, Vite, and Tailwind CSS.
+
+## Contact & Links
+- [Website](https://mustafa-dev-portfolio.web.app)
+- [LinkedIn](https://www.linkedin.com/in/mdmustafahossain)
+- [GitHub](https://github.com/md-mustafa-hossain-create)
+
+## Technical Skills
+- Core Stack: HTML5, CSS3, JavaScript, React.js, Tailwind CSS, React Router, Firebase, Git, GitHub.
+
+## Education
+- Bachelor of Computer Applications (BCA) - Murshidabad, West Bengal, India.

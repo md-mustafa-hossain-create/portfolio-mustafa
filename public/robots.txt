@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mustafa-dev-portfolio.web.app/sitemap.xml
