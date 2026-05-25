@@ -207,3 +207,28 @@ export const DEFAULT_SKILLS = [
     )
   }
 ];
+
+export const EDUCATION_DATA = [
+  {
+    institution: 'Brainware University',
+    degree: 'Bachelor of Computer Applications (BCA)',
+    year: '2024',
+    location: 'Kolkata, India',
+    active: false,
+  },
+  {
+    institution: 'Netaji Subhas Public School',
+    degree: 'Higher Secondary (12th)',
+    year: '2019',
+    location: 'Jiaganj, India',
+    active: false,
+  },
+  {
+    institution: "Nawab Bahadur's Institution",
+    degree: 'Secondary (10th)',
+    year: '2017',
+    location: 'Lalbagh, India',
+    active: false,
+  },
+];
+

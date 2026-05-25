@@ -18,15 +18,13 @@ export default function Projects() {
     return (
       <section id="projects" className="py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] uppercase tracking-wider font-mono text-brand-400 mb-3 animate-pulse">
-              <Code2 className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '3s' }} />
-              <span>{PROJECTS_STRINGS.SECTION_TAG}</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tighter">
-              {PROJECTS_STRINGS.SECTION_TITLE_PREFIX} <span className="text-brand-400">{PROJECTS_STRINGS.SECTION_TITLE_HIGHLIGHT}</span>
-            </h2>
-            <div className="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+          <div className="animate-pulse">
+            <SectionHeader 
+              tag={PROJECTS_STRINGS.SECTION_TAG}
+              icon={<Code2 className="animate-spin" style={{ animationDuration: '3s' }} />}
+              titlePrefix={PROJECTS_STRINGS.SECTION_TITLE_PREFIX}
+              titleHighlight={PROJECTS_STRINGS.SECTION_TITLE_HIGHLIGHT}
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((item) => (

@@ -31,6 +31,7 @@ export default function SkillCard({ skill, index }) {
           src={iconUrl} 
           alt={skillObj.name || 'Skill icon'} 
           className="w-8 h-8 object-contain rounded"
+          loading="lazy"
           onError={(e) => { e.target.style.display = 'none'; }}
         />
       );

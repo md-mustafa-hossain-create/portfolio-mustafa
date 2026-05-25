@@ -63,6 +63,12 @@ export const PROJECTS_STRINGS = {
   BTN_DEMO: "DEMO"
 };
 
+export const EDUCATION_STRINGS = {
+  SECTION_TAG: "04 . Academics",
+  SECTION_TITLE_PREFIX: "My",
+  SECTION_TITLE_HIGHLIGHT: "Education",
+};
+
 export const CONTACT_STRINGS = {
   SECTION_TAG: "05 . Get In Touch",
   SECTION_TITLE_PREFIX: "Contact",

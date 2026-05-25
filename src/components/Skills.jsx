@@ -18,15 +18,13 @@ export default function Skills() {
     return (
       <section id="skills" className="py-28 relative overflow-hidden bg-zinc-950/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20 animate-pulse">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] uppercase tracking-wider text-brand-400 font-mono mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{SKILLS_STRINGS.SECTION_TAG}</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tighter">
-              {SKILLS_STRINGS.SECTION_TITLE_PREFIX} <span className="text-brand-400">{SKILLS_STRINGS.SECTION_TITLE_HIGHLIGHT}</span>
-            </h2>
-            <div className="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+          <div className="animate-pulse">
+            <SectionHeader 
+              tag={SKILLS_STRINGS.SECTION_TAG}
+              icon={<Sparkles />}
+              titlePrefix={SKILLS_STRINGS.SECTION_TITLE_PREFIX}
+              titleHighlight={SKILLS_STRINGS.SECTION_TITLE_HIGHLIGHT}
+            />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((item) => (

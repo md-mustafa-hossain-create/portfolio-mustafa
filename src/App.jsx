@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import MouseSpotlight from './components/MouseSpotlight';
+import LazySection from './components/ui/LazySection';
 import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from './theme';
 
 const Skills = lazy(() => import('./components/Skills'));
@@ -36,18 +37,26 @@ function PortfolioHome() {
       {/* Sections structured with matching anchors */}
       <Hero />
       <About />
-      <Suspense fallback={<SectionFallback id="skills" label="skills" />}>
-        <Skills />
-      </Suspense>
-      <Suspense fallback={<SectionFallback id="projects" label="projects" />}>
-        <Projects />
-      </Suspense>
-      <Suspense fallback={<SectionFallback id="education" label="education" />}>
-        <Education />
-      </Suspense>
-      <Suspense fallback={<SectionFallback id="contact" label="contact" minHeight="min-h-[360px]" />}>
-        <Contact />
-      </Suspense>
+      <LazySection placeholder={<SectionFallback id="skills" label="skills" />}>
+        <Suspense fallback={<SectionFallback id="skills" label="skills" />}>
+          <Skills />
+        </Suspense>
+      </LazySection>
+      <LazySection placeholder={<SectionFallback id="projects" label="projects" />}>
+        <Suspense fallback={<SectionFallback id="projects" label="projects" />}>
+          <Projects />
+        </Suspense>
+      </LazySection>
+      <LazySection placeholder={<SectionFallback id="education" label="education" />}>
+        <Suspense fallback={<SectionFallback id="education" label="education" />}>
+          <Education />
+        </Suspense>
+      </LazySection>
+      <LazySection placeholder={<SectionFallback id="contact" label="contact" minHeight="min-h-[360px]" />}>
+        <Suspense fallback={<SectionFallback id="contact" label="contact" minHeight="min-h-[360px]" />}>
+          <Contact />
+        </Suspense>
+      </LazySection>
     </div>
   );
 }
@@ -128,9 +137,11 @@ function App() {
           </Routes>
         </main>
 
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
+        <LazySection placeholder={null}>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
+        </LazySection>
       </div>
     </Router>
   );
