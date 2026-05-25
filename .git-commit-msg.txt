@@ -1,5 +1,0 @@
-feat: add SEO Open Graph tags and React Error Boundary
-
-- Added Open Graph and Twitter Card meta tags to `index.html` for rich social media link previews.
-- Created `ErrorBoundary.jsx` class component with a sleek, dark-themed fallback UI to catch runtime errors.
-- Wrapped the root `<App />` component inside `<ErrorBoundary>` in `main.jsx` to prevent blank white screens on crash.

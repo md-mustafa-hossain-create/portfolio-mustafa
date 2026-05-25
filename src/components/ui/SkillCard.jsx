@@ -3,21 +3,6 @@
  */
 
 export default function SkillCard({ skill, index }) {
-  // Helper to determine background glow color
-  const getSkillColor = (skillObj) => {
-    if (skillObj.color) return skillObj.color;
-    const normalizedName = (skillObj.name || skillObj.Name || '').toLowerCase();
-    if (normalizedName.includes('html')) return 'from-orange-500/20 to-red-500/20';
-    if (normalizedName.includes('css') && !normalizedName.includes('tailwind')) return 'from-blue-500/20 to-cyan-500/20';
-    if (normalizedName.includes('javascript') || normalizedName === 'js') return 'from-yellow-500/20 to-amber-500/20';
-    if (normalizedName.includes('react') && !normalizedName.includes('router')) return 'from-cyan-400/20 to-blue-500/20';
-    if (normalizedName.includes('tailwind')) return 'from-teal-400/20 to-cyan-500/20';
-    if (normalizedName.includes('router')) return 'from-red-500/20 to-purple-600/20';
-    if (normalizedName.includes('firebase')) return 'from-amber-400/20 to-orange-500/20';
-    if (normalizedName.includes('git') && !normalizedName.includes('hub')) return 'from-orange-600/20 to-red-600/20';
-    if (normalizedName.includes('github')) return 'from-zinc-600/20 to-zinc-800/20';
-    return 'from-brand-400/20 to-brand-600/20';
-  };
 
   // Helper to render icon, checking if it's already an element or an image URL
   const renderIcon = (skillObj) => {

@@ -1,6 +1,6 @@
 import { ArrowUp } from 'lucide-react';
 import { SOCIALS } from '../constants/data';
-import { GLOBAL, FOOTER_STRINGS } from '../constants/strings';
+import { GLOBAL } from '../constants/strings';
 
 /**
  * @fileoverview Main Footer section component.

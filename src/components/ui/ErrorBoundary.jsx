@@ -53,7 +53,7 @@ class ErrorBoundary extends Component {
             </button>
             
             {/* Optional: Show brief error message in dev or for debugging */}
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <div className="mt-6 text-left bg-zinc-950/80 rounded-lg p-4 border border-red-500/20 overflow-auto max-h-32 text-xs font-mono text-red-400">
                 {this.state.error.toString()}
               </div>
