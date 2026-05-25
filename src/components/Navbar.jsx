@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Moon, SunMedium, Terminal } from 'lucide-react';
+import { NAV_LINKS } from '../constants/data';
+import { GLOBAL, NAV_STRINGS } from '../constants/strings';
+
+/**
+ * @fileoverview Main Navigation component.
+ * Refactored to use extracted constants for DRY compliance.
+ */
 
 export default function Navbar({ theme, onToggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,11 +16,7 @@ export default function Navbar({ theme, onToggleTheme }) {
   // Monitor scroll height to adjust style/border shadow
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -21,11 +24,11 @@ export default function Navbar({ theme, onToggleTheme }) {
 
   // Scrollspy: dynamic navbar section highlighting
   useEffect(() => {
-    const sections = ['home', 'about', 'skills', 'projects', 'education', 'contact'];
+    const sections = NAV_LINKS.map(link => link.href.slice(1));
     
     const observerOptions = {
       root: null,
-      rootMargin: '-40% 0px -40% 0px', // trigger when section occupies central viewport
+      rootMargin: '-40% 0px -40% 0px',
       threshold: 0
     };
 
@@ -41,22 +44,11 @@ export default function Navbar({ theme, onToggleTheme }) {
 
     sections.forEach((id) => {
       const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
+      if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, []);
-
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Education', href: '#education' },
-    { name: 'Contact', href: '#contact' },
-  ];
 
   const isLightTheme = theme === 'light';
 
@@ -79,14 +71,14 @@ export default function Navbar({ theme, onToggleTheme }) {
           <div className="p-2 bg-gradient-to-tr from-brand-400 to-brand-600 rounded-full group-hover:rotate-12 transition-spring">
             <Terminal className="w-4 h-4 text-white" />
           </div>
-          <span className="font-mono font-bold text-base tracking-wider text-white group-hover:text-brand-400 transition-colors">
-            MUSTAFA<span className="text-brand-400">.dev</span>
+          <span className="font-mono font-bold text-base tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase">
+            {GLOBAL.BRAND_NAME}<span className="text-brand-400 lowercase">{GLOBAL.BRAND_DOMAIN}</span>
           </span>
         </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-1">
-          {navLinks.map((link) => {
+          {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.slice(1);
             return (
               <a
@@ -111,29 +103,28 @@ export default function Navbar({ theme, onToggleTheme }) {
             href="#contact"
             className="ml-2 px-4 py-2.5 text-xs font-mono font-bold tracking-wide uppercase text-white bg-zinc-900 border border-zinc-800 hover:border-brand-400/50 hover:bg-zinc-900/80 rounded-full transition-premium active:scale-95 shadow-md"
           >
-            Hire Me
+            {NAV_STRINGS.BTN_HIRE}
           </a>
           <button
             id="nav-btn-theme-toggle"
             type="button"
             onClick={onToggleTheme}
             className="ml-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 transition-premium active:scale-95 cursor-pointer"
-            aria-label={`Switch to ${isLightTheme ? 'dark' : 'light'} theme`}
-            title={`Switch to ${isLightTheme ? 'dark' : 'light'} theme`}
+            aria-label={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
+            title={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
           >
             {isLightTheme ? <Moon className="w-4 h-4" /> : <SunMedium className="w-4 h-4" />}
           </button>
         </div>
 
-        {/* Mobile Actions (Theme Toggle & Menu) */}
+        {/* Mobile Actions */}
         <div className="md:hidden flex items-center gap-2">
           <button
             id="nav-btn-mobile-theme-toggle"
             type="button"
             onClick={onToggleTheme}
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 transition-premium active:scale-95 cursor-pointer"
-            aria-label={`Switch to ${isLightTheme ? 'dark' : 'light'} theme`}
-            title={`Switch to ${isLightTheme ? 'dark' : 'light'} theme`}
+            aria-label={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
           >
             {isLightTheme ? <Moon className="w-4 h-4" /> : <SunMedium className="w-4 h-4" />}
           </button>
@@ -158,7 +149,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         isOpen ? 'opacity-100 translate-y-0 visible scale-100' : 'opacity-0 -translate-y-4 invisible scale-95 pointer-events-none'
       }`}>
         <div className="px-3 py-5 space-y-1 bg-zinc-950/95 border border-zinc-900 backdrop-blur-2xl rounded-3xl shadow-2xl">
-          {navLinks.map((link, i) => {
+          {NAV_LINKS.map((link, i) => {
             const isActive = activeSection === link.href.slice(1);
             return (
               <a
@@ -186,7 +177,7 @@ export default function Navbar({ theme, onToggleTheme }) {
               onClick={() => setIsOpen(false)}
               className="block w-full text-center py-3 text-xs font-mono font-bold uppercase tracking-wider text-white bg-gradient-to-r from-brand-400 to-brand-600 hover:from-brand-300 hover:to-brand-500 rounded-xl transition-premium shadow-lg shadow-brand-500/10 active:scale-98"
             >
-              Hire Me
+              {NAV_STRINGS.BTN_HIRE}
             </a>
           </div>
         </div>

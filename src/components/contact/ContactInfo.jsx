@@ -1,0 +1,80 @@
+import { Mail, MapPin } from 'lucide-react';
+import { SOCIALS } from '../../constants/data';
+import { CONTACT_STRINGS, GLOBAL } from '../../constants/strings';
+
+/**
+ * @fileoverview Renders the social links and direct contact information.
+ */
+
+export default function ContactInfo() {
+  return (
+    <div className="space-y-8 text-left reveal" style={{ transitionDelay: '100ms' }}>
+      <div className="space-y-6">
+        <h3 className="text-2xl font-bold text-zinc-100">
+          {CONTACT_STRINGS.HEADING}
+        </h3>
+        <div className="flex items-center gap-2 text-[10px] text-zinc-500 select-none font-mono mt-4">
+          <span>mustafa@dev:~$</span>
+          <span className="text-purple-400">./connect.sh</span>
+        </div>
+        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-mono mt-3">
+          [<span className="text-yellow-400 font-bold">CONNECT</span>] I am actively seeking opportunities to start my career as a <span className="text-brand-400 font-bold">Frontend Developer</span>. I am open to working on React projects, learning new tools, and collaborating with cross-functional teams.
+        </p>
+
+        {/* Direct Card info */}
+        <div className="space-y-4 pt-4">
+          <div className="flex items-center gap-4 text-zinc-300">
+            <div className="p-3 bg-zinc-900 rounded-lg border border-zinc-800">
+              <Mail className="w-5 h-5 text-brand-400" />
+            </div>
+            <div>
+              <span className="text-[10px] text-zinc-500 font-mono block">EMAIL ME</span>
+              <a
+                href={`mailto:${GLOBAL.DEV_EMAIL}`}
+                className="text-sm font-semibold hover:text-brand-400 transition-colors"
+              >
+                {GLOBAL.DEV_EMAIL}
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 text-zinc-300">
+            <div className="p-3 bg-zinc-900 rounded-lg border border-zinc-800">
+              <MapPin className="w-5 h-5 text-brand-400" />
+            </div>
+            <div>
+              <span className="text-[10px] text-zinc-500 font-mono block">MY LOCATION</span>
+              <span className="text-sm font-semibold">
+                {GLOBAL.DEV_LOCATION}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Social Grid */}
+      <div className="space-y-4 pt-6">
+        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500">
+          {CONTACT_STRINGS.FIND_ME}
+        </h4>
+        <div className="grid grid-cols-2 gap-3">
+          {SOCIALS.map((social) => (
+            <a
+              key={social.name}
+              id={`contact-social-${social.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`glass p-3 rounded-lg flex items-center gap-3 border border-zinc-800 transition-all duration-300 ${social.color}`}
+            >
+              {social.icon}
+              <span className="text-xs font-semibold text-zinc-300 group-hover:text-white">
+                {social.name}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
