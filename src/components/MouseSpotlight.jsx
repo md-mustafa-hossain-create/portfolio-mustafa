@@ -81,11 +81,11 @@ export default function MouseSpotlight() {
       />
       {/* Interactive Micro-cursor dot */}
       <div
-        className="absolute w-1.5 h-1.5 bg-brand-400 rounded-full -translate-x-1/2 -translate-y-1/2"
+        className="absolute w-3 h-3 bg-brand-400 rounded-full -translate-x-1/2 -translate-y-1/2"
         style={{
           left: 'var(--dot-x, -999px)',
           top: 'var(--dot-y, -999px)',
-          boxShadow: '0 0 12px 3px color-mix(in srgb, var(--color-brand-400) 50%, transparent)'
+          boxShadow: '0 0 16px 6px color-mix(in srgb, var(--color-brand-400) 60%, transparent)'
         }}
       />
     </div>
