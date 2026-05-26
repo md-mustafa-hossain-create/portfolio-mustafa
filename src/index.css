@@ -375,3 +375,25 @@ html[data-theme='light'] .double-bezel-inner {
   opacity: 0;
   animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Fix all section header capsule tag icons layout and size constraints globally */
+.inline-flex.rounded-full span.inline-block,
+.inline-flex.rounded-full span.flex {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+}
+
+.inline-flex.rounded-full span svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  flex-shrink: 0 !important;
+}
+
