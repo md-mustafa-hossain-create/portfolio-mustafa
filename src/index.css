@@ -397,3 +397,18 @@ html[data-theme='light'] .double-bezel-inner {
   flex-shrink: 0 !important;
 }
 
+/* Custom Cursor Spotlight & Ambient Backlight Theme Styles */
+.spotlight-dot-el {
+  background-color: var(--color-brand-400);
+  box-shadow: 0 0 12px 4px color-mix(in srgb, var(--color-brand-400) 40%, transparent);
+}
+
+/* Light Mode overrides */
+html[data-theme='light'] .spotlight-ambient-container {
+  display: none !important;
+}
+
+html[data-theme='light'] .spotlight-dot-el {
+  background-color: var(--color-zinc-400);
+  box-shadow: none !important;
+}
