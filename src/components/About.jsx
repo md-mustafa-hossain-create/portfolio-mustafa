@@ -36,7 +36,7 @@ export default function About() {
               <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-brand-400 rounded-br-xl pointer-events-none"></div>
               
               <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-square p-2 bg-zinc-900/30 border border-white/5 rounded-[2.5rem] shadow-2xl backdrop-blur-md">
-                <div className="w-full h-full rounded-[calc(2.5rem-0.5rem)] bg-zinc-950 border border-white/5 overflow-hidden flex items-end justify-center relative pixel-grid-overlay">
+                <div className="w-full h-full rounded-[calc(2.5rem-0.5rem)] bg-zinc-950 border border-white/5 overflow-hidden flex items-end justify-center relative">
                   <div className="absolute inset-0 bg-zinc-950 z-0"></div>
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-brand-500/10 rounded-full blur-2xl z-0"></div>
                   
