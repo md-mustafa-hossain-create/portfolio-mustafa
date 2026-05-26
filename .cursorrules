@@ -1,0 +1,27 @@
+# AI Security & Coding Instructions for Portfolio Mustafa
+
+This file contains security-focused instructions and guidelines that all AI coding assistants (Cursor, Gemini, Copilot, etc.) must follow when modifying or extending this codebase.
+
+## 1. Firebase Security & Data Protection
+- **Secrets Management**: Never hardcode Firebase admin credentials, service accounts, or private keys. All sensitive configurations must go into `.env` and be loaded via `import.meta.env`.
+- **Database Rules**: Do not alter [firestore.rules](file:///d:/portfolio-mustafa/firestore.rules) to loosen security. Any new collection must have a default-deny policy (`allow read, write: if false;`) unless explicitly authorized.
+- **Client Writes**: Never implement direct database writes from the client side for critical collections (e.g., `projects`, `skills`). Only submit messages using strict validation.
+
+## 2. Preventing Frontend Vulnerabilities
+- **Cross-Site Scripting (XSS)**: 
+  - Never render raw HTML using `dangerouslySetInnerHTML` unless the content is thoroughly sanitized using a trusted library (e.g., `dompurify`).
+  - Always escape and sanitize dynamic user input before rendering.
+- **Tab-Nabbing (Phishing Protection)**:
+  - All external anchor tags (`<a>`) targeting `_blank` must include `rel="noopener noreferrer"` to prevent the destination page from tampering with the window object of your application.
+- **Safe State & Storage**:
+  - Never store sensitive user information, session tokens, or API credentials in `localStorage` or `sessionStorage`.
+
+## 3. Form Validation & Input Sanitization
+- **Contact Form**:
+  - Implement both client-side and server-side validation.
+  - Trim and sanitize string inputs (name, email, message) to strip out potential HTML tags, scripts, or malicious query injections.
+  - Enforce email format verification via standard regex patterns before submission.
+
+## 4. Dependencies & Third-Party Code
+- **Package Verification**: Before installing new npm dependencies, check for known vulnerabilities and ensure they are well-maintained.
+- **No Unsafe Executions**: Avoid using unsafe JavaScript functions like `eval()`, `setTimeout` with string arguments, or `new Function()`.
