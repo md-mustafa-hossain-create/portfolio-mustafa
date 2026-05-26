@@ -55,10 +55,10 @@ export default function Navbar({ theme, onToggleTheme }) {
   return (
     <nav className={`fixed left-1/2 -translate-x-1/2 z-50 transition-premium ${
       scrolled 
-        ? 'top-4 w-[92%] max-w-5xl glass-nav py-2 px-6 rounded-full shadow-2xl shadow-zinc-950/40 border border-white/5' 
-        : 'top-6 w-[95%] max-w-6xl bg-zinc-950/30 backdrop-blur-md py-3 px-6 rounded-full border border-white/3'
+        ? 'top-4 w-[92%] max-w-5xl glass-nav py-2 px-4 sm:px-6 rounded-full shadow-2xl shadow-zinc-950/40 border border-white/5' 
+        : 'top-6 w-[95%] max-w-6xl bg-zinc-950/30 backdrop-blur-md py-3 px-4 sm:px-6 rounded-full border border-white/3'
     }`}>
-      <div className="flex items-center justify-between h-12">
+      <div className="flex items-center justify-between h-12 flex-nowrap">
         {/* Logo Brand */}
         <div 
           id="nav-logo"
@@ -66,12 +66,12 @@ export default function Navbar({ theme, onToggleTheme }) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setIsOpen(false);
           }} 
-          className="flex-shrink-0 flex items-center gap-2 group cursor-pointer"
+          className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 group cursor-pointer"
         >
-          <div className="p-2 bg-gradient-to-tr from-brand-400 to-brand-600 rounded-full group-hover:rotate-12 transition-spring">
-            <Terminal className="w-4 h-4 text-white" />
+          <div className="p-1.5 sm:p-2 bg-gradient-to-tr from-brand-400 to-brand-600 rounded-full group-hover:rotate-12 transition-spring shrink-0">
+            <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
           </div>
-          <span className="font-mono font-bold text-base tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase">
+          <span className="font-mono font-bold text-sm sm:text-base tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase whitespace-nowrap">
             {GLOBAL.BRAND_NAME}<span className="text-brand-400 lowercase">{GLOBAL.BRAND_DOMAIN}</span>
           </span>
         </div>
@@ -118,27 +118,27 @@ export default function Navbar({ theme, onToggleTheme }) {
         </div>
 
         {/* Mobile Actions */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="md:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
           <button
             id="nav-btn-mobile-theme-toggle"
             type="button"
             onClick={onToggleTheme}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 transition-premium active:scale-95 cursor-pointer"
+            className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 transition-premium active:scale-95 cursor-pointer shrink-0"
             aria-label={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
           >
-            {isLightTheme ? <Moon className="w-4 h-4" /> : <SunMedium className="w-4 h-4" />}
+            {isLightTheme ? <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <SunMedium className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
           </button>
           
           <button
             id="nav-btn-mobile-toggle"
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-10 h-10 flex flex-col justify-center items-center rounded-full hover:bg-zinc-900/60 focus:outline-none transition-premium"
+            className="relative w-9 h-9 sm:w-10 sm:h-10 flex flex-col justify-center items-center rounded-full hover:bg-zinc-900/60 focus:outline-none transition-premium shrink-0"
             aria-label="Toggle Menu"
           >
-            <div className="w-5 flex flex-col gap-1.5">
-              <span className={`h-0.5 w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-              <span className={`h-0.5 w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'opacity-0 scale-0' : ''}`}></span>
-              <span className={`h-0.5 w-5 bg-zinc-300 rounded transition-spring ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            <div className="w-4 sm:w-5 flex flex-col gap-1 sm:gap-1.5">
+              <span className={`h-0.5 w-4 sm:w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'rotate-45 translate-y-1.5 sm:translate-y-2' : ''}`}></span>
+              <span className={`h-0.5 w-4 sm:w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'opacity-0 scale-0' : ''}`}></span>
+              <span className={`h-0.5 w-4 sm:w-5 bg-zinc-300 rounded transition-spring ${isOpen ? '-rotate-45 -translate-y-1.5 sm:-translate-y-2' : ''}`}></span>
             </div>
           </button>
         </div>

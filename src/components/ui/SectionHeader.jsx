@@ -6,8 +6,12 @@
 export default function SectionHeader({ tag, icon, titlePrefix, titleHighlight, subtitle }) {
   return (
     <div className="text-center mb-20 reveal">
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] uppercase tracking-wider text-brand-400 font-mono mb-3">
-        {icon && <span className="w-3.5 h-3.5 inline-block">{icon}</span>}
+      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] uppercase tracking-wider text-brand-400 font-mono mb-3 whitespace-nowrap">
+        {icon && (
+          <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0 [&>svg]:w-full [&>svg]:h-full">
+            {icon}
+          </span>
+        )}
         <span>{tag}</span>
       </div>
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tighter">
