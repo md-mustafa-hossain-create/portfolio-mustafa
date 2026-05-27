@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Terminal } from 'lucide-react';
 import { GLOBAL } from '../../constants/strings';
+import { getAICopilotResponse } from '../../config/aiService';
 
 /**
  * @fileoverview Handles the code mockup window on the right side of the Hero section.
@@ -9,6 +10,91 @@ import { GLOBAL } from '../../constants/strings';
 
 export default function TerminalWindow({ isBooted }) {
   const [activeTab, setActiveTab] = useState('Mustafa.jsx');
+  const [input, setInput] = useState('');
+  const [history, setHistory] = useState([
+    { type: 'system', text: "Welcome to Mustafa's AI Terminal Copilot!" },
+    { type: 'system', text: "Ask questions about his skills, education, or projects." },
+    { type: 'system', text: "Try typing: \"What is his CGPA?\" or \"skills\"" }
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const terminalEndRef = useRef(null);
+
+  // Auto-scroll scrollback buffer to bottom on history change
+  useEffect(() => {
+    if (terminalEndRef.current) {
+      terminalEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [history, isLoading, activeTab]);
+
+  const handleCommandSubmit = async (e) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    const userCommand = input.trim();
+    setInput('');
+
+    // Append command to scrollback history
+    setHistory((prev) => [...prev, { type: 'input', text: userCommand }]);
+    setIsLoading(true);
+
+    try {
+      const response = await getAICopilotResponse(userCommand);
+      setHistory((prev) => [...prev, { type: 'output', text: response }]);
+    } catch (err) {
+      setHistory((prev) => [...prev, { type: 'output', text: "[ERROR] Connection failed. Please try again." }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const renderAICopilotSh = () => (
+    <div className="flex flex-col h-full justify-between font-mono text-[11px] sm:text-xs">
+      <div className="flex-grow overflow-y-auto space-y-1.5 scrollbar-thin pr-1 max-h-[190px] min-h-[190px]">
+        {history.map((item, idx) => {
+          if (item.type === 'system') {
+            return (
+              <div key={idx} className="text-zinc-500 select-none">
+                # {item.text}
+              </div>
+            );
+          }
+          if (item.type === 'input') {
+            return (
+              <div key={idx} className="flex gap-2">
+                <span className="text-brand-400 select-none">visitor@mustafa:~$</span>
+                <span className="text-white">{item.text}</span>
+              </div>
+            );
+          }
+          return (
+            <div key={idx} className="text-brand-300 whitespace-pre-wrap pl-2 border-l border-brand-500/20 leading-relaxed">
+              {item.text}
+            </div>
+          );
+        })}
+        {isLoading && (
+          <div className="text-brand-400/70 animate-pulse select-none">
+            &gt; Querying database...
+          </div>
+        )}
+        <div ref={terminalEndRef} />
+      </div>
+      
+      <form onSubmit={handleCommandSubmit} className="flex items-center gap-1.5 mt-2 pt-2 border-t border-zinc-900 shrink-0">
+        <span className="text-brand-400 font-bold select-none whitespace-nowrap">visitor@mustafa:~$</span>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          disabled={isLoading}
+          placeholder="Ask a question..."
+          className="flex-1 bg-transparent text-white outline-none border-none font-mono text-[11px] sm:text-xs p-0 m-0 w-full focus:ring-0 focus:outline-none"
+          maxLength={80}
+          autoFocus={activeTab === 'AI_Copilot.sh'}
+        />
+      </form>
+    </div>
+  );
 
   const renderMustafaJsx = () => (
     <>
@@ -138,7 +224,7 @@ export default function TerminalWindow({ isBooted }) {
             </div>
             
             <div className="flex gap-1.5 overflow-x-auto max-w-[70%] no-scrollbar">
-              {['Mustafa.jsx', 'Skills.json', 'Contact.sh'].map((tab) => {
+              {['Mustafa.jsx', 'Skills.json', 'Contact.sh', 'AI_Copilot.sh'].map((tab) => {
                 const isActive = activeTab === tab;
                 return (
                   <button
@@ -159,10 +245,13 @@ export default function TerminalWindow({ isBooted }) {
             </div>
           </div>
 
-          <div className="font-mono text-[11px] sm:text-xs text-left text-zinc-300 space-y-1.5 flex-grow overflow-y-auto pr-1 h-[240px] scrollbar-thin">
+          <div className={`font-mono text-[11px] sm:text-xs text-left text-zinc-300 space-y-1.5 flex-grow pr-1 h-[240px] ${
+            activeTab === 'AI_Copilot.sh' ? '' : 'overflow-y-auto scrollbar-thin'
+          }`}>
             {activeTab === 'Mustafa.jsx' && renderMustafaJsx()}
             {activeTab === 'Skills.json' && renderSkillsJson()}
             {activeTab === 'Contact.sh' && renderContactSh()}
+            {activeTab === 'AI_Copilot.sh' && renderAICopilotSh()}
           </div>
 
           <div className="mt-4 pt-3 border-t border-zinc-900 flex items-center justify-between text-[10px] font-mono text-zinc-500 shrink-0">
@@ -170,7 +259,7 @@ export default function TerminalWindow({ isBooted }) {
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
               <span className="text-emerald-400 font-bold tracking-wider">READY</span>
             </div>
-            <div className="uppercase">{activeTab.split('.').pop()}</div>
+            <div className="uppercase">{activeTab.split('.').pop() === 'sh' && activeTab.includes('AI') ? 'AI_COPILOT' : activeTab.split('.').pop()}</div>
             <div className="text-brand-400 font-semibold group-hover:translate-x-1 transition-premium text-[10px]">
               &lt;coder_mockup /&gt;
             </div>
