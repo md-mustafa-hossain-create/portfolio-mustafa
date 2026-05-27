@@ -23,6 +23,9 @@ export default function Navbar({ theme, onToggleTheme }) {
   }, []);
 
   // Scrollspy: dynamic navbar section highlighting
+  // NOTE: Because sections are wrapped in LazySection, the fallback DOM nodes are unmounted
+  // and replaced with the actual component DOM nodes upon intersection. We use a MutationObserver
+  // to dynamically re-bind the IntersectionObserver whenever section DOM elements mount/unmount.
   useEffect(() => {
     const sections = NAV_LINKS.map(link => link.href.slice(1));
     
@@ -32,22 +35,62 @@ export default function Navbar({ theme, onToggleTheme }) {
       threshold: 0
     };
 
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    let observer;
+
+    const bindObserver = () => {
+      if (observer) {
+        observer.disconnect();
+      }
+      
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.observe(element);
         }
       });
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    // Initial binding of the observer to existing elements
+    bindObserver();
 
-    sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
+    // Monitor DOM changes to re-bind when placeholders are replaced by actual components
+    const mutationObserver = new MutationObserver((mutations) => {
+      let shouldRebind = false;
+      for (const mutation of mutations) {
+        const hasSectionNode = (nodes) => 
+          Array.from(nodes).some(node => 
+            node.nodeType === 1 && 
+            (sections.includes(node.id) || (node.querySelector && node.querySelector('section[id]')) || node.tagName === 'SECTION')
+          );
+
+        if (hasSectionNode(mutation.addedNodes) || hasSectionNode(mutation.removedNodes)) {
+          shouldRebind = true;
+          break;
+        }
+      }
+
+      if (shouldRebind) {
+        bindObserver();
+      }
     });
 
-    return () => observer.disconnect();
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    return () => {
+      if (observer) observer.disconnect();
+      mutationObserver.disconnect();
+    };
   }, []);
 
   const isLightTheme = theme === 'light';
