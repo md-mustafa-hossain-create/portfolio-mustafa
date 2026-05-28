@@ -8,6 +8,7 @@ import { getAICopilotResponse } from '../../config/aiService';
  */
 export default function TerminalWindow({ isBooted }) {
   const [input, setInput] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
   const [history, setHistory] = useState([
     { type: 'system', text: "=== MUSTAFA_DEV AI COPILOT TERMINAL v1.0 ===" },
     { type: 'system', text: "Ask me anything about Mustafa's skills, qualifications, or GPA." },
@@ -23,6 +24,23 @@ export default function TerminalWindow({ isBooted }) {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const terminalEndRef = useRef(null);
+  const inputRef = useRef(null);
+
+  const clearHistory = () => {
+    setHistory([
+      { type: 'system', text: "=== MUSTAFA_DEV AI COPILOT TERMINAL v1.0 ===" },
+      { type: 'system', text: "Ask me anything about Mustafa's skills, qualifications, or GPA." },
+      { type: 'system', text: "Click a quick command below to run it instantly:" },
+      {
+        type: 'suggestions',
+        commands: [
+          { label: '/skills', desc: 'Tech stack & tools', query: 'What are your technical skills?' },
+          { label: '/cgpa', desc: 'University grades', query: 'What is your BCA CGPA?' },
+          { label: '/contact', desc: 'Contact details', query: 'How can I contact you?' }
+        ]
+      }
+    ]);
+  };
 
   // Auto-scroll scrollback buffer to bottom on history change
   useEffect(() => {
@@ -39,6 +57,12 @@ export default function TerminalWindow({ isBooted }) {
 
   const executeQuery = async (query) => {
     if (!query.trim() || isLoading) return;
+
+    const cleanQuery = query.trim().toLowerCase();
+    if (cleanQuery === '/clear' || cleanQuery === 'clear') {
+      clearHistory();
+      return;
+    }
 
     // Append query to history
     setHistory((prev) => [...prev, { type: 'input', text: query }]);
@@ -82,6 +106,17 @@ export default function TerminalWindow({ isBooted }) {
           
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-brand-500/5 rounded-full blur-3xl group-hover:bg-brand-500/15 transition-all duration-500 pointer-events-none"></div>
           
+          {/* Retro Blinking Cursor Keyframes */}
+          <style>{`
+            @keyframes cursor-blink {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0; }
+            }
+            .retro-cursor {
+              animation: cursor-blink 1s steps(2) infinite;
+            }
+          `}</style>
+
           {/* Terminal Window Header Bar */}
           <div className="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4 shrink-0 select-none">
             <div className="flex items-center gap-1.5">
@@ -95,7 +130,14 @@ export default function TerminalWindow({ isBooted }) {
               <span>MUSTAFA_AI_COPILOT.sh</span>
             </div>
             
-            <div className="w-12"></div>
+            <button
+              onClick={clearHistory}
+              type="button"
+              className="text-[9px] font-mono text-zinc-500 hover:text-red-400 transition-colors px-2 py-0.5 bg-zinc-900/50 hover:bg-red-500/10 border border-zinc-800 hover:border-red-500/20 rounded cursor-pointer select-none"
+              title="Clear terminal history"
+            >
+              [CLEAR]
+            </button>
           </div>
 
           {/* Interactive Shell Body */}
@@ -158,18 +200,33 @@ export default function TerminalWindow({ isBooted }) {
             </div>
             
             {/* Form Input Prompt */}
-            <form onSubmit={handleCommandSubmit} className="flex items-center gap-1.5 mt-2 pt-2 border-t border-zinc-900 shrink-0">
+            <form 
+              onSubmit={handleCommandSubmit}
+              onClick={() => inputRef.current?.focus()}
+              className="flex items-center gap-1.5 mt-2 pt-2 border-t border-zinc-900 shrink-0 cursor-text"
+            >
               <span className="text-brand-400 font-bold select-none whitespace-nowrap">visitor@mustafa:~$</span>
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                disabled={isLoading}
-                placeholder="Ask me a question..."
-                className="flex-1 bg-transparent text-white outline-none border-none font-mono text-[11px] sm:text-xs p-0 m-0 w-full focus:ring-0 focus:outline-none"
-                maxLength={80}
-                autoFocus
-              />
+              <div className="flex-grow flex items-center relative overflow-hidden font-mono text-[11px] sm:text-xs min-h-[1.25rem]">
+                {input.length === 0 && !isFocused && (
+                  <span className="text-zinc-600 select-none pointer-events-none absolute left-0">Ask me a question...</span>
+                )}
+                <span className="text-white whitespace-pre-wrap break-all">{input}</span>
+                {isFocused && (
+                  <span className="w-1.5 h-3.5 bg-brand-400 ml-0.5 retro-cursor shrink-0" />
+                )}
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
+                  disabled={isLoading}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-text focus:ring-0 focus:outline-none"
+                  maxLength={80}
+                  autoFocus
+                />
+              </div>
             </form>
           </div>
 
