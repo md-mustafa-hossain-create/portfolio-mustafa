@@ -61,12 +61,14 @@ export default function TerminalWindow({ isBooted }) {
     const cleanQuery = query.trim().toLowerCase();
     if (cleanQuery === '/clear' || cleanQuery === 'clear') {
       clearHistory();
+      setTimeout(() => inputRef.current?.focus(), 50);
       return;
     }
 
     // Append query to history
     setHistory((prev) => [...prev, { type: 'input', text: query }]);
     setIsLoading(true);
+    setTimeout(() => inputRef.current?.focus(), 50);
 
     try {
       const response = await getAICopilotResponse(query);
@@ -78,6 +80,7 @@ export default function TerminalWindow({ isBooted }) {
       ]);
     } finally {
       setIsLoading(false);
+      setTimeout(() => inputRef.current?.focus(), 50);
     }
   };
 
@@ -221,7 +224,7 @@ export default function TerminalWindow({ isBooted }) {
                   onChange={(e) => setInput(e.target.value)}
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
-                  disabled={isLoading}
+                  readOnly={isLoading}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-text focus:ring-0 focus:outline-none"
                   maxLength={80}
                   autoFocus
