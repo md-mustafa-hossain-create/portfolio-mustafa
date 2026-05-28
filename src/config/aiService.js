@@ -78,7 +78,7 @@ const getFallbackResponse = (prompt) => {
   }
   
   return `[INFO] I'm running in local DEMO mode.
-To ask custom questions like "${prompt}", add 'VITE_GEMINI_API_KEY' to your .env file to activate live Gemini AI.
+To ask custom questions like "${prompt}", add 'VITE_GEMINI_API_KEY' to your .env file to activate live AI responses.
 - Note: Mustafa is a React & Tailwind CSS Frontend Developer.`;
 };
 

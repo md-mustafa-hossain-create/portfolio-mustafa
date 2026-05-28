@@ -181,7 +181,7 @@ export default function TerminalWindow({ isBooted }) {
             </div>
             <div className="uppercase">AI_COPILOT</div>
             <div className="text-brand-400 font-semibold group-hover:translate-x-1 transition-premium text-[10px]">
-              &lt;gemini_terminal /&gt;
+              &lt;copilot_terminal /&gt;
             </div>
           </div>
 
