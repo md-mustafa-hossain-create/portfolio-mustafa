@@ -77,8 +77,8 @@ export default function TerminalWindow({ isBooted }) {
       }`}
       style={{ animationDelay: '300ms' }}
     >
-      <div className="w-full max-w-md aspect-square p-2 bg-zinc-900/30 border border-white/5 rounded-[2.5rem] shadow-2xl backdrop-blur-md group hover:border-white/10 transition-premium">
-        <div className="rounded-[calc(2.5rem-0.5rem)] bg-zinc-950/90 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] p-6 flex flex-col justify-between h-full relative overflow-hidden">
+      <div className="w-full max-w-md aspect-square p-2 bg-zinc-900/20 border border-white/5 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5),_0_0_40px_rgba(16,185,129,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.6),_0_0_50px_rgba(16,185,129,0.12)] hover:border-brand-500/20 transition-all duration-500 backdrop-blur-md group">
+        <div className="rounded-[calc(2.5rem-0.5rem)] bg-zinc-950/50 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] backdrop-blur-xl p-6 flex flex-col justify-between h-full relative overflow-hidden">
           
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-brand-500/5 rounded-full blur-3xl group-hover:bg-brand-500/15 transition-all duration-500 pointer-events-none"></div>
           
@@ -119,12 +119,12 @@ export default function TerminalWindow({ isBooted }) {
                           key={cmd.label}
                           type="button"
                           onClick={() => handleSuggestionClick(cmd.query)}
-                          className="flex flex-col items-start p-2 bg-zinc-900/60 border border-zinc-800/80 hover:border-brand-500/40 rounded-lg text-left transition-all duration-200 group/btn cursor-pointer"
+                          className="flex flex-col items-start p-2.5 bg-zinc-900/30 border border-white/5 hover:border-brand-500/40 hover:bg-brand-500/5 hover:shadow-[0_0_12px_rgba(16,185,129,0.1)] rounded-lg text-left transition-all duration-300 group/btn cursor-pointer"
                         >
-                          <span className="text-[10px] text-brand-400 font-bold group-hover/btn:text-brand-300 font-mono">
+                          <span className="text-[10px] text-brand-400 font-bold group-hover/btn:text-brand-300 group-hover/btn:translate-x-0.5 transition-all duration-300 font-mono">
                             {cmd.label}
                           </span>
-                          <span className="text-[8px] text-zinc-500 font-mono mt-0.5">
+                          <span className="text-[8px] text-zinc-500 group-hover/btn:text-zinc-400 transition-all duration-300 font-mono mt-0.5">
                             {cmd.desc}
                           </span>
                         </button>
