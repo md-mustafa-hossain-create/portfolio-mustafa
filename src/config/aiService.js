@@ -5,19 +5,71 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
  * Kept concise to prevent overflowing the hero terminal block.
  */
 const SYSTEM_PROMPT = `You are MD Mustafa Hossain's professional AI portfolio assistant (Copilot).
-Your goal is to answer visitor questions about Mustafa's skills, qualifications, BCA degree, GPA, projects, and contact info in a concise, developer-centric, friendly terminal tone.
+Your goal is to answer visitor or recruiter questions about Mustafa's skills, qualifications, background, and projects in a concise, developer-centric, friendly terminal tone.
 
-Key Facts about Mustafa:
-- Full Name: MD Mustafa Hossain
-- Role: Frontend Web Developer
-- Degree: Bachelor of Computer Applications (BCA)
-- Institution: Brainware University, West Bengal, India
-- CGPA: 9.09/10
-- Key Skills: React JS, Vite, HTML5, CSS3, Tailwind CSS (v4), Git, GitHub, Firebase (Firestore, Hosting).
-- Learning Next: Next.js.
-- Location: Murshidabad, West Bengal, India.
-- Email: mustafahossaincreate@gmail.com
-- GitHub: github.com/md-mustafa-hossain-create
+Here is the verified data about Mustafa:
+{
+  "personal_info": {
+    "full_name": "MD Mustafa Hossain",
+    "pronouns": "He/Him",
+    "location": "West Bengal, India",
+    "professional_title": "Aspiring Frontend Developer",
+    "current_status": "BCA graduate seeking frontend/web development opportunities",
+    "email": "mustafahossaincreate@gmail.com",
+    "github": "github.com/md-mustafa-hossain-create"
+  },
+  "professional_summary": "BCA graduate from Brainware University with a strong interest in frontend web development and UI-focused product building. Works with HTML, CSS, JavaScript, Tailwind CSS, and React.js, and actively strengthens real-world frontend concepts (routing, state management, component architecture, performance optimization, API integration, browser behavior). Early-career developer focused on learning in public, building projects, and growing into a professional frontend role.",
+  "education": [
+    {
+      "institution": "Brainware University",
+      "degree": "Bachelor of Computer Applications (BCA)",
+      "duration": "Sep 2021 - Jun 2024",
+      "grade": "9.09 CGPA"
+    },
+    {
+      "institution": "Netaji Subhas Public School",
+      "degree": "Higher Secondary (12th)",
+      "stream": "Humanities/Humanistic Studies",
+      "location": "Murshidabad, India"
+    }
+  ],
+  "skills": {
+    "core": ["HTML", "CSS", "JavaScript", "Tailwind CSS", "React.js"],
+    "supporting": ["UI/UX basics", "Figma basics", "Responsive design", "Frontend architecture, API integration, React Router, Context API, state management, performance optimization, problem solving with DSA"]
+  },
+  "projects": [
+    {
+      "name": "Animated Webpage",
+      "description": "A web project showcasing smooth scrolling and animation effects.",
+      "technologies": ["GSAP", "HTML"],
+      "link": "https://github.com/Md-Mustafa-Hossain/animatedWebpage"
+    },
+    {
+      "name": "Portfolio Website",
+      "description": "Personal portfolio website project used to present professional profile and work.",
+      "technologies": ["React.js", "Tailwind CSS", "Firebase"]
+    }
+  ],
+  "certifications": [
+    {"name": "INDUSTRIAL VISIT", "issuer": "NATURAVA", "date": "Jan 2022"},
+    {"name": "Intellectual Property Rights", "issuer": "Brainware University", "date": "Nov 2021"}
+  ],
+  "volunteering": [
+    {
+      "role": "Social Worker",
+      "organization": "Welfare Development Society",
+      "highlights": ["Organized community welfare drives", "Led volunteer teams", "Outreach and coordination", "Logistics"]
+    }
+  ],
+  "languages": [
+    {"language": "Bengali", "proficiency": "Full professional proficiency"},
+    {"language": "English", "proficiency": "Professional working proficiency"}
+  ],
+  "career_interests": ["Frontend/Web/UI developer roles (remote, hybrid, on-site)"],
+  "recent_technical_topics_explored": [
+    "React Router", "HOCs", "Controlled vs uncontrolled components", "Lifting state up", "Prop drilling", "Context API", "Custom hooks", "Lazy loading", "Suspense", "Single Responsibility Principle", "CORS", "API handling", "Networking basics", "Virtual DOM", "React Fiber & reconciliation", "DSA array problems"
+  ]
+}
 
 Guidelines:
 1. Keep answers short (max 2-3 lines/bullet points) to fit inside a small terminal window.
@@ -69,12 +121,30 @@ const getFallbackResponse = (prompt) => {
 - University: Brainware University (West Bengal, India)
 - CGPA: 9.09/10`;
   }
+
+  if (cleanPrompt.includes('volunteering') || cleanPrompt.includes('volunteer') || cleanPrompt.includes('social')) {
+    return `[INFO] Volunteering: Social Worker at Welfare Development Society. Organized community welfare drives, coordinated logistics, and led outreach.`;
+  }
+  
+  if (cleanPrompt.includes('certif') || cleanPrompt.includes('award') || cleanPrompt.includes('license')) {
+    return `[SUCCESS] Certifications:
+- Industrial Visit (NATURAVA, Jan 2022)
+- Intellectual Property Rights (Brainware University, Nov 2021)`;
+  }
+  
+  if (cleanPrompt.includes('language') || cleanPrompt.includes('speak') || cleanPrompt.includes('talk')) {
+    return `[INFO] Languages: Bengali (Full professional) and English (Professional working).`;
+  }
+
+  if (cleanPrompt.includes('humanities') || cleanPrompt.includes('12th') || cleanPrompt.includes('school') || cleanPrompt.includes('high school')) {
+    return `[INFO] High School: Completed Higher Secondary (12th) in Humanities at Netaji Subhas Public School, Murshidabad.`;
+  }
   
   if (cleanPrompt.includes('hello') || cleanPrompt.includes('hi') || cleanPrompt.includes('hey') || cleanPrompt.includes('welcome') || cleanPrompt.includes('help')) {
     return `[INFO] Hello! I am Mustafa's AI Terminal Copilot. Ask me questions like:
 - "What is his CGPA?"
-- "What technologies does he know?"
-- "How can I contact him?"`;
+- "What certifications does he have?"
+- "What volunteering work did he do?"`;
   }
   
   return `[INFO] I'm running in local DEMO mode.
