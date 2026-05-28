@@ -72,10 +72,12 @@ Here is the verified data about Mustafa:
 }
 
 Guidelines:
-1. Keep answers short (max 2-3 lines/bullet points) to fit inside a small terminal window.
+1. Keep answers short (max 2-3 lines/bullet points) to fit inside the terminal scroll height.
 2. Do not use Markdown headers or bold text (**), keep it clean terminal-style text.
-3. Feel free to use console tag formats like [INFO], [SUCCESS], or [WARN] to prefix responses.
-4. If asked about unrelated things, politely decline and redirect the visitor to ask about Mustafa.`;
+3. Use console tag formats like [INFO], [SUCCESS], [TECH_INFO], or [SYSTEM] to prefix responses.
+4. Answering Technical Questions: If asked about the technical topics Mustafa has explored (e.g. CORS, Virtual DOM, Lifting State Up, Custom Hooks, React Fiber, prop drilling, HOCs, etc.), provide a short, accurate explanation from Mustafa's perspective to demonstrate his solid frontend knowledge.
+5. Coding Queries: If asked to write code or scripts, write brief code blocks (JavaScript/HTML/CSS) demonstrating Mustafa's capabilities.
+6. Off-Topic/General Queries: If asked unrelated general questions, jokes, or commands, answer them in a fun, geeky terminal-themed way or politely bring them back to Mustafa's background.`;
 
 // Read the API Key from Vite env variables
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -139,12 +141,28 @@ const getFallbackResponse = (prompt) => {
   if (cleanPrompt.includes('humanities') || cleanPrompt.includes('12th') || cleanPrompt.includes('school') || cleanPrompt.includes('high school')) {
     return `[INFO] High School: Completed Higher Secondary (12th) in Humanities at Netaji Subhas Public School, Murshidabad.`;
   }
+
+  if (cleanPrompt.includes('virtual dom') || cleanPrompt.includes('reconciliation') || cleanPrompt.includes('react fiber')) {
+    return `[TECH_INFO] Virtual DOM: A lightweight in-memory representation of the real DOM. React uses it to diff changes and efficiently update only the modified nodes (reconciliation) via React Fiber.`;
+  }
+  
+  if (cleanPrompt.includes('cors')) {
+    return `[TECH_INFO] CORS (Cross-Origin Resource Sharing): A browser security mechanism that restricts resources on a web page from being requested from another domain. Solved using proper API headers.`;
+  }
+
+  if (cleanPrompt.includes('prop drilling') || cleanPrompt.includes('context api')) {
+    return `[TECH_INFO] Prop Drilling: Passing data through multiple nested components. Solved in React using the Context API or state management tools to share global state.`;
+  }
+
+  if (cleanPrompt.includes('custom hook') || cleanPrompt.includes('hoc') || cleanPrompt.includes('higher-order')) {
+    return `[TECH_INFO] Reusability: Custom hooks extract component logic into reusable functions. Higher-Order Components (HOCs) are functions that take a component and return a new component with added features.`;
+  }
   
   if (cleanPrompt.includes('hello') || cleanPrompt.includes('hi') || cleanPrompt.includes('hey') || cleanPrompt.includes('welcome') || cleanPrompt.includes('help')) {
     return `[INFO] Hello! I am Mustafa's AI Terminal Copilot. Ask me questions like:
 - "What is his CGPA?"
 - "What certifications does he have?"
-- "What volunteering work did he do?"`;
+- "Explain Virtual DOM in React"`;
   }
   
   return `[INFO] I'm running in local DEMO mode.
