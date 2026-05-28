@@ -165,8 +165,16 @@ const getFallbackResponse = (prompt) => {
 - "Explain Virtual DOM in React"`;
   }
   
-  return `[INFO] I'm running in local DEMO mode.
+  const isDev = import.meta.env.DEV || (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'));
+  
+  if (isDev) {
+    return `[INFO] I'm running in local DEMO mode.
 To ask custom questions like "${prompt}", add 'VITE_GEMINI_API_KEY' to your .env file to activate live AI responses.
+- Note: Mustafa is a React & Tailwind CSS Frontend Developer.`;
+  }
+  
+  return `[INFO] I'm currently running in offline database mode due to high traffic.
+To ask custom questions, please try again in a few minutes.
 - Note: Mustafa is a React & Tailwind CSS Frontend Developer.`;
 };
 
