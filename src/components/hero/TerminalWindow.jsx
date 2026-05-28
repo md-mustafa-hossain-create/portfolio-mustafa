@@ -27,7 +27,13 @@ export default function TerminalWindow({ isBooted }) {
   // Auto-scroll scrollback buffer to bottom on history change
   useEffect(() => {
     if (terminalEndRef.current) {
-      terminalEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      const container = terminalEndRef.current.parentNode;
+      if (container) {
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
     }
   }, [history, isLoading]);
 
