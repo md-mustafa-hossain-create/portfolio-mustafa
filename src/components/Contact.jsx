@@ -23,7 +23,6 @@ export default function Contact() {
           icon={<Mail />}
           titlePrefix={CONTACT_STRINGS.SECTION_TITLE_PREFIX}
           titleHighlight={CONTACT_STRINGS.SECTION_TITLE_HIGHLIGHT}
-          subtitle={CONTACT_STRINGS.SUBTITLE}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-stretch">

@@ -55,13 +55,7 @@ export default function Skills() {
           titleHighlight={SKILLS_STRINGS.SECTION_TITLE_HIGHLIGHT}
         />
         
-        <div className="text-center mb-10">
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto leading-relaxed font-mono">
-            {SKILLS_STRINGS.TERMINAL_STATUS}
-            <br />
-            {SKILLS_STRINGS.TERMINAL_DESC}
-          </p>
-        </div>
+
 
         {/* Skills Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

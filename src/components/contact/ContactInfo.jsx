@@ -13,13 +13,6 @@ export default function ContactInfo() {
         <h3 className="text-2xl font-bold text-zinc-100">
           {CONTACT_STRINGS.HEADING}
         </h3>
-        <div className="flex items-center gap-2 text-[10px] text-zinc-500 select-none font-mono mt-4">
-          <span>mustafa@dev:~$</span>
-          <span className="text-purple-400">./connect.sh</span>
-        </div>
-        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-mono mt-3">
-          [<span className="text-yellow-400 font-bold">CONNECT</span>] I am actively seeking opportunities to start my career as a <span className="text-brand-400 font-bold">Frontend Developer</span>. I am open to working on React projects, learning new tools, and collaborating with cross-functional teams.
-        </p>
 
         {/* Direct Card info */}
         <div className="space-y-4 pt-4">
