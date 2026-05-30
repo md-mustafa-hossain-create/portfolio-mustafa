@@ -127,7 +127,14 @@ function App() {
       const reveals = rootElement.querySelectorAll('.reveal');
       reveals.forEach((el) => {
         if (!el.classList.contains('revealed')) {
-          intersectionObserver.observe(el);
+          const rect = el.getBoundingClientRect();
+          // If the element has already entered or passed the viewport vertically,
+          // mark it as revealed immediately to prevent it from getting stuck invisible.
+          if (rect.top < window.innerHeight) {
+            el.classList.add('revealed');
+          } else {
+            intersectionObserver.observe(el);
+          }
         }
       });
     };
@@ -141,7 +148,12 @@ function App() {
         mutation.addedNodes.forEach((node) => {
           if (node.nodeType === 1) { // ELEMENT_NODE
             if (node.classList.contains('reveal')) {
-              intersectionObserver.observe(node);
+              const rect = node.getBoundingClientRect();
+              if (rect.top < window.innerHeight) {
+                node.classList.add('revealed');
+              } else {
+                intersectionObserver.observe(node);
+              }
             }
             observeNewElements(node);
           }
