@@ -228,6 +228,7 @@ export default function TerminalWindow({ isBooted }) {
                   className="absolute inset-0 w-full h-full opacity-0 cursor-text focus:ring-0 focus:outline-none"
                   maxLength={80}
                   autoFocus
+                  aria-label="Terminal command input"
                 />
               </div>
             </form>

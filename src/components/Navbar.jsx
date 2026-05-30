@@ -191,19 +191,19 @@ export default function Navbar({ theme, onToggleTheme }) {
         </div>
 
         {/* Mobile Actions */}
-        <div className="md:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="md:hidden flex items-center gap-2 shrink-0">
           <button
             id="nav-btn-mobile-theme-toggle"
             type="button"
             onClick={onToggleTheme}
-            className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 transition-premium active:scale-95 cursor-pointer shrink-0"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 transition-premium active:scale-95 cursor-pointer shrink-0"
             aria-label={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
           >
             {isLightTheme ? (
-              <Lightbulb className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-500 transition-all duration-300" />
+              <Lightbulb className="w-4 h-4 text-zinc-500 transition-all duration-300" />
             ) : (
               <Lightbulb 
-                className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-400 fill-brand-400 animate-pulse transition-all duration-300"
+                className="w-4 h-4 text-brand-400 fill-brand-400 animate-pulse transition-all duration-300"
                 style={{
                   filter: 'drop-shadow(0 0 6px rgba(85, 255, 85, 0.65))'
                 }}
@@ -214,13 +214,13 @@ export default function Navbar({ theme, onToggleTheme }) {
           <button
             id="nav-btn-mobile-toggle"
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-9 h-9 sm:w-10 sm:h-10 flex flex-col justify-center items-center rounded-full hover:bg-zinc-900/60 focus:outline-none transition-premium shrink-0"
+            className="relative w-12 h-12 flex flex-col justify-center items-center rounded-full hover:bg-zinc-900/60 focus:outline-none transition-premium shrink-0"
             aria-label="Toggle Menu"
           >
-            <div className="w-4 sm:w-5 flex flex-col gap-1 sm:gap-1.5">
-              <span className={`h-0.5 w-4 sm:w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'rotate-45 translate-y-1.5 sm:translate-y-2' : ''}`}></span>
-              <span className={`h-0.5 w-4 sm:w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'opacity-0 scale-0' : ''}`}></span>
-              <span className={`h-0.5 w-4 sm:w-5 bg-zinc-300 rounded transition-spring ${isOpen ? '-rotate-45 -translate-y-1.5 sm:-translate-y-2' : ''}`}></span>
+            <div className="w-5 flex flex-col gap-1.5">
+              <span className={`h-0.5 w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`h-0.5 w-5 bg-zinc-300 rounded transition-spring ${isOpen ? 'opacity-0 scale-0' : ''}`}></span>
+              <span className={`h-0.5 w-5 bg-zinc-300 rounded transition-spring ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
             </div>
           </button>
         </div>
@@ -240,7 +240,7 @@ export default function Navbar({ theme, onToggleTheme }) {
                 href={link.href}
                 onClick={(e) => handleNavLinkClick(e, link.href)}
                 style={{ transitionDelay: isOpen ? `${i * 50}ms` : '0ms' }}
-                className={`block px-4 py-3 rounded-xl text-sm font-medium transition-premium transform ${
+                className={`block px-4 py-3.5 rounded-xl text-sm font-medium transition-premium transform ${
                   isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                 } ${
                   isActive 

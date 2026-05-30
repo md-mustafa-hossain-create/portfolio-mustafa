@@ -138,6 +138,7 @@ export default function BlogsFeedPage() {
               placeholder={BLOGS_STRINGS.SEARCH_PLACEHOLDER}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label={BLOGS_STRINGS.SEARCH_PLACEHOLDER}
               className="w-full bg-zinc-950/65 border border-white/5 focus:border-brand-500/30 focus:outline-none rounded-2xl py-3 pl-16 pr-10 text-xs sm:text-sm text-white font-mono placeholder-zinc-600 transition-premium shadow-inner"
             />
             {searchQuery ? (

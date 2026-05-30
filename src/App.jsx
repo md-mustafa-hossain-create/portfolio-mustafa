@@ -24,7 +24,7 @@ function SectionFallback({ id, label, minHeight = 'min-h-[280px]' }) {
       className={`flex items-center justify-center ${minHeight} px-4 sm:px-6 lg:px-8`}
     >
       <div className="w-full max-w-6xl rounded-2xl border border-zinc-900 bg-zinc-950/50 p-6">
-        <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-zinc-600">
+        <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-zinc-400">
           Loading {label}
         </div>
       </div>
