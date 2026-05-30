@@ -127,18 +127,46 @@ export default function BlogPostPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const { data: blogList, loading } = useFirebaseData('blogs', DEFAULT_BLOGS);
 
-  // Scroll spy reading progress listener
+  // Scroll spy reading progress listener with optimizations to avoid layout thrashing
   useEffect(() => {
+    if (loading) return; // Wait until content is fully loaded and mounted
+
+    // Calculate total scrollable height once after component mounts
+    let totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    const handleResize = () => {
+      totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    };
+
+    let lastProgress = 0;
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(progress);
+        // Calculate progress percentage, rounding to the nearest integer
+        // to reduce React state updates and avoid unnecessary re-renders.
+        const progress = Math.round((window.scrollY / totalHeight) * 100);
+        
+        if (progress !== lastProgress) {
+          lastProgress = progress;
+          setScrollProgress(progress);
+        }
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
+    // Recalculate height after a short delay to account for dynamic image renders
+    const timer = setTimeout(() => {
+      totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    }, 150);
+
+    // Use passive listeners to allow smooth composited scrolling
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [loading, id]);
 
   if (loading) {
     return (
