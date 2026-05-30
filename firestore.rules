@@ -14,7 +14,13 @@ service cloud.firestore {
       allow write: if false;
     }
     
-    // 3. Contact Messages: Anyone can submit a message, but no one can read or modify existing messages from the frontend.
+    // 3. Blogs: Anyone can read/view your blogs list, but only the admin (via Console) can write.
+    match /blogs/{blog} {
+      allow read: if true;
+      allow write: if false;
+    }
+    
+    // 4. Contact Messages: Anyone can submit a message, but no one can read or modify existing messages from the frontend.
     match /messages/{message} {
       allow create: if request.resource.data.name != null 
                     && request.resource.data.email != null 
