@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Terminal } from 'lucide-react';
-import { getAICopilotResponse } from '../../config/aiService';
+import { getAICopilotResponse } from '@/config/aiService';
 
 /**
  * @fileoverview Handles the AI Copilot terminal window in the Hero section.

@@ -1,18 +1,18 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import MouseSpotlight from './components/MouseSpotlight';
-import LazySection from './components/ui/LazySection';
-import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from './theme';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import About from '@/components/About';
+import MouseSpotlight from '@/components/MouseSpotlight';
+import LazySection from '@/components/ui/LazySection';
+import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from '@/theme';
 
-const Skills = lazy(() => import('./components/Skills'));
-const Projects = lazy(() => import('./components/Projects'));
-const Education = lazy(() => import('./components/Education'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
+const Skills = lazy(() => import('@/components/Skills'));
+const Projects = lazy(() => import('@/components/Projects'));
+const Education = lazy(() => import('@/components/Education'));
+const Contact = lazy(() => import('@/components/Contact'));
+const Footer = lazy(() => import('@/components/Footer'));
 
 function SectionFallback({ id, label, minHeight = 'min-h-[280px]' }) {
   return (
