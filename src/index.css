@@ -412,3 +412,18 @@ html[data-theme='light'] .spotlight-dot-el {
   background-color: var(--color-zinc-400);
   box-shadow: none !important;
 }
+
+/* 
+ * Keyboard Focus Indicators (WCAG 2.1 - 2.4.7 Focus Visible)
+ * Ensures keyboard navigators (Tab key users) see a clear, high-contrast 
+ * brand-green focus ring around any active element. Outlines are ignored 
+ * during standard mouse clicks to preserve visual aesthetics.
+ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--color-brand-400, #10b981) !important;
+  outline-offset: 3px !important;
+}
