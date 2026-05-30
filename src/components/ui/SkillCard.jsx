@@ -1,3 +1,5 @@
+import { DEFAULT_SKILLS } from '../../constants/data';
+
 /**
  * @fileoverview Reusable Skill Card component.
  */
@@ -6,11 +8,14 @@ export default function SkillCard({ skill, index }) {
 
   // Helper to render icon, checking if it's already an element or an image URL
   const renderIcon = (skillObj) => {
+    // 1. If it's already a React element (e.g. from local fallback)
     if (skillObj.icon && typeof skillObj.icon !== 'string') {
       return skillObj.icon;
     }
+    
+    // 2. If it's a dynamic image URL from Firebase
     const iconUrl = skillObj.icon || skillObj.Icon || skillObj.image || skillObj.Image;
-    if (iconUrl && typeof iconUrl === 'string') {
+    if (iconUrl && typeof iconUrl === 'string' && (iconUrl.startsWith('http') || iconUrl.startsWith('/') || iconUrl.startsWith('data:'))) {
       return (
         <img 
           src={iconUrl} 
@@ -21,6 +26,16 @@ export default function SkillCard({ skill, index }) {
         />
       );
     }
+
+    // 3. Fallback to local high-fidelity SVG icon if it matches by name
+    const localMatch = DEFAULT_SKILLS.find(
+      (ds) => ds.name.toLowerCase() === (skillObj.name || "").toLowerCase()
+    );
+    if (localMatch && localMatch.icon) {
+      return localMatch.icon;
+    }
+
+    // 4. Default retro code icon fallback
     return (
       <svg className="w-8 h-8 text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="16 18 22 12 16 6" />
