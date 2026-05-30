@@ -73,14 +73,27 @@ export default function Projects() {
           titleHighlight={PROJECTS_STRINGS.SECTION_TITLE_HIGHLIGHT}
         />
         
-
-
-        {/* Projects Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectList.map((project, idx) => (
-            <ProjectCard key={project.id || idx} project={project} index={idx} />
-          ))}
-        </div>
+        {projectList && projectList.length > 0 ? (
+          /* Projects Cards Grid */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projectList.map((project, idx) => (
+              <ProjectCard key={project.id || idx} project={project} index={idx} />
+            ))}
+          </div>
+        ) : (
+          /* Sleek monospaced empty state */
+          <div className="p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-3xl max-w-lg mx-auto shadow-md mt-12">
+            <div className="rounded-[calc(1.5rem-0.25rem)] bg-zinc-950/45 p-6 sm:p-8 text-center font-mono">
+              <div className="p-3 bg-zinc-900/40 rounded-full w-12 h-12 flex items-center justify-center mx-auto text-brand-400 border border-white/5 mb-4 animate-pulse">
+                <Code2 className="w-5 h-5" />
+              </div>
+              <span className="text-brand-500 font-bold block text-sm mb-1">[SYSTEM] Repository index is empty.</span>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                No public projects found at this time. Mustafa is currently working on some exciting new software. Stay tuned!
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

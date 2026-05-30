@@ -35,6 +35,7 @@ export const NAV_LINKS = [
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
   { name: 'Education', href: '#education' },
+  { name: 'Blogs', href: '#blogs' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -66,29 +67,7 @@ export const INFO_CARDS = [
   },
 ];
 
-export const DEFAULT_PROJECTS = [
-  {
-    title: 'TaskFlow - Project Manager',
-    description: 'A collaborative board app featuring project creation, drag-and-drop task boards, and detailed priority tracking labels.',
-    tags: ['React JS', 'Tailwind CSS', 'Firebase'],
-    github: 'https://github.com/md-mustafa-hossain-create',
-    demo: 'https://github.com/md-mustafa-hossain-create',
-  },
-  {
-    title: 'WeatherSphere - Live Forecast',
-    description: 'An interactive weather forecasting dashboard that pulls real-time information using geolocation and third-party APIs.',
-    tags: ['React JS', 'Tailwind CSS', 'React Router'],
-    github: 'https://github.com/md-mustafa-hossain-create',
-    demo: 'https://github.com/md-mustafa-hossain-create',
-  },
-  {
-    title: 'DevChat - Realtime Chat',
-    description: 'A clean developer chat application powered by Firebase, facilitating private messages, group channels, and code snippet sharing.',
-    tags: ['React JS', 'Firebase', 'Tailwind CSS'],
-    github: 'https://github.com/md-mustafa-hossain-create',
-    demo: 'https://github.com/md-mustafa-hossain-create',
-  },
-];
+export const DEFAULT_PROJECTS = [];
 
 export const SOCIALS = [
   {
@@ -233,4 +212,6 @@ export const EDUCATION_DATA = [
     active: false,
   },
 ];
+
+export const DEFAULT_BLOGS = [];
 

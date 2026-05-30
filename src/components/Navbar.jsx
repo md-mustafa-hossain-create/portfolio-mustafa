@@ -1,17 +1,30 @@
 import { useState, useEffect } from 'react';
 import { Lightbulb, Terminal } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { NAV_LINKS } from '../constants/data';
 import { GLOBAL, NAV_STRINGS } from '../constants/strings';
 
 /**
  * @fileoverview Main Navigation component.
- * Refactored to use extracted constants for DRY compliance.
+ * Refactored to use navigation hooks for cross-page redirection and scrollspy highlight.
  */
 
 export default function Navbar({ theme, onToggleTheme }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  const isOnHomePage = location.pathname === '/';
+
+  const handleNavLinkClick = (e, href) => {
+    if (!isOnHomePage) {
+      e.preventDefault();
+      navigate(`/${href}`);
+    }
+    setIsOpen(false);
+  };
 
   // Monitor scroll height to adjust style/border shadow
   useEffect(() => {
@@ -128,6 +141,7 @@ export default function Navbar({ theme, onToggleTheme }) {
                 key={link.name}
                 id={`nav-link-${link.name.toLowerCase()}`}
                 href={link.href}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
                 className={`font-medium text-xs px-4 py-2 rounded-full transition-premium relative group ${
                   isActive 
                     ? 'text-brand-400 bg-zinc-900/60 font-semibold' 
@@ -144,6 +158,7 @@ export default function Navbar({ theme, onToggleTheme }) {
           <a
             id="nav-btn-hire"
             href="#contact"
+            onClick={(e) => handleNavLinkClick(e, '#contact')}
             className="ml-2 px-4 py-2.5 text-xs font-mono font-bold tracking-wide uppercase text-white bg-zinc-900 border border-zinc-800 hover:border-brand-400/50 hover:bg-zinc-900/80 rounded-full transition-premium active:scale-95 shadow-md"
           >
             {NAV_STRINGS.BTN_HIRE}
@@ -217,7 +232,7 @@ export default function Navbar({ theme, onToggleTheme }) {
                 key={link.name}
                 id={`nav-mobile-link-${link.name.toLowerCase()}`}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
                 style={{ transitionDelay: isOpen ? `${i * 50}ms` : '0ms' }}
                 className={`block px-4 py-3 rounded-xl text-sm font-medium transition-premium transform ${
                   isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
@@ -235,7 +250,7 @@ export default function Navbar({ theme, onToggleTheme }) {
             <a
               id="nav-mobile-btn-hire"
               href="#contact"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavLinkClick(e, '#contact')}
               className="block w-full text-center py-3 text-xs font-mono font-bold uppercase tracking-wider text-white bg-gradient-to-r from-brand-400 to-brand-600 hover:from-brand-300 hover:to-brand-500 rounded-xl transition-premium shadow-lg shadow-brand-500/10 active:scale-98"
             >
               {NAV_STRINGS.BTN_HIRE}

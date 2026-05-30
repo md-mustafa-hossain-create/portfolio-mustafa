@@ -43,9 +43,9 @@ export default function About() {
                   <img 
                     src={profileImg} 
                     alt={GLOBAL.DEV_NAME}
-                    className="w-full h-full object-cover z-10 transition-premium group-hover:scale-[1.04]"
+                    className="w-full h-full object-cover z-10 transition-premium group-hover:scale-[1.03]"
                   />
-                  
+
                   <span className="absolute top-4 right-4 z-20 px-2 py-1 rounded bg-brand-500/10 border border-brand-400/20 text-[8px] font-mono text-brand-400 uppercase tracking-widest shadow-md backdrop-blur-md">
                     Developer
                   </span>

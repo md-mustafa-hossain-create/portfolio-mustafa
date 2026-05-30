@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -11,6 +11,9 @@ import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from '@/theme';
 const Skills = lazy(() => import('@/components/Skills'));
 const Projects = lazy(() => import('@/components/Projects'));
 const Education = lazy(() => import('@/components/Education'));
+const Blogs = lazy(() => import('@/components/Blogs'));
+const BlogsFeedPage = lazy(() => import('@/components/BlogsFeedPage'));
+const BlogPostPage = lazy(() => import('@/components/BlogPostPage'));
 const Contact = lazy(() => import('@/components/Contact'));
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -29,8 +32,38 @@ function SectionFallback({ id, label, minHeight = 'min-h-[280px]' }) {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 // Layout containing all standard sections for single-page scrolling
 function PortfolioHome() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        const timer = setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [hash]);
+
   return (
     <div className="relative">
       <MouseSpotlight />
@@ -50,6 +83,11 @@ function PortfolioHome() {
       <LazySection placeholder={<SectionFallback id="education" label="education" />}>
         <Suspense fallback={<SectionFallback id="education" label="education" />}>
           <Education />
+        </Suspense>
+      </LazySection>
+      <LazySection placeholder={<SectionFallback id="blogs" label="blogs" />}>
+        <Suspense fallback={<SectionFallback id="blogs" label="blogs" />}>
+          <Blogs />
         </Suspense>
       </LazySection>
       <LazySection placeholder={<SectionFallback id="contact" label="contact" minHeight="min-h-[360px]" />}>
@@ -124,7 +162,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300 crt-screen crt-flicker">
+      <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300">
         <Navbar
           theme={theme}
           onToggleTheme={() => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))}
@@ -132,8 +170,25 @@ function App() {
         
         {/* Main routing area */}
         <main className="flex-grow">
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<PortfolioHome />} />
+            <Route
+              path="/blogs"
+              element={
+                <Suspense fallback={<SectionFallback id="blogs-feed" label="blogs feed" minHeight="min-h-[500px]" />}>
+                  <BlogsFeedPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/blogs/:id"
+              element={
+                <Suspense fallback={<SectionFallback id="blog-post" label="blog article" minHeight="min-h-[500px]" />}>
+                  <BlogPostPage />
+                </Suspense>
+              }
+            />
           </Routes>
         </main>
 

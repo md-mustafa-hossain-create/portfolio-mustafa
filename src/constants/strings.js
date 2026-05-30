@@ -69,8 +69,21 @@ export const EDUCATION_STRINGS = {
   SECTION_TITLE_HIGHLIGHT: "Education",
 };
 
+export const BLOGS_STRINGS = {
+  SECTION_TAG: "05 . Publications",
+  SECTION_TITLE_PREFIX: "My",
+  SECTION_TITLE_HIGHLIGHT: "Blogs",
+  TERMINAL_STATUS: "[FETCH] Retrieving articles... 200 OK",
+  TERMINAL_DESC: "A collection of thoughts, tutorials, and insights on frontend development, UI/UX, and modern web technologies.",
+  SEARCH_PLACEHOLDER: "Search articles by title or tag...",
+  READ_MORE: "Read Article",
+  EXTERNAL_LINK: "External link",
+  CLOSE_MODAL: "[exit]",
+  NO_RESULTS: "No articles match your search query."
+};
+
 export const CONTACT_STRINGS = {
-  SECTION_TAG: "05 . Get In Touch",
+  SECTION_TAG: "06 . Get In Touch",
   SECTION_TITLE_PREFIX: "Contact",
   SECTION_TITLE_HIGHLIGHT: "Me",
   SUBTITLE: "Have an internship opportunity, a project idea, or just want to say hi? Drop me a message!",
