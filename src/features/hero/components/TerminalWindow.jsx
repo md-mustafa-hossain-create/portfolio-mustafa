@@ -76,8 +76,14 @@ export default function TerminalWindow({ isBooted }) {
       return;
     }
 
-    // Append query to history
-    setHistory((prev) => [...prev, { type: 'input', text: query }]);
+    // Clearing initial system prompts and suggested commands on first message to clean up the conversation viewport
+    const isFirstMessage = !history.some((item) => item.type === 'input');
+
+    if (isFirstMessage) {
+      setHistory([{ type: 'input', text: query }]);
+    } else {
+      setHistory((prev) => [...prev, { type: 'input', text: query }]);
+    }
     setIsLoading(true);
     setTimeout(() => inputRef.current?.focus(), 50);
 
