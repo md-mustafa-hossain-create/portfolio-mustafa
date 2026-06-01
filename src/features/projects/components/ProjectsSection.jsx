@@ -11,8 +11,10 @@ import ProjectCard from './ProjectCard';
  * @fileoverview Main Projects section component.
  */
 
+const EMPTY_ARRAY = [];
+
 function ProjectsSectionContent() {
-  const { data: rawProjectList, loading } = useFirebaseData('projects', []);
+  const { data: rawProjectList, loading } = useFirebaseData('projects', EMPTY_ARRAY);
 
   // Normalize all project records to standard objects
   const projectList = React.useMemo(() => normalizeProjects(rawProjectList), [rawProjectList]);

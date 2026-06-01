@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
+const DEFAULT_FALLBACK = [];
+
 /**
  * Custom hook to fetch data from a Firestore collection.
  * Includes built-in error handling and fallback logic.
@@ -10,7 +12,7 @@ import { db } from '../config/firebase';
  * @param {Array} fallbackData - Static data to return if the Firebase query fails, is empty, or isn't configured.
  * @returns {{ data: Array, loading: boolean, error: Error|null }} An object containing the data, loading state, and error.
  */
-export function useFirebaseData(collectionName, fallbackData = []) {
+export function useFirebaseData(collectionName, fallbackData = DEFAULT_FALLBACK) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
