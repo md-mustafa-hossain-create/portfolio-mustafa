@@ -1,5 +1,5 @@
 import { GraduationCap } from 'lucide-react';
-import SectionHeader from './ui/SectionHeader';
+import SectionHeader from '@/shared/components/ui/SectionHeader';
 import EducationCard from './ui/EducationCard';
 import { EDUCATION_STRINGS } from '../constants/strings';
 import { EDUCATION_DATA } from '../constants/data';

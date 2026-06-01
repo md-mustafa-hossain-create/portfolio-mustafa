@@ -1,11 +1,22 @@
 import { useState, useEffect } from 'react';
-import { ROLES } from '../../constants/data';
+import PropTypes from 'prop-types';
+import { ROLES } from '@/constants/data';
 
 /**
- * @fileoverview Handles the typewriter effect logic, isolated to prevent
- * unnecessary re-renders in the parent Hero component.
+ * @fileoverview Handles the typewriter effect logic.
+ * Isolated to prevent unnecessary re-renders in the parent Hero component.
  */
 
+/**
+ * @typedef {Object} TypewriterTextProps
+ * @property {boolean} isBooted - Control state to start typewriter sequences.
+ */
+
+/**
+ * TypewriterText component.
+ * @param {TypewriterTextProps} props
+ * @returns {React.ReactElement}
+ */
 export default function TypewriterText({ isBooted }) {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
@@ -52,3 +63,7 @@ export default function TypewriterText({ isBooted }) {
     </span>
   );
 }
+
+TypewriterText.propTypes = {
+  isBooted: PropTypes.bool.isRequired,
+};

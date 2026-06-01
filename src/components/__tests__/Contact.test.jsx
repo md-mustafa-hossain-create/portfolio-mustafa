@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import Contact from '../Contact';
+import Contact from '@/features/contact/components/ContactSection';
 
 // Mock variables
 const mockAddDoc = vi.fn();

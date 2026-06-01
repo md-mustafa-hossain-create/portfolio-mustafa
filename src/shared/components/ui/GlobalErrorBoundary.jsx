@@ -1,11 +1,12 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { AlertTriangle, RefreshCcw } from 'lucide-react';
 
 /**
  * @fileoverview React Error Boundary component to catch JavaScript errors anywhere
  * in the child component tree, log those errors, and display a fallback UI.
  */
-class ErrorBoundary extends Component {
+export default class GlobalErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: null };
@@ -17,8 +18,8 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service here
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    // Log details of the failure
+    console.error('GlobalErrorBoundary caught an error:', error, errorInfo);
   }
 
   handleReload = () => {
@@ -28,7 +29,7 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-4 selection:bg-brand-500/20 crt-screen crt-flicker">
+        <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-4 selection:bg-brand-500/20 crt-screen crt-flicker font-sans">
           <div className="max-w-md w-full bg-zinc-900/40 backdrop-blur-lg border border-white/10 rounded-[2rem] p-8 text-center shadow-2xl relative overflow-hidden">
             {/* Background glow */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 blur-3xl rounded-full"></div>
@@ -46,7 +47,7 @@ class ErrorBoundary extends Component {
             
             <button
               onClick={this.handleReload}
-              className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl bg-brand-500 text-white font-medium hover:bg-brand-600 transition-colors shadow-[0_0_20px_rgba(var(--brand-500-rgb),0.3)]"
+              className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl bg-brand-500 text-white font-medium hover:bg-brand-600 transition-colors shadow-[0_0_20px_rgba(var(--brand-500-rgb),0.3)] cursor-pointer"
             >
               <RefreshCcw className="w-4 h-4" />
               Reboot System
@@ -67,4 +68,6 @@ class ErrorBoundary extends Component {
   }
 }
 
-export default ErrorBoundary;
+GlobalErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};

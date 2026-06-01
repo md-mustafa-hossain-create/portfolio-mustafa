@@ -1,10 +1,15 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../Navbar';
 
 describe('Navbar Component', () => {
   it('renders brand logo and desktop navigation links successfully', () => {
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
 
     // Verify brand logo text exists
     expect(screen.getByText('MUSTAFA')).toBeInTheDocument();
@@ -25,7 +30,11 @@ describe('Navbar Component', () => {
   });
 
   it('toggles the mobile drawer menu when clicking the hamburger menu button', () => {
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
 
     // Find the toggle button by aria-label "Toggle Menu"
     const toggleButton = screen.getByLabelText('Toggle Menu');
@@ -43,7 +52,11 @@ describe('Navbar Component', () => {
   });
 
   it('closes the mobile menu when clicking a mobile navigation link', () => {
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
 
     const toggleButton = screen.getByLabelText('Toggle Menu');
     
@@ -64,7 +77,11 @@ describe('Navbar Component', () => {
     const scrollToMock = vi.fn();
     window.scrollTo = scrollToMock;
 
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
 
     const logoElement = document.getElementById('nav-logo');
     expect(logoElement).toBeInTheDocument();

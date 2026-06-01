@@ -67,7 +67,72 @@ export const INFO_CARDS = [
   },
 ];
 
-export const DEFAULT_PROJECTS = [];
+export const DEFAULT_PROJECTS = [
+  {
+    id: "streampulse",
+    title: "StreamPulse",
+    category: "Music Streaming App",
+    description: "A premium music streaming web application built with React, Tailwind CSS, and Firestore, featuring glassmorphism design and custom audio controller node APIs.",
+    github: "https://github.com/md-mustafa-hossain-create/streampulse",
+    demo: "https://streampulse-demo.web.app",
+    tags: ["React", "Tailwind CSS", "Firebase", "Web Audio API"],
+    challenge: "Creating a seamless playback experience across routes with visualizers while managing global state without heavy state-management libraries like Redux.",
+    solution: "Designed a Context-based React State Provider paired with React Audio Nodes. Leveraged requestAnimationFrame loops to sync canvas visualizers in real-time without blocking UI thread render passes.",
+    codeSpotlight: `// Context-based global audio controller initialization
+const useAudio = () => {
+  const context = useContext(AudioContext);
+  if (!context) {
+    throw new Error("useAudio must be used within AudioProvider");
+  }
+  return context;
+};`,
+    metrics: [
+      { label: "Lighthouse Score", value: "98%" },
+      { label: "Audio Playback Latency", value: "12ms" },
+      { label: "CLS (Layout Shift)", value: "0.00" }
+    ]
+  },
+  {
+    id: "devdock",
+    title: "DevDock",
+    category: "Developer Workspace Tool",
+    description: "An interactive, drag-and-drop workspace app that lets developers build and customize portfolios, complete with retro themes and AI copilot integrations.",
+    github: "https://github.com/md-mustafa-hossain-create/devdock",
+    demo: "https://devdock.web.app",
+    tags: ["React", "Drag-and-Drop", "Gemini API", "LocalStore"],
+    challenge: "Handling fluid visual layouts during drag-and-drop actions on mobile browsers where touch interaction events are heavily throttled.",
+    solution: "Implemented CSS hardware acceleration will-change flags alongside passive touchstart events. Abstracted dragging calculations into a clean React Hook with requestAnimationFrame lerping.",
+    codeSpotlight: `// Smooth transform transition lerp hook
+export function useSpringTransition(value, stiffness = 0.1) {
+  const [current, setCurrent] = useState(value);
+  // smooth spring updates using animation frames
+}`,
+    metrics: [
+      { label: "Drag Render FPS", value: "60 fps" },
+      { label: "AI Response speed", value: "1.2s" },
+      { label: "Bundle size reduction", value: "32%" }
+    ]
+  },
+  {
+    id: "geolearn",
+    title: "GeoLearn",
+    category: "Gamified Map Platform",
+    description: "An interactive education platform teaching geography through gamified map-based quizzes, dynamic statistics, and localized trivia modules.",
+    github: "https://github.com/md-mustafa-hossain-create/geolearn",
+    demo: "https://geolearn.web.app",
+    tags: ["React", "Leaflet Maps", "Tailwind CSS", "Recharts"],
+    challenge: "Loading high-resolution SVG map elements dynamically without introducing noticeable layout shifts (CLS) on slow mobile connections.",
+    solution: "Configured pre-sized bounding box elements acting as container targets. Implemented lazy-loaded GeoJSON tiles chunking combined with Web Workers to parse geometry threads.",
+    codeSpotlight: `// Web Worker mapping parser thread
+const worker = new Worker(new URL('./geoWorker.js', import.meta.url));
+worker.postMessage({ geoJsonData });`,
+    metrics: [
+      { label: "Map loading speedup", value: "2.4x" },
+      { label: "CLS (Layout Shift)", value: "0.01" },
+      { label: "Offline availability", value: "100%" }
+    ]
+  }
+];
 
 export const SOCIALS = [
   {

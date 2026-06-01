@@ -33,8 +33,8 @@ export const HERO_STRINGS = {
   BTN_RESUME: "Download Resume",
   BTN_CONTACT: "Contact Me",
   RESUME_NOTE: "* Note: Replace public/resume.pdf with your actual CV",
-  TERMINAL_STATUS: "READY",
-  BOOT_TITLE: "MUSTAFA_OS v4.0.0 initializing...",
+  TERMINAL_STATUS: "ACTIVE",
+  BOOT_TITLE: "Welcome to my portfolio",
 };
 
 export const ABOUT_STRINGS = {
@@ -49,18 +49,18 @@ export const SKILLS_STRINGS = {
   SECTION_TAG: "02 . Core Stack",
   SECTION_TITLE_PREFIX: "My",
   SECTION_TITLE_HIGHLIGHT: "Skills",
-  TERMINAL_STATUS: "[SYSTEM] Scanning capabilities... 100% COMPLETE",
-  TERMINAL_DESC: "Found modern frontend tools and frameworks configured for web projects."
+  STATUS: "Capabilities Checklist",
+  DESC: "Modern frontend tools and frameworks configured for web projects."
 };
 
 export const PROJECTS_STRINGS = {
   SECTION_TAG: "03 . Projects",
   SECTION_TITLE_PREFIX: "My",
   SECTION_TITLE_HIGHLIGHT: "Showcase",
-  TERMINAL_STATUS: "[QUERY] Listing projects... OK",
-  TERMINAL_DESC: "Select a card below to inspect repositories and live demonstrations.",
-  BTN_REPO: "REPO",
-  BTN_DEMO: "DEMO"
+  STATUS: "Active Repositories",
+  DESC: "Explore repositories and live demonstrations below.",
+  BTN_REPO: "Repository",
+  BTN_DEMO: "Live Demo"
 };
 
 export const EDUCATION_STRINGS = {
@@ -73,12 +73,12 @@ export const BLOGS_STRINGS = {
   SECTION_TAG: "05 . Publications",
   SECTION_TITLE_PREFIX: "My",
   SECTION_TITLE_HIGHLIGHT: "Blogs",
-  TERMINAL_STATUS: "[FETCH] Retrieving articles... 200 OK",
-  TERMINAL_DESC: "A collection of thoughts, tutorials, and insights on frontend development, UI/UX, and modern web technologies.",
+  STATUS: "Latest Articles",
+  DESC: "A collection of thoughts, tutorials, and insights on frontend development, UI/UX, and modern web technologies.",
   SEARCH_PLACEHOLDER: "Search articles by title or tag...",
   READ_MORE: "Read Article",
   EXTERNAL_LINK: "External link",
-  CLOSE_MODAL: "[exit]",
+  CLOSE_MODAL: "close",
   NO_RESULTS: "No articles match your search query."
 };
 

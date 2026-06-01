@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Lightbulb, Terminal } from 'lucide-react';
+import { Lightbulb } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NAV_LINKS } from '../constants/data';
 import { GLOBAL, NAV_STRINGS } from '../constants/strings';
@@ -115,10 +115,10 @@ export default function Navbar({ theme, onToggleTheme }) {
   const isLightTheme = theme === 'light';
 
   return (
-    <nav className={`fixed left-1/2 -translate-x-1/2 z-50 transition-premium ${
+    <nav className={`navbar-custom px-4 sm:px-6 ${
       scrolled 
-        ? 'top-4 w-[92%] max-w-5xl glass-nav py-2 px-4 sm:px-6 rounded-full shadow-2xl shadow-zinc-950/40 border border-white/5' 
-        : 'top-6 w-[95%] max-w-6xl bg-zinc-950/30 backdrop-blur-md py-3 px-4 sm:px-6 rounded-full border border-white/3'
+        ? 'navbar-scrolled py-2' 
+        : 'navbar-unscrolled py-3'
     }`}>
       <div className="flex items-center justify-between h-12 flex-nowrap">
         {/* Logo Brand */}
@@ -128,12 +128,32 @@ export default function Navbar({ theme, onToggleTheme }) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setIsOpen(false);
           }} 
-          className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 group cursor-pointer"
+          className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2.5 group cursor-pointer"
         >
-          <div className="p-1.5 sm:p-2 bg-gradient-to-tr from-brand-400 to-brand-600 rounded-full group-hover:rotate-12 transition-spring shrink-0">
-            <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
+          {/* Professional Developer Hexagonal Monogram Logo */}
+          <div className="w-7 h-7 sm:w-8 sm:h-8 group-hover:scale-105 group-hover:rotate-6 transition-spring shrink-0">
+            <svg viewBox="0 0 512 512" className="w-full h-full">
+              <defs>
+                <linearGradient id="nav-brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#10b981" />
+                  <stop offset="100%" stopColor="#059669" />
+                </linearGradient>
+                <linearGradient id="nav-glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#34d399" />
+                  <stop offset="100%" stopColor="#10b981" />
+                </linearGradient>
+                <filter id="nav-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="8" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              <polygon points="256,32 450,144 450,368 256,480 62,368 62,144" fill="#09090b" stroke="url(#nav-brand-grad)" strokeWidth="20" strokeLinejoin="round" />
+              <path d="M 210,180 L 130,256 L 210,332" stroke="url(#nav-glow-grad)" strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <path d="M 302,180 L 382,256 L 302,332" stroke="url(#nav-glow-grad)" strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <line x1="280" y1="160" x2="232" y2="352" stroke="#ffffff" strokeWidth="32" strokeLinecap="round" filter="url(#nav-glow)" />
+            </svg>
           </div>
-          <span className="font-mono font-bold text-sm sm:text-base tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase whitespace-nowrap">
+          <span className="font-sans font-bold text-sm sm:text-base tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase whitespace-nowrap">
             {GLOBAL.BRAND_NAME}<span className="text-brand-400 lowercase">{GLOBAL.BRAND_DOMAIN}</span>
           </span>
         </div>
@@ -165,7 +185,7 @@ export default function Navbar({ theme, onToggleTheme }) {
             id="nav-btn-hire"
             href="#contact"
             onClick={(e) => handleNavLinkClick(e, '#contact')}
-            className="ml-2 px-4 py-2.5 text-xs font-mono font-bold tracking-wide uppercase text-white bg-zinc-900 border border-zinc-800 hover:border-brand-400/50 hover:bg-zinc-900/80 rounded-full transition-premium active:scale-95 shadow-md"
+            className="ml-2 px-4 py-2.5 text-xs font-sans font-bold tracking-wide uppercase text-white bg-zinc-900 border border-zinc-800 hover:border-brand-400/50 hover:bg-zinc-900/80 rounded-full transition-premium active:scale-95 shadow-md"
           >
             {NAV_STRINGS.BTN_HIRE}
           </a>
@@ -257,7 +277,7 @@ export default function Navbar({ theme, onToggleTheme }) {
               id="nav-mobile-btn-hire"
               href="#contact"
               onClick={(e) => handleNavLinkClick(e, '#contact')}
-              className="block w-full text-center py-3 text-xs font-mono font-bold uppercase tracking-wider text-white bg-gradient-to-r from-brand-400 to-brand-600 hover:from-brand-300 hover:to-brand-500 rounded-xl transition-premium shadow-lg shadow-brand-500/10 active:scale-98"
+              className="block w-full text-center py-3 text-xs font-sans font-bold uppercase tracking-wider text-white bg-gradient-to-r from-brand-400 to-brand-600 hover:from-brand-300 hover:to-brand-500 rounded-xl transition-premium shadow-lg shadow-brand-500/10 active:scale-98"
             >
               {NAV_STRINGS.BTN_HIRE}
             </a>

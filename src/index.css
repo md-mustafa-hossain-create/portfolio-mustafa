@@ -1,52 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* Overrides for strict 16 ANSI colors theme */
-  --color-black: #000000;
-  --color-white: #ffffff;
-  
-  --color-zinc-950: #000000;
-  --color-zinc-900: #000000;
-  --color-zinc-800: #555555;
-  --color-zinc-700: #555555;
-  --color-zinc-600: #555555;
-  --color-zinc-500: #555555;
-  --color-zinc-400: #e5e5e5;
-  --color-zinc-300: #e5e5e5;
-  --color-zinc-200: #ffffff;
-  --color-zinc-100: #ffffff;
-  --color-zinc-50: #ffffff;
+  /* Customize sans-serif font family to use Outfit */
+  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
 
-  --color-brand-300: #55ffff; /* ANSI Bright Cyan */
-  --color-brand-400: #55ff55; /* ANSI Bright Green */
-  --color-brand-500: #00cd00; /* ANSI Green */
-  --color-brand-600: #00cd00; /* ANSI Green */
-  --color-brand-950: #000000; /* ANSI Black */
-
-  --color-purple-400: #ff55ff; /* ANSI Bright Magenta */
-  --color-green-400: #55ff55; /* ANSI Bright Green */
-  --color-blue-400: #5555ff;  /* ANSI Bright Blue */
-  --color-emerald-400: #55ff55; /* ANSI Bright Green */
-  --color-emerald-500: #00cd00; /* ANSI Green */
-
-  --color-orange-500: #cdcd00; /* ANSI Yellow */
-  --color-orange-600: #cd0000; /* ANSI Red */
-  --color-red-500: #cd0000;    /* ANSI Red */
-  --color-red-600: #cd0000;    /* ANSI Red */
-  
-  --color-blue-500: #0000ee;   /* ANSI Blue */
-  --color-cyan-500: #00cdcd;   /* ANSI Cyan */
-  --color-yellow-500: #cdcd00; /* ANSI Yellow */
-  --color-yellow-400: #ffff55; /* ANSI Bright Yellow */
-  
-  --color-amber-500: #cdcd00;  /* ANSI Yellow */
-  --color-amber-400: #ffff55;  /* ANSI Bright Yellow */
-  
-  --color-teal-400: #55ff55;   /* ANSI Bright Green */
-  --color-teal-500: #00cd00;   /* ANSI Green */
-  --color-rose-500: #ff55ff;   /* ANSI Bright Magenta */
-  --color-indigo-500: #0000ee;  /* ANSI Blue */
-  --color-indigo-600: #0000ee;  /* ANSI Blue */
+  /* Premium Mint/Emerald hybrid brand color palette */
+  --color-brand-50: #f0fdf9;
+  --color-brand-100: #ccfbf1;
+  --color-brand-200: #99f6e4;
+  --color-brand-300: #5de4c7;
+  --color-brand-400: #2dd4bf;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+  --color-brand-950: #022c22;
   
   --animate-fade-in: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-slide-up: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -78,18 +47,11 @@
 }
 
 :root {
-  --page-bg: #000000;
+  --page-bg: #09090b; /* Tailwind zinc-950 */
   --page-text: var(--color-zinc-300);
-  --scrollbar-track: #000000;
-  --scrollbar-border: #000000;
-  --crt-scanline-a: rgba(0, 0, 0, 0.08);
-  --crt-rgb-r: rgba(255, 0, 0, 0.015);
-  --crt-rgb-g: rgba(0, 255, 0, 0.005);
-  --crt-rgb-b: rgba(0, 0, 255, 0.015);
-  --pixel-grid-dot: #000000;
-  --terminal-mesh-strength: 4%;
-  --terminal-mesh-secondary: 1.5%;
-  --bezel-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.6);
+  --scrollbar-track: #09090b;
+  --scrollbar-border: #09090b;
+  --bezel-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.4);
 }
 
 html {
@@ -99,69 +61,11 @@ html {
 
 html[data-theme='light'] {
   color-scheme: light;
-
-  --color-black: #f4f6f3;
-  --color-white: #0f172a;
-
-  --color-zinc-950: #f4f6f3;
-  --color-zinc-900: #ffffff;
-  --color-zinc-800: #e2e8f0;
-  --color-zinc-700: #cbd5e1;
-  --color-zinc-600: #94a3b8;
-  --color-zinc-500: #64748b;
-  --color-zinc-400: #475569;
-  --color-zinc-300: #334155;
-  --color-zinc-200: #1e293b;
-  --color-zinc-100: #0f172a;
-  --color-zinc-50: #020617;
-
-  --color-brand-50: #f0fdf4;
-  --color-brand-100: #dcfce7;
-  --color-brand-200: #bbf7d0;
-  --color-brand-300: #0d9488; /* High-contrast Teal for syntax highlights */
-  --color-brand-400: #059669; /* Vibrant Green for accents */
-  --color-brand-500: #047857; /* Dark Green for primary actions/hovers */
-  --color-brand-600: #065f46;
-  --color-brand-700: #047857;
-  --color-brand-800: #065f46;
-  --color-brand-900: #022c22;
-  --color-brand-950: #f0fdf4;
-
-  --color-purple-400: #7c3aed; /* Deep Violet for keywords */
-  --color-green-400: #0f766e;  /* Deep Teal for strings */
-  --color-blue-400: #1d4ed8;   /* Royal Blue for functions/links */
-  --color-emerald-400: #059669;
-  --color-emerald-500: #047857;
-
-  --color-orange-500: #b45309;
-  --color-orange-600: #9a3412;
-  --color-red-500: #dc2626;
-  --color-red-600: #b91c1c;
-  --color-blue-500: #1d4ed8;
-  --color-cyan-500: #0369a1;
-  --color-yellow-500: #b45309;
-  --color-yellow-400: #d97706;
-  --color-amber-500: #b45309;
-  --color-amber-400: #d97706;
-
-  --color-teal-400: #0f766e;
-  --color-teal-500: #0d9488;
-  --color-rose-500: #be185d;
-  --color-indigo-500: #4338ca;
-  --color-indigo-600: #3730a3;
-
-  --page-bg: #f4f6f3;
-  --page-text: #334155;
+  --page-bg: #f8fafc; /* Tailwind slate-50 */
+  --page-text: #0f172a; /* Tailwind slate-900 */
   --scrollbar-track: #f1f5f9;
   --scrollbar-border: #f1f5f9;
-  --crt-scanline-a: rgba(0, 0, 0, 0.015);
-  --crt-rgb-r: rgba(0, 0, 0, 0);
-  --crt-rgb-g: rgba(0, 0, 0, 0);
-  --crt-rgb-b: rgba(0, 0, 0, 0);
-  --pixel-grid-dot: #e2e8f0;
-  --terminal-mesh-strength: 3%;
-  --terminal-mesh-secondary: 1%;
-  --bezel-shadow: 0 10px 30px -15px rgba(15, 23, 42, 0.08);
+  --bezel-shadow: 0 10px 30px -15px rgba(15, 23, 42, 0.05);
 }
 
 /* Modern clean scrollbar */
@@ -177,7 +81,7 @@ html[data-theme='light'] {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-zinc-500);
+  background: var(--color-zinc-600);
 }
 
 body {
@@ -188,7 +92,7 @@ body {
 
 html[data-theme='light'] body {
   background-image:
-    radial-gradient(circle at top, rgba(17, 107, 65, 0.035), transparent 34%),
+    radial-gradient(circle at top, rgba(16, 185, 129, 0.035), transparent 34%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0));
 }
 
@@ -205,21 +109,35 @@ html[data-theme='light'] body {
   transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* NOTE: Smooth, snappy easing function (cubic-bezier(0.25, 1, 0.5, 1)) over 300ms to eliminate visual jitter and make the scroll transition feel responsive */
+@utility nav-transition {
+  transition: width 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              max-width 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              top 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-top 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-bottom 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-left 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-right 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: width, max-width, top, padding;
+}
+
 /* Concentric Double-Bezel nested card architectures */
 @utility double-bezel-outer {
-  background: color-mix(in srgb, var(--color-zinc-950) 80%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-zinc-800) 20%, transparent);
+  background: color-mix(in srgb, var(--color-zinc-900) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-zinc-800) 40%, transparent);
   border-radius: 2rem;
-  padding: 0.5rem;
+  padding: 0.25rem;
   box-shadow: var(--bezel-shadow);
-  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @utility double-bezel-inner {
   background: var(--color-zinc-950);
-  border-radius: calc(2rem - 0.5rem);
-  box-shadow: inset 0 1px 1px color-mix(in srgb, var(--color-white) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-zinc-800) 15%, transparent);
+  border-radius: calc(2rem - 0.25rem);
+  border: 1px solid color-mix(in srgb, var(--color-zinc-850) 30%, transparent);
   height: 100%;
   width: 100%;
 }
@@ -231,6 +149,7 @@ html[data-theme='light'] body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid color-mix(in srgb, var(--color-zinc-800) 20%, transparent);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-white) 8%, transparent);
+  will-change: transform, backdrop-filter;
 }
 
 .glass-nav {
@@ -239,22 +158,95 @@ html[data-theme='light'] body {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid color-mix(in srgb, var(--color-zinc-800) 15%, transparent);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-white) 5%, transparent);
+  will-change: transform, backdrop-filter;
 }
 
-html[data-theme='light'] .glass {
-  background: color-mix(in srgb, var(--color-zinc-900) 92%, transparent);
-  border-color: color-mix(in srgb, var(--color-zinc-700) 35%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    0 14px 40px -28px rgba(39, 63, 44, 0.18);
+/* Centered Hardware-Accelerated Navbar Transitions */
+/* NOTE: Smooth, snappy easing function (cubic-bezier(0.25, 1, 0.5, 1)) over 300ms to eliminate visual jitter and make the scroll transition feel responsive */
+.navbar-custom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 50;
+  border-radius: 9999px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: width 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              max-width 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              top 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-top 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-bottom 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-left 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              padding-right 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: width, max-width, top, padding, background-color, border-color, box-shadow;
 }
 
-html[data-theme='light'] .glass-nav {
-  background: color-mix(in srgb, var(--color-zinc-900) 90%, transparent);
-  border-color: color-mix(in srgb, var(--color-zinc-700) 30%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    0 18px 40px -30px rgba(39, 63, 44, 0.16);
+.navbar-unscrolled {
+  top: 1.5rem;
+  width: 95%;
+  max-width: 72rem;
+  background-color: color-mix(in srgb, var(--color-zinc-950) 30%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-zinc-800) 10%, transparent);
+}
+
+.navbar-scrolled {
+  top: 1rem;
+  width: 92%;
+  max-width: 64rem;
+  background-color: color-mix(in srgb, var(--color-zinc-950) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-zinc-800) 15%, transparent);
+  box-shadow: 
+    inset 0 1px 0 color-mix(in srgb, var(--color-white) 5%, transparent),
+    0 20px 40px -10px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme='light'] {
+  /* True inverted zinc grays, adjusted darker for crisp text contrast */
+  --color-zinc-50: #09090b;
+  --color-zinc-100: #18181b;
+  --color-zinc-200: #27272a;
+  --color-zinc-300: #27272a; /* Darker main text (zinc-800) */
+  --color-zinc-400: #3f3f46; /* Darker sub text (zinc-700) */
+  --color-zinc-500: #52525b; /* Darker muted text (zinc-600) */
+  --color-zinc-600: #71717a;
+  --color-zinc-700: #a1a1aa;
+  --color-zinc-800: #e4e4e7;
+  --color-zinc-850: #e4e4e7;
+  --color-zinc-900: #f4f4f5;
+  --color-zinc-950: #fafafa;
+  
+  --color-white: #09090b;
+  --color-black: #ffffff;
+}
+
+/* Specifically darken brand text in light mode for professional contrast */
+html[data-theme='light'] .text-brand-400 {
+  color: var(--color-brand-700) !important;
+}
+html[data-theme='light'] .text-brand-300 {
+  color: var(--color-brand-800) !important;
+}
+html[data-theme='light'] .text-brand-500 {
+  color: var(--color-brand-700) !important;
+}
+
+/* Fix light mode glass and bezel lighting (restore white highlights) */
+html[data-theme='light'] .glass,
+html[data-theme='light'] .glass-nav,
+html[data-theme='light'] .navbar-custom.navbar-scrolled {
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.9), 
+    0 4px 6px -1px rgba(0, 0, 0, 0.03), 
+    0 20px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme='light'] .double-bezel-inner {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
 }
 
 ::selection {
@@ -262,101 +254,48 @@ html[data-theme='light'] .glass-nav {
   color: var(--color-brand-300);
 }
 
-/* Scroll Reveal Animations */
+/* 
+ * Scroll Reveal Animations
+ * NOTE: Added support for reveal-left, reveal-right, and reveal-zoom variations
+ * to handle coordinated horizontal and zoom entry transitions on scroll.
+ */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  filter: blur(4px);
-  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
-              filter 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(6px);
+  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1000ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity, filter;
 }
 
+/* Default vertical fade-up entrance */
+.reveal:not(.reveal-left, .reveal-right, .reveal-zoom) {
+  transform: translateY(30px);
+}
+
+/* Horizontal swipe-in entrance from left */
+.reveal-left {
+  transform: translateX(-50px);
+}
+
+/* Horizontal swipe-in entrance from right */
+.reveal-right {
+  transform: translateX(50px);
+}
+
+/* Zoom/scale-up entrance */
+.reveal-zoom {
+  transform: scale(0.92);
+}
+
+/* Clear transforms and filters once elements are in view */
 .reveal.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(0) scale(1) !important;
   filter: blur(0);
 }
 
-/* Retro CRT Scanlines & Screen Overlay */
-.crt-screen {
-  position: relative;
-}
-.crt-screen::before {
-  content: " ";
-  display: block;
-  position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background:
-    linear-gradient(rgba(18, 16, 16, 0) 50%, var(--crt-scanline-a) 50%),
-    linear-gradient(90deg, var(--crt-rgb-r), var(--crt-rgb-g), var(--crt-rgb-b));
-  z-index: 999;
-  background-size: 100% 4px, 4px 100%;
-  pointer-events: none;
-}
 
-/* CRT Screen Flicker */
-@keyframes crt-flicker {
-  0% { opacity: 0.99; }
-  50% { opacity: 1; }
-  100% { opacity: 0.995; }
-}
-.crt-flicker {
-  animation: crt-flicker 0.15s infinite;
-}
-
-html[data-theme='light'] .crt-flicker {
-  animation: none;
-}
-
-/* Pixel Dot-Matrix Overlay for Images */
-.pixel-grid-overlay {
-  position: relative;
-}
-.pixel-grid-overlay::after {
-  content: " ";
-  display: block;
-  position: absolute;
-  inset: 0;
-  background-size: 4px 4px;
-  background-image: radial-gradient(circle, transparent 35%, var(--pixel-grid-dot) 75%);
-  z-index: 15;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: 0.55;
-}
-
-html[data-theme='light'] .pixel-grid-overlay::after {
-  opacity: 0;
-}
-
-/* Terminal Mesh Gradient Backgrounds */
-.bg-terminal-mesh-hero {
-  background-color: var(--page-bg);
-  background-image: 
-    radial-gradient(circle at 50% 15%, color-mix(in srgb, var(--color-brand-500) var(--terminal-mesh-strength), transparent) 0%, transparent 60%),
-    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--color-brand-400) var(--terminal-mesh-secondary), transparent) 0%, transparent 40%);
-}
-.bg-terminal-mesh-contact {
-  background-color: var(--page-bg);
-  background-image: 
-    radial-gradient(circle at 50% 85%, color-mix(in srgb, var(--color-brand-500) var(--terminal-mesh-strength), transparent) 0%, transparent 60%),
-    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--color-brand-400) var(--terminal-mesh-secondary), transparent) 0%, transparent 40%);
-}
-
-html[data-theme='light'] .double-bezel-outer {
-  background: color-mix(in srgb, var(--color-zinc-900) 92%, transparent);
-  border-color: color-mix(in srgb, var(--color-zinc-700) 28%, transparent);
-}
-
-html[data-theme='light'] .double-bezel-inner {
-  background: color-mix(in srgb, var(--color-zinc-900) 96%, transparent);
-  border-color: color-mix(in srgb, var(--color-zinc-700) 18%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -1px 0 rgba(182, 196, 181, 0.25);
-}
 
 /* Staggered Hero Reveal Animations */
 @keyframes heroReveal {
@@ -416,14 +355,28 @@ html[data-theme='light'] .spotlight-dot-el {
 /* 
  * Keyboard Focus Indicators (WCAG 2.1 - 2.4.7 Focus Visible)
  * Ensures keyboard navigators (Tab key users) see a clear, high-contrast 
- * brand-green focus ring around any active element. Outlines are ignored 
+ * focus ring around any active element. Outlines are ignored 
  * during standard mouse clicks to preserve visual aesthetics.
  */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
 [role="button"]:focus-visible {
   outline: 2px solid var(--color-brand-400, #10b981) !important;
   outline-offset: 3px !important;
+}
+
+/* 
+ * Motion Accessibility (WCAG 2.1 - 2.3.3 Animation from Interactions)
+ * Respects OS-level reduced motion preferences by universally disabling 
+ * animations and smoothing transitions.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *:not(.navbar-custom, .navbar-custom *, .reveal, .reveal *),
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

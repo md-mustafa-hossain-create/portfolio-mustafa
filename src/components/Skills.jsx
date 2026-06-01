@@ -2,7 +2,7 @@ import { Sparkles } from 'lucide-react';
 import { useFirebaseData } from '../hooks/useFirebaseData';
 import { SKILLS_STRINGS } from '../constants/strings';
 import { DEFAULT_SKILLS } from '../constants/data';
-import SectionHeader from './ui/SectionHeader';
+import SectionHeader from '@/shared/components/ui/SectionHeader';
 import SkillCard from './ui/SkillCard';
 
 /**

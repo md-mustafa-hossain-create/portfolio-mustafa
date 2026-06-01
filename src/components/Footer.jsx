@@ -24,7 +24,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
           {/* Brand/Logo */}
-          <div className="text-left font-mono text-sm text-zinc-400">
+          <div className="text-left text-sm text-zinc-400">
             <span>Designed & Built by </span>
             <span className="text-brand-400 font-bold">{GLOBAL.DEV_NAME}</span>
           </div>

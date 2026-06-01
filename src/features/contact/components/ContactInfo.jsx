@@ -1,6 +1,6 @@
 import { Mail, MapPin } from 'lucide-react';
-import { SOCIALS } from '../../constants/data';
-import { CONTACT_STRINGS, GLOBAL } from '../../constants/strings';
+import { SOCIALS } from '@/constants/data';
+import { CONTACT_STRINGS, GLOBAL } from '@/constants/strings';
 
 /**
  * @fileoverview Renders the social links and direct contact information.
@@ -21,7 +21,7 @@ export default function ContactInfo() {
               <Mail className="w-5 h-5 text-brand-400" />
             </div>
             <div>
-              <span className="text-[10px] text-zinc-500 font-mono block">EMAIL ME</span>
+              <span className="text-[10px] text-zinc-500 font-sans font-semibold block">EMAIL ME</span>
               <a
                 href={`mailto:${GLOBAL.DEV_EMAIL}`}
                 className="text-sm font-semibold hover:text-brand-400 transition-colors"
@@ -36,7 +36,7 @@ export default function ContactInfo() {
               <MapPin className="w-5 h-5 text-brand-400" />
             </div>
             <div>
-              <span className="text-[10px] text-zinc-500 font-mono block">MY LOCATION</span>
+              <span className="text-[10px] text-zinc-500 font-sans font-semibold block">MY LOCATION</span>
               <span className="text-sm font-semibold">
                 {GLOBAL.DEV_LOCATION}
               </span>
@@ -47,7 +47,7 @@ export default function ContactInfo() {
 
       {/* Social Grid */}
       <div className="space-y-4 pt-6">
-        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500">
+        <h4 className="text-xs font-sans font-bold uppercase tracking-wider text-zinc-500">
           {CONTACT_STRINGS.FIND_ME}
         </h4>
         <div className="grid grid-cols-2 gap-3">
