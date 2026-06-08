@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight, ExternalLink } from 'lucide-react';
 import { BLOGS_STRINGS } from '@/constants/strings';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Blog Card component to display single article previews.
@@ -84,31 +85,32 @@ export default function BlogCard({ blog, index }) {
     </div>
   );
 
-  const containerClasses = "p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-3xl hover:border-brand-500/20 hover:scale-[1.01] transition-premium group relative cursor-pointer flex flex-col h-full reveal reveal-zoom shadow-md";
-  const inlineStyle = { transitionDelay: `${200 + index * 50}ms` };
+  const containerClasses = "p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-3xl hover:border-brand-500/20 hover:scale-[1.01] transition-premium group relative cursor-pointer flex flex-col h-full shadow-md";
 
   if (isExternal) {
     return (
-      <a
-        href={blog.externalUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={containerClasses}
-        style={inlineStyle}
-      >
-        {cardContent}
-      </a>
+      <ScrollReveal animation="zoom" delay={0.2 + index * 0.05} className="h-full">
+        <a
+          href={blog.externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={containerClasses}
+        >
+          {cardContent}
+        </a>
+      </ScrollReveal>
     );
   }
 
   return (
-    <Link
-      to={`/blogs/${blog.id}`}
-      className={containerClasses}
-      style={inlineStyle}
-    >
-      {cardContent}
-    </Link>
+    <ScrollReveal animation="zoom" delay={0.2 + index * 0.05} className="h-full">
+      <Link
+        to={`/blogs/${blog.id}`}
+        className={containerClasses}
+      >
+        {cardContent}
+      </Link>
+    </ScrollReveal>
   );
 }
 

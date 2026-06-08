@@ -2,6 +2,7 @@ import { ArrowRight, Download, Mail } from 'lucide-react';
 import { GLOBAL, HERO_STRINGS } from '@/constants/strings';
 import TypewriterText from './TypewriterText';
 import TerminalWindow from './TerminalWindow';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Main Hero section component.
@@ -22,59 +23,56 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Hero Left Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left reveal reveal-left">
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
             
             {/* Tagline pill */}
-            <div 
-              className={`inline-flex items-center px-4 py-1.5 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-[10px] uppercase tracking-wider text-brand-400 font-semibold mb-6 backdrop-blur-md ${
-                isBooted ? 'hero-revealed' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '100ms' }}
+            <ScrollReveal 
+              animation="up"
+              delay={0.1}
+              className="inline-flex items-center px-4 py-1.5 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-[10px] uppercase tracking-wider text-brand-400 font-semibold mb-6 backdrop-blur-md"
             >
               <span>{HERO_STRINGS.AVAILABLE_BADGE}</span>
-            </div>
+            </ScrollReveal>
 
             {/* Main Greeting */}
-            <h1 
-              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05] text-white mb-6 ${
-                isBooted ? 'hero-revealed' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '250ms' }}
+            <ScrollReveal 
+              animation="up"
+              delay={0.25}
+              as="h1"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05] text-white mb-6"
             >
               {HERO_STRINGS.GREETING} <br />
               <span className="text-brand-400">
                 {GLOBAL.DEV_NAME}
               </span>
-            </h1>
+            </ScrollReveal>
 
             {/* Typewriter Role Headline */}
-            <div 
-              className={`h-10 sm:h-12 flex items-center mb-6 ${
-                isBooted ? 'hero-revealed' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '400ms' }}
+            <ScrollReveal 
+              animation="up"
+              delay={0.4}
+              className="h-10 sm:h-12 flex items-center mb-6"
             >
               <p className="text-lg sm:text-2xl font-sans font-medium text-zinc-300">
                 I'm a <TypewriterText isBooted={isBooted} />
               </p>
-            </div>
+            </ScrollReveal>
 
             {/* Subtitle */}
-            <p 
-              className={`text-base sm:text-lg text-zinc-400 max-w-xl mb-10 leading-relaxed font-sans ${
-                isBooted ? 'hero-revealed' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '550ms' }}
+            <ScrollReveal 
+              animation="up"
+              delay={0.55}
+              as="p"
+              className="text-base sm:text-lg text-zinc-400 max-w-xl mb-10 leading-relaxed font-sans"
             >
               {HERO_STRINGS.SUBTITLE}
-            </p>
+            </ScrollReveal>
 
             {/* Actions CTA: Sleek and responsive button architecture */}
-            <div 
-              className={`w-full flex flex-col sm:flex-row gap-3 sm:gap-4 ${
-                isBooted ? 'hero-revealed' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '700ms' }}
+            <ScrollReveal 
+              animation="up"
+              delay={0.7}
+              className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4"
             >
               <a
                 id="hero-btn-projects"
@@ -105,22 +103,22 @@ export default function HeroSection() {
                   <span>{HERO_STRINGS.BTN_CONTACT}</span>
                 </a>
               </div>
-            </div>
+            </ScrollReveal>
 
-            <span 
-              className={`text-[10px] text-zinc-600 mt-4 font-sans block ${
-                isBooted ? 'hero-revealed' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '850ms' }}
+            <ScrollReveal 
+              animation="up"
+              delay={0.85}
+              as="span"
+              className="text-[10px] text-zinc-600 mt-4 font-sans block"
             >
               {HERO_STRINGS.RESUME_NOTE}
-            </span>
+            </ScrollReveal>
           </div>
 
           {/* Hero Right: Terminal Mockup */}
-          <div className="lg:col-span-5 reveal reveal-right" style={{ transitionDelay: '300ms' }}>
-            <TerminalWindow isBooted={isBooted} />
-          </div>
+          <ScrollReveal animation="right" delay={0.3} className="lg:col-span-5">
+            <TerminalWindow />
+          </ScrollReveal>
           
         </div>
       </div>

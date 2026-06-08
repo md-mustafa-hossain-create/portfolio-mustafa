@@ -254,66 +254,7 @@ html[data-theme='light'] .double-bezel-inner {
   color: var(--color-brand-300);
 }
 
-/* 
- * Scroll Reveal Animations
- * NOTE: Added support for reveal-left, reveal-right, and reveal-zoom variations
- * to handle coordinated horizontal and zoom entry transitions on scroll.
- */
-.reveal {
-  opacity: 0;
-  filter: blur(6px);
-  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1000ms cubic-bezier(0.16, 1, 0.3, 1),
-              filter 1000ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity, filter;
-}
 
-/* Default vertical fade-up entrance */
-.reveal:not(.reveal-left, .reveal-right, .reveal-zoom) {
-  transform: translateY(30px);
-}
-
-/* Horizontal swipe-in entrance from left */
-.reveal-left {
-  transform: translateX(-50px);
-}
-
-/* Horizontal swipe-in entrance from right */
-.reveal-right {
-  transform: translateX(50px);
-}
-
-/* Zoom/scale-up entrance */
-.reveal-zoom {
-  transform: scale(0.92);
-}
-
-/* Clear transforms and filters once elements are in view */
-.reveal.revealed {
-  opacity: 1;
-  transform: translate(0) scale(1) !important;
-  filter: blur(0);
-}
-
-
-
-/* Staggered Hero Reveal Animations */
-@keyframes heroReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(15px);
-    filter: blur(4px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-.hero-revealed {
-  opacity: 0;
-  animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
 
 /* Fix all section header capsule tag icons layout and size constraints globally */
 .inline-flex.rounded-full span.inline-block,

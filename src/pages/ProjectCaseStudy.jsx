@@ -5,6 +5,7 @@ import { useFirebaseData } from '@/hooks/useFirebaseData';
 import { DEFAULT_PROJECTS } from '@/constants/data';
 import GlassCard from '@/shared/components/ui/GlassCard';
 import { normalizeProjects } from '@/features/projects/utils/projectAdapters';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Full-page Project Case Study view (/projects/:id) displaying details.
@@ -222,7 +223,7 @@ export default function ProjectCaseStudy() {
             </div>
 
             {/* The Challenge Card */}
-            <div className="reveal">
+            <ScrollReveal animation="up" delay={0.1}>
               <GlassCard className="p-8 space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 bg-zinc-900 border border-zinc-800 text-zinc-400 rounded-xl">
@@ -234,10 +235,10 @@ export default function ProjectCaseStudy() {
                   {project.challenge || "Every engineering effort faces unique challenges during implementation. This section details performance thresholds, data complexity, and standard layout limitations that had to be addressed."}
                 </p>
               </GlassCard>
-            </div>
+            </ScrollReveal>
 
             {/* The Solution Card */}
-            <div className="reveal">
+            <ScrollReveal animation="up" delay={0.2}>
               <GlassCard className="p-8 space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 bg-zinc-900 border border-zinc-800 text-zinc-400 rounded-xl">
@@ -249,11 +250,11 @@ export default function ProjectCaseStudy() {
                   {project.solution || "To resolve the project criteria, advanced architectural strategies and design patterns were applied. These optimizations ensured high rendering efficiency and robust state flow."}
                 </p>
               </GlassCard>
-            </div>
+            </ScrollReveal>
 
             {/* Code Spotlight Editor Mockup */}
             {project.codeSpotlight && (
-              <div className="reveal">
+              <ScrollReveal animation="up" delay={0.3}>
                 <GlassCard className="p-0 overflow-hidden border border-zinc-850">
                   {/* Editor Header */}
                   <div className="bg-zinc-900/60 px-5 py-3 border-b border-zinc-850 flex items-center justify-between font-mono text-xs">
@@ -270,11 +271,11 @@ export default function ProjectCaseStudy() {
                     </pre>
                   </div>
                 </GlassCard>
-              </div>
+              </ScrollReveal>
             )}
 
             {/* Tech Stack List */}
-            <div className="reveal">
+            <ScrollReveal animation="up" delay={0.4}>
               <GlassCard className="p-8 space-y-5">
                 <h3 className="text-lg font-bold text-white">Technologies Utilized</h3>
                 <div className="flex flex-wrap gap-2.5">
@@ -288,7 +289,7 @@ export default function ProjectCaseStudy() {
                   ))}
                 </div>
               </GlassCard>
-            </div>
+            </ScrollReveal>
 
             {/* Footer breadcrumb */}
             <div className="pt-8 border-t border-zinc-850/60 flex items-center justify-between text-xs text-zinc-500 font-medium font-sans">

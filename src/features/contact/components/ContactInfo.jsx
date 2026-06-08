@@ -1,6 +1,7 @@
 import { Mail, MapPin } from 'lucide-react';
 import { SOCIALS } from '@/constants/data';
 import { CONTACT_STRINGS, GLOBAL } from '@/constants/strings';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Renders the social links and direct contact information.
@@ -8,7 +9,7 @@ import { CONTACT_STRINGS, GLOBAL } from '@/constants/strings';
 
 export default function ContactInfo() {
   return (
-    <div className="space-y-8 text-left reveal" style={{ transitionDelay: '100ms' }}>
+    <ScrollReveal animation="up" delay={0.1} className="space-y-8 text-left">
       <div className="space-y-6">
         <h3 className="text-2xl font-bold text-zinc-100">
           {CONTACT_STRINGS.HEADING}
@@ -68,6 +69,6 @@ export default function ContactInfo() {
           ))}
         </div>
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

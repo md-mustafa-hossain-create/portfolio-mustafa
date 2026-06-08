@@ -8,6 +8,7 @@ import SectionHeader from '@/shared/components/ui/SectionHeader';
 import SectionErrorBoundary from '@/shared/components/ui/SectionErrorBoundary';
 import { normalizeBlogs } from '../utils/blogAdapters';
 import BlogCard from './BlogCard';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Compact Blogs section preview. Renders only the single latest blog post
@@ -71,7 +72,7 @@ function BlogsSectionContent() {
           </div>
 
           {/* View All CTA Button */}
-          <div className="mt-16 text-center reveal" style={{ transitionDelay: '300ms' }}>
+          <ScrollReveal animation="up" delay={0.3} className="mt-16 text-center">
             <Link
               to="/blogs"
               className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 border border-zinc-800 hover:border-brand-500/40 hover:bg-brand-500/5 text-zinc-300 hover:text-white rounded-full transition-premium active:scale-95 shadow-lg text-sm font-semibold font-sans"
@@ -79,7 +80,7 @@ function BlogsSectionContent() {
               <span>Explore All Blogs</span>
               <ArrowRight className="w-4 h-4 text-brand-400" />
             </Link>
-          </div>
+          </ScrollReveal>
         </>
       ) : (
         /* Sleek modern empty state */

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { ExternalLink, Folder } from 'lucide-react';
 import GlassCard from '@/shared/components/ui/GlassCard';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Reusable Project Card component.
@@ -28,10 +29,7 @@ export default function ProjectCard({ project, index }) {
   const normalizedTitle = (project.title || '').toLowerCase().replace(/\s+/g, '-');
   
   return (
-    <div
-      className="relative reveal reveal-zoom h-full"
-      style={{ transitionDelay: `${index * 150}ms` }}
-    >
+    <ScrollReveal animation="zoom" delay={index * 0.15} className="h-full relative">
       <GlassCard className="flex flex-col p-6 h-full z-10 group">
         {/* Decorative top gradient light */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-500/10 to-transparent group-hover:via-brand-500/30 transition-all duration-500"></div>
@@ -98,7 +96,7 @@ export default function ProjectCard({ project, index }) {
           </div>
         </div>
       </GlassCard>
-    </div>
+    </ScrollReveal>
   );
 }
 

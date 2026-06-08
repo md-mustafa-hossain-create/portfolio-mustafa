@@ -1,14 +1,16 @@
 import { Calendar, MapPin, Award } from 'lucide-react';
 import GlassCard from '@/shared/components/ui/GlassCard';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Reusable Education Card component.
  */
 export default function EducationCard({ entry, index }) {
   return (
-    <div
-      className="relative reveal reveal-left"
-      style={{ transitionDelay: `${index * 150}ms` }}
+    <ScrollReveal
+      animation="left"
+      delay={index * 0.15}
+      className="relative"
     >
       <GlassCard className="group">
         <div className="p-5 sm:p-6 text-left relative z-10">
@@ -38,6 +40,6 @@ export default function EducationCard({ entry, index }) {
 
         </div>
       </GlassCard>
-    </div>
+    </ScrollReveal>
   );
 }

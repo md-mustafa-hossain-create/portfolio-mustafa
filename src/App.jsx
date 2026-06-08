@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from '@/components/Navbar';
 import LazySection from '@/shared/components/ui/LazySection';
 import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from '@/theme';
-import { useRevealObserver } from '@/hooks/useRevealObserver';
+import SmoothScroll from '@/shared/components/ui/SmoothScroll';
 
 // Lazy-load top-level pages
 const Home = lazy(() => import('@/pages/Home'));
@@ -59,10 +59,8 @@ export default function App() {
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
-  // Hook handles intersection and mutation observers for scroll animations
-  useRevealObserver();
-
   return (
+    <SmoothScroll>
     <Router>
       <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300">
         
@@ -119,5 +117,6 @@ export default function App() {
         </LazySection>
       </div>
     </Router>
+    </SmoothScroll>
   );
 }

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Reusable Section Header component.
@@ -20,7 +21,7 @@ import PropTypes from 'prop-types';
  */
 export default function SectionHeader({ tag, titlePrefix, titleHighlight, subtitle }) {
   return (
-    <div className="text-center mb-20 reveal">
+    <ScrollReveal animation="up" className="text-center mb-20">
       <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] uppercase tracking-wider text-brand-400 font-sans font-semibold mb-3 whitespace-nowrap">
         <span>{tag}</span>
       </div>
@@ -33,7 +34,7 @@ export default function SectionHeader({ tag, titlePrefix, titleHighlight, subtit
           {subtitle}
         </p>
       )}
-    </div>
+    </ScrollReveal>
   );
 }
 

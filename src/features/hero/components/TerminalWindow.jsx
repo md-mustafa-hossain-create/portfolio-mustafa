@@ -15,10 +15,9 @@ import { getAICopilotResponse } from '@/config/aiService';
 
 /**
  * TerminalWindow component.
- * @param {TerminalWindowProps} props
  * @returns {React.ReactElement}
  */
-export default function TerminalWindow({ isBooted }) {
+export default function TerminalWindow() {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([
     { type: 'system', text: "Mustafa's AI Assistant v2.0" },
@@ -115,12 +114,7 @@ export default function TerminalWindow({ isBooted }) {
   };
 
   return (
-    <div 
-      className={`lg:col-span-5 flex justify-center items-center z-10 w-full ${
-        isBooted ? 'hero-revealed' : 'opacity-0'
-      }`}
-      style={{ animationDelay: '300ms' }}
-    >
+    <div className="flex justify-center items-center z-10 w-full">
       <div className="w-full max-w-md aspect-square p-2 glass rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1),_0_0_40px_rgba(16,185,129,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.15),_0_0_50px_rgba(16,185,129,0.12)] hover:border-brand-500/20 transition-all duration-500 group">
         <div className="rounded-[calc(2.5rem-0.5rem)] bg-transparent p-5 flex flex-col justify-between h-full relative overflow-hidden">
           

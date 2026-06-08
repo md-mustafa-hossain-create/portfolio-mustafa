@@ -4,6 +4,7 @@ import { ABOUT_STRINGS, GLOBAL } from '../constants/strings';
 import { INFO_CARDS } from '../constants/data';
 import SectionHeader from '@/shared/components/ui/SectionHeader';
 import GlassCard from '@/shared/components/ui/GlassCard';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Main About section component.
@@ -29,7 +30,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Grid: Premium Photo Display */}
-          <div className="lg:col-span-5 flex justify-center items-center reveal reveal-left" style={{ transitionDelay: '100ms' }}>
+          <ScrollReveal animation="left" delay={0.1} className="lg:col-span-5 flex justify-center items-center">
             <div className="relative group">
               <div className="absolute -inset-1 rounded-[2.5rem] bg-brand-500 opacity-10 group-hover:opacity-25 blur-lg transition duration-700"></div>
               
@@ -53,10 +54,10 @@ export default function About() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
  
           {/* Right Grid: Bio Text & Cards */}
-          <div className="lg:col-span-7 text-left space-y-8 reveal reveal-right" style={{ transitionDelay: '200ms' }}>
+          <ScrollReveal animation="right" delay={0.2} className="lg:col-span-7 text-left space-y-8">
             <div className="space-y-4">
               <h3 className="text-2xl sm:text-3xl font-bold text-zinc-200 tracking-tight leading-snug">
                 {ABOUT_STRINGS.BIO_HEADING}
@@ -100,7 +101,7 @@ export default function About() {
                 </GlassCard>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

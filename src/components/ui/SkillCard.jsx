@@ -1,5 +1,6 @@
 import { DEFAULT_SKILLS } from '../../constants/data';
 import GlassCard from '@/shared/components/ui/GlassCard';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Reusable Skill Card component.
@@ -46,9 +47,10 @@ export default function SkillCard({ skill, index }) {
   };
 
   return (
-    <div
-      className="relative reveal reveal-zoom h-full"
-      style={{ transitionDelay: `${index * 100}ms` }}
+    <ScrollReveal
+      animation="zoom"
+      delay={index * 0.10}
+      className="h-full"
     >
       <GlassCard className="p-1.5 group h-full">
         <div className="absolute top-0 right-0 w-28 h-28 bg-brand-500/5 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500"></div>
@@ -67,6 +69,6 @@ export default function SkillCard({ skill, index }) {
           </div>
         </div>
       </GlassCard>
-    </div>
+    </ScrollReveal>
   );
 }

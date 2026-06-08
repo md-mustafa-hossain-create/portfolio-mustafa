@@ -4,6 +4,7 @@ import SectionHeader from '@/shared/components/ui/SectionHeader';
 import SectionErrorBoundary from '@/shared/components/ui/SectionErrorBoundary';
 import ContactForm from './ContactForm';
 import ContactInfo from './ContactInfo';
+import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
  * @fileoverview Main Contact section component.
@@ -25,14 +26,14 @@ function ContactSectionContent() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-stretch">
         
         {/* Info Side (Socials & Direct Contact) */}
-        <div className="lg:col-span-5 flex flex-col justify-between reveal reveal-left">
+        <ScrollReveal animation="left" className="lg:col-span-5 flex flex-col justify-between">
           <ContactInfo />
-        </div>
+        </ScrollReveal>
 
         {/* Form Side */}
-        <div className="lg:col-span-7 reveal reveal-right" style={{ transitionDelay: '150ms' }}>
+        <ScrollReveal animation="right" delay={0.15} className="lg:col-span-7">
           <ContactForm />
-        </div>
+        </ScrollReveal>
 
       </div>
     </div>
