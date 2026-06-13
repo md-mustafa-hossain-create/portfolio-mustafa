@@ -126,14 +126,14 @@ export default function TerminalWindow() {
               <div className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></div>
               <div className="flex flex-col">
                 <span className="text-xs font-semibold text-white tracking-wide">Mustafa AI</span>
-                <span className="text-[9px] text-zinc-500">Ask about skills, education, contact</span>
+                <span className="text-xs text-zinc-400">Ask about skills, education, contact</span>
               </div>
             </div>
             
             <button
               onClick={clearHistory}
               type="button"
-              className="p-1.5 text-zinc-500 hover:text-brand-400 hover:bg-zinc-900/80 border border-zinc-800 hover:border-brand-500/20 rounded-lg transition-all duration-200 cursor-pointer select-none"
+              className="p-1.5 text-zinc-400 hover:text-brand-400 hover:bg-zinc-900/80 border border-zinc-800 hover:border-brand-500/20 rounded-lg transition-all duration-200 cursor-pointer select-none"
               title="Reset Chat"
               aria-label="Reset Chat"
             >
@@ -153,7 +153,7 @@ export default function TerminalWindow() {
               {history.map((item, idx) => {
                 if (item.type === 'system') {
                   return (
-                    <div key={idx} className="text-center text-zinc-500 text-[10px] my-0.5 select-none self-center leading-normal">
+                    <div key={idx} className="text-center text-zinc-400 text-xs my-0.5 select-none self-center leading-normal">
                       • {item.text}
                     </div>
                   );
@@ -169,10 +169,10 @@ export default function TerminalWindow() {
                           onClick={() => handleSuggestionClick(cmd.query)}
                           className="flex flex-col items-start p-2.5 bg-zinc-900/40 border border-zinc-850 hover:border-brand-500/40 hover:bg-brand-500/5 hover:shadow-[0_0_12px_rgba(16,185,129,0.05)] rounded-xl text-left transition-all duration-300 group/btn cursor-pointer"
                         >
-                          <span className="text-[10px] text-brand-400 font-bold group-hover/btn:text-brand-300 group-hover/btn:translate-x-0.5 transition-all duration-300">
+                          <span className="text-xs text-brand-400 font-bold group-hover/btn:text-brand-300 group-hover/btn:translate-x-0.5 transition-all duration-300">
                             {cmd.label}
                           </span>
-                          <span className="text-[8px] text-zinc-500 group-hover/btn:text-zinc-400 transition-all duration-300 mt-0.5">
+                          <span className="text-xs text-zinc-400 group-hover/btn:text-zinc-400 transition-all duration-300 mt-0.5">
                             {cmd.desc}
                           </span>
                         </button>
@@ -201,7 +201,7 @@ export default function TerminalWindow() {
               })}
               
               {isLoading && (
-                <div className="flex items-center gap-1.5 text-zinc-500 text-[10px] select-none pl-2 animate-pulse mt-1">
+                <div className="flex items-center gap-1.5 text-zinc-400 text-xs select-none pl-2 animate-pulse mt-1">
                   <Sparkles className="w-3.5 h-3.5 text-brand-500/60" />
                   <span>Thinking...</span>
                 </div>
@@ -231,7 +231,7 @@ export default function TerminalWindow() {
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
-                  className="p-1 rounded-full text-brand-400 hover:text-brand-300 disabled:text-zinc-600 disabled:hover:text-zinc-600 transition-colors cursor-pointer"
+                  className="p-1 rounded-full text-brand-400 hover:text-brand-300 disabled:text-zinc-400 disabled:hover:text-zinc-400 transition-colors cursor-pointer"
                   aria-label="Send message"
                 >
                   <Send className="w-3.5 h-3.5" />
@@ -241,12 +241,12 @@ export default function TerminalWindow() {
           </div>
 
           {/* Footer Status Bar */}
-          <div className="mt-4 pt-3 border-t border-zinc-900 flex items-center justify-between text-[9px] font-sans text-zinc-500 shrink-0 select-none">
+          <div className="mt-4 pt-3 border-t border-zinc-900 flex items-center justify-between text-xs font-sans text-zinc-400 shrink-0 select-none">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
               <span className="text-zinc-400 font-medium">Assistant Online</span>
             </div>
-            <div className="text-[10px] font-semibold text-brand-500/70 hover:text-brand-400 transition-colors flex items-center gap-1">
+            <div className="text-xs font-semibold text-brand-500/70 hover:text-brand-400 transition-colors flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
               <span>Interactive Copilot</span>
             </div>

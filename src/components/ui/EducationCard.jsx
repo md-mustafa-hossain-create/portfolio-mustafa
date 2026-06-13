@@ -17,12 +17,12 @@ export default function EducationCard({ entry, index }) {
           
           {/* Year & Location row */}
           <div className="flex flex-wrap items-center gap-3 mb-3">
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-sans font-semibold text-brand-400 bg-zinc-900 border border-zinc-800/80 px-3 py-1 rounded-full">
+            <span className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-brand-400 bg-zinc-900 border border-zinc-800/80 px-3 py-1 rounded-full">
               <Calendar className="w-3 h-3 text-brand-400/80" />
               {entry.year}
             </span>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-sans font-medium text-zinc-500">
-              <MapPin className="w-3 h-3 text-zinc-600" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-sans font-medium text-zinc-400">
+              <MapPin className="w-3 h-3 text-zinc-400" />
               {entry.location}
             </span>
           </div>

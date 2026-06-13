@@ -193,7 +193,7 @@ export default function BlogPost() {
       <div className="min-h-screen bg-zinc-950 text-zinc-100 py-32 flex flex-col items-center justify-center font-sans px-4">
         <span className="text-brand-500 font-bold text-3xl mb-3">404</span>
         <h2 className="text-lg font-bold text-zinc-200 mb-1">Article Not Found</h2>
-        <p className="text-zinc-500 mb-8 text-xs sm:text-sm text-center max-w-xs leading-relaxed">
+        <p className="text-zinc-400 mb-8 text-xs sm:text-sm text-center max-w-xs leading-relaxed">
           The publication you are trying to view does not exist or has been removed.
         </p>
         <Link
@@ -235,7 +235,7 @@ export default function BlogPost() {
         <article className="space-y-8 text-left">
           
           <div className="space-y-4">
-            <span className="px-2.5 py-1.5 text-[10px] font-semibold rounded-full bg-brand-500/10 border border-brand-400/20 text-brand-400 uppercase tracking-widest">
+            <span className="px-2.5 py-1.5 text-xs font-semibold rounded-full bg-brand-500/10 border border-brand-400/20 text-brand-400 uppercase tracking-widest">
               {blog.category}
             </span>
 
@@ -244,14 +244,14 @@ export default function BlogPost() {
             </h1>
 
             {/* Author info & Metadata row */}
-            <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-zinc-500 border-b border-zinc-850/60 pb-6">
+            <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-zinc-400 border-b border-zinc-850/60 pb-6">
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-zinc-600" />
+                <Calendar className="w-3.5 h-3.5 text-zinc-400" />
                 {blog.date}
               </span>
               <span>·</span>
               <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-zinc-600" />
+                <Clock className="w-3.5 h-3.5 text-zinc-400" />
                 {blog.readTime}
               </span>
             </div>
@@ -277,7 +277,7 @@ export default function BlogPost() {
         </article>
 
         {/* Reading completion footer */}
-        <div className="mt-16 pt-8 border-t border-zinc-850/60 flex items-center justify-between text-xs text-zinc-500">
+        <div className="mt-16 pt-8 border-t border-zinc-850/60 flex items-center justify-between text-xs text-zinc-400">
           <span>MD Mustafa Hossain</span>
           <Link
             to="/blogs"

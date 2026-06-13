@@ -1,5 +1,5 @@
 import { User } from 'lucide-react';
-import profileImg from '../assets/profile.png';
+import profileImg from '../assets/profile.webp';
 import { ABOUT_STRINGS, GLOBAL } from '../constants/strings';
 import { INFO_CARDS } from '../constants/data';
 import SectionHeader from '@/shared/components/ui/SectionHeader';
@@ -45,10 +45,13 @@ export default function About() {
                   <img 
                     src={profileImg} 
                     alt={GLOBAL.DEV_NAME}
+                    width="326"
+                    height="326"
+                    fetchpriority="high"
                     className="w-full h-full object-cover z-10 transition-premium group-hover:scale-[1.03]"
                   />
  
-                  <span className="absolute top-4 right-4 z-20 px-2 py-1 rounded bg-brand-500/10 border border-brand-400/20 text-[8px] font-sans font-semibold text-brand-400 uppercase tracking-widest shadow-md backdrop-blur-md">
+                  <span className="absolute top-4 right-4 z-20 px-2 py-1 rounded bg-brand-500/10 border border-brand-400/20 text-xs font-sans font-semibold text-brand-400 uppercase tracking-widest shadow-md backdrop-blur-md">
                     Developer
                   </span>
                 </div>
@@ -88,13 +91,13 @@ export default function About() {
                     {card.icon}
                   </div>
                   <div className="text-left">
-                    <h4 className="text-[9px] font-sans font-bold text-zinc-500 uppercase tracking-wider">
+                    <h4 className="text-xs font-sans font-bold text-zinc-400 uppercase tracking-wider">
                       {card.title}
                     </h4>
                     <p className="text-xs sm:text-sm font-semibold text-white mt-1 group-hover:text-brand-400 transition-colors">
                       {card.details}
                     </p>
-                    <span className="text-[10px] text-zinc-400 block mt-0.5 leading-tight">
+                    <span className="text-xs text-zinc-400 block mt-0.5 leading-tight">
                       {card.sub}
                     </span>
                   </div>

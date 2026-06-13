@@ -1,7 +1,4 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { db } from '../config/firebase';
-
 const DEFAULT_FALLBACK = [];
 
 /**
@@ -35,6 +32,9 @@ export function useFirebaseData(collectionName, fallbackData = DEFAULT_FALLBACK)
       }
 
       try {
+        const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
+        const { db } = await import('../config/firebase');
+
         // 2. Query the collection, ordered by 'order'
         const q = query(collection(db, collectionName), orderBy('order', 'asc'));
         const querySnapshot = await getDocs(q);

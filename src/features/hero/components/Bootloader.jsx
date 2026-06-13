@@ -93,7 +93,7 @@ export default function Bootloader({ onComplete }) {
             />
           </div>
           
-          <div className="flex justify-between w-full text-[10px] text-zinc-500 font-medium">
+          <div className="flex justify-between w-full text-xs text-zinc-400 font-medium">
             <span>{loadingText}</span>
             <span>{Math.round(progress)}%</span>
           </div>

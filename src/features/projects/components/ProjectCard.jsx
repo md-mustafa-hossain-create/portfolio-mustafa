@@ -42,7 +42,7 @@ export default function ProjectCard({ project, index }) {
                 <Folder className="w-5 h-5" />
               </div>
               
-              <span className="text-[10px] text-zinc-500 font-semibold tracking-wider uppercase font-sans">
+              <span className="text-xs text-zinc-400 font-semibold tracking-wider uppercase font-sans">
                 {project.category || `Project #${String(index + 1).padStart(2, '0')}`}
               </span>
             </div>
@@ -61,7 +61,7 @@ export default function ProjectCard({ project, index }) {
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-0.5 text-[10px] font-sans font-medium rounded-full bg-zinc-950 border border-zinc-850 text-zinc-400 group-hover:border-brand-500/10 group-hover:text-brand-300 transition-all duration-300 cursor-default"
+                  className="px-2.5 py-0.5 text-xs font-sans font-medium rounded-full bg-zinc-950 border border-zinc-850 text-zinc-400 group-hover:border-brand-500/10 group-hover:text-brand-300 transition-all duration-300 cursor-default"
                 >
                   {tag}
                 </span>

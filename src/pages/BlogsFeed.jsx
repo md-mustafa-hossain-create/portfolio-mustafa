@@ -128,7 +128,7 @@ export default function BlogsFeed() {
           
           {/* Custom modern search widget */}
           <div className="relative w-full max-w-md">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
             <input
               type="text"
               placeholder={BLOGS_STRINGS.SEARCH_PLACEHOLDER}
@@ -173,7 +173,7 @@ export default function BlogsFeed() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-24 text-zinc-500">
+          <div className="text-center py-24 text-zinc-400">
             <span className="text-zinc-300 font-bold block text-base mb-2">
               No results found
             </span>

@@ -32,21 +32,21 @@ export default function BlogCard({ blog, index }) {
             alt={blog.title}
             className="w-full h-full object-cover group-hover:scale-[1.02] transition-premium"
           />
-          <span className="absolute top-3 left-3 bg-zinc-950/80 border border-white/10 text-[9px] font-semibold text-zinc-300 px-2 py-0.5 rounded-full backdrop-blur-md">
+          <span className="absolute top-3 left-3 bg-zinc-950/80 border border-white/10 text-xs font-semibold text-zinc-300 px-2 py-0.5 rounded-full backdrop-blur-md">
             {blog.category}
           </span>
         </div>
       )}
 
       {/* Metadata */}
-      <div className="flex items-center gap-3 text-[10px] font-medium text-zinc-500 mb-2.5 shrink-0">
+      <div className="flex items-center gap-3 text-xs font-medium text-zinc-400 mb-2.5 shrink-0">
         <span className="flex items-center gap-1">
-          <Calendar className="w-3.5 h-3.5 text-zinc-600" />
+          <Calendar className="w-3.5 h-3.5 text-zinc-400" />
           {blog.date}
         </span>
         <span>·</span>
         <span className="flex items-center gap-1">
-          <Clock className="w-3.5 h-3.5 text-zinc-600" />
+          <Clock className="w-3.5 h-3.5 text-zinc-400" />
           {blog.readTime}
         </span>
       </div>
@@ -63,12 +63,12 @@ export default function BlogCard({ blog, index }) {
       <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 shrink-0">
         <div className="flex flex-wrap gap-1.5">
           {blog.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="text-[9px] text-zinc-500 font-medium">
+            <span key={tag} className="text-xs text-zinc-400 font-medium">
               #{tag.toLowerCase()}
             </span>
           ))}
         </div>
-        <div className="text-[10px] font-semibold text-brand-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+        <div className="text-xs font-semibold text-brand-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
           {isExternal ? (
             <>
               {BLOGS_STRINGS.EXTERNAL_LINK}

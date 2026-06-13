@@ -198,7 +198,7 @@ export default function Navbar({ theme, onToggleTheme }) {
             title={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
           >
             {isLightTheme ? (
-              <Lightbulb className="w-4 h-4 text-zinc-500 transition-all duration-300" />
+              <Lightbulb className="w-4 h-4 text-zinc-400 transition-all duration-300" />
             ) : (
               <Lightbulb 
                 className="w-4 h-4 text-brand-400 fill-brand-400 animate-pulse transition-all duration-300"
@@ -220,7 +220,7 @@ export default function Navbar({ theme, onToggleTheme }) {
             aria-label={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
           >
             {isLightTheme ? (
-              <Lightbulb className="w-4 h-4 text-zinc-500 transition-all duration-300" />
+              <Lightbulb className="w-4 h-4 text-zinc-400 transition-all duration-300" />
             ) : (
               <Lightbulb 
                 className="w-4 h-4 text-brand-400 fill-brand-400 animate-pulse transition-all duration-300"

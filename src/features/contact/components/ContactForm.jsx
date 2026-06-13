@@ -37,7 +37,7 @@ export default function ContactForm() {
             providing a cleaner glassmorphism feel across light and dark modes.
           */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="name" className="text-[10px] font-sans font-bold text-zinc-500 uppercase tracking-wider">
+            <label htmlFor="name" className="text-xs font-sans font-bold text-zinc-400 uppercase tracking-wider">
               {CONTACT_STRINGS.FORM_NAME_LABEL}
             </label>
             <input
@@ -53,7 +53,7 @@ export default function ContactForm() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-[10px] font-sans font-bold text-zinc-500 uppercase tracking-wider">
+            <label htmlFor="email" className="text-xs font-sans font-bold text-zinc-400 uppercase tracking-wider">
               {CONTACT_STRINGS.FORM_EMAIL_LABEL}
             </label>
             <input
@@ -69,7 +69,7 @@ export default function ContactForm() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="message" className="text-[10px] font-sans font-bold text-zinc-500 uppercase tracking-wider">
+            <label htmlFor="message" className="text-xs font-sans font-bold text-zinc-400 uppercase tracking-wider">
               {CONTACT_STRINGS.FORM_MSG_LABEL}
             </label>
             <textarea
@@ -101,7 +101,7 @@ export default function ContactForm() {
             id="contact-btn-submit"
             type="submit"
             disabled={status === 'sending'}
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-500 hover:bg-brand-400 disabled:bg-zinc-800 disabled:text-zinc-500 text-black font-semibold rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] shadow-lg shadow-brand-500/10 cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-500 hover:bg-brand-400 disabled:bg-zinc-800 disabled:text-zinc-400 text-black font-semibold rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] shadow-lg shadow-brand-500/10 cursor-pointer"
           >
             {status === 'sending' ? (
               <>

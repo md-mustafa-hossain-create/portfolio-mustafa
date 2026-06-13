@@ -29,7 +29,7 @@ export default function HeroSection() {
             <ScrollReveal 
               animation="up"
               delay={0.1}
-              className="inline-flex items-center px-4 py-1.5 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-[10px] uppercase tracking-wider text-brand-400 font-semibold mb-6 backdrop-blur-md"
+              className="inline-flex items-center px-4 py-1.5 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-xs uppercase tracking-wider text-brand-400 font-semibold mb-6 backdrop-blur-md"
             >
               <span>{HERO_STRINGS.AVAILABLE_BADGE}</span>
             </ScrollReveal>
@@ -109,7 +109,7 @@ export default function HeroSection() {
               animation="up"
               delay={0.85}
               as="span"
-              className="text-[10px] text-zinc-600 mt-4 font-sans block"
+              className="text-xs text-zinc-400 mt-4 font-sans block"
             >
               {HERO_STRINGS.RESUME_NOTE}
             </ScrollReveal>

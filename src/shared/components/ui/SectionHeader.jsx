@@ -22,7 +22,7 @@ import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 export default function SectionHeader({ tag, titlePrefix, titleHighlight, subtitle }) {
   return (
     <ScrollReveal animation="up" className="text-center mb-20">
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] uppercase tracking-wider text-brand-400 font-sans font-semibold mb-3 whitespace-nowrap">
+      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs uppercase tracking-wider text-brand-400 font-sans font-semibold mb-3 whitespace-nowrap">
         <span>{tag}</span>
       </div>
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tighter">

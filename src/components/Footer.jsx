@@ -19,7 +19,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-zinc-900 bg-zinc-950 py-8 relative">
+    <footer className="border-t border-zinc-900 bg-zinc-950 py-8 relative min-h-[104px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
@@ -43,7 +43,7 @@ export default function Footer() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-2 rounded-lg text-zinc-500 transition-colors ${social.color}`}
+                className={`p-2 rounded-lg text-zinc-400 transition-colors ${social.color}`}
                 aria-label={social.name}
               >
                 {/* Clone the icon to enforce small size in footer */}

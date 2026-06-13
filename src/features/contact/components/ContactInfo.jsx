@@ -22,7 +22,7 @@ export default function ContactInfo() {
               <Mail className="w-5 h-5 text-brand-400" />
             </div>
             <div>
-              <span className="text-[10px] text-zinc-500 font-sans font-semibold block">EMAIL ME</span>
+              <span className="text-xs text-zinc-400 font-sans font-semibold block">EMAIL ME</span>
               <a
                 href={`mailto:${GLOBAL.DEV_EMAIL}`}
                 className="text-sm font-semibold hover:text-brand-400 transition-colors"
@@ -37,7 +37,7 @@ export default function ContactInfo() {
               <MapPin className="w-5 h-5 text-brand-400" />
             </div>
             <div>
-              <span className="text-[10px] text-zinc-500 font-sans font-semibold block">MY LOCATION</span>
+              <span className="text-xs text-zinc-400 font-sans font-semibold block">MY LOCATION</span>
               <span className="text-sm font-semibold">
                 {GLOBAL.DEV_LOCATION}
               </span>
@@ -48,7 +48,7 @@ export default function ContactInfo() {
 
       {/* Social Grid */}
       <div className="space-y-4 pt-6">
-        <h4 className="text-xs font-sans font-bold uppercase tracking-wider text-zinc-500">
+        <h4 className="text-xs font-sans font-bold uppercase tracking-wider text-zinc-400">
           {CONTACT_STRINGS.FIND_ME}
         </h4>
         <div className="grid grid-cols-2 gap-3">

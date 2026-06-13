@@ -84,7 +84,7 @@ export default function ProjectCaseStudy() {
       <div className="min-h-screen bg-zinc-950 text-zinc-100 py-32 flex flex-col items-center justify-center font-sans px-4">
         <span className="text-brand-500 font-bold text-3xl mb-3">404</span>
         <h2 className="text-lg font-bold text-zinc-200 mb-1">Case Study Not Found</h2>
-        <p className="text-zinc-500 mb-8 text-xs sm:text-sm text-center max-w-xs leading-relaxed">
+        <p className="text-zinc-400 mb-8 text-xs sm:text-sm text-center max-w-xs leading-relaxed">
           The case study you are trying to view does not exist or has been removed.
         </p>
         <Link
@@ -126,7 +126,7 @@ export default function ProjectCaseStudy() {
             </Link>
 
             <div className="space-y-4">
-              <span className="px-3.5 py-1.5 text-[10px] font-sans font-bold uppercase tracking-wider rounded-full bg-brand-500/10 border border-brand-400/25 text-brand-400">
+              <span className="px-3.5 py-1.5 text-xs font-sans font-bold uppercase tracking-wider rounded-full bg-brand-500/10 border border-brand-400/25 text-brand-400">
                 {project.category}
               </span>
 
@@ -147,7 +147,7 @@ export default function ProjectCaseStudy() {
                     <span className="text-lg font-bold text-brand-400 block tracking-tight">
                       {metric.value}
                     </span>
-                    <span className="text-[9px] font-sans text-zinc-500 uppercase tracking-wide leading-tight block mt-1">
+                    <span className="text-xs font-sans text-zinc-400 uppercase tracking-wide leading-tight block mt-1">
                       {metric.label}
                     </span>
                   </div>
@@ -194,7 +194,7 @@ export default function ProjectCaseStudy() {
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/30"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-green-500/30"></span>
                   </div>
-                  <div className="rounded-md bg-zinc-950 border border-zinc-900 px-10 py-0.5 text-[9px] text-zinc-500 font-mono tracking-wide lowercase truncate max-w-[200px]">
+                  <div className="rounded-md bg-zinc-950 border border-zinc-900 px-10 py-0.5 text-xs text-zinc-400 font-mono tracking-wide lowercase truncate max-w-[200px]">
                     {project.title.toLowerCase()}.web.app
                   </div>
                   <Sparkles className="w-3.5 h-3.5 text-brand-500/40" />
@@ -206,13 +206,13 @@ export default function ProjectCaseStudy() {
                     <Cpu className="w-10 h-10" />
                   </div>
                   <h4 className="text-base font-bold text-white mb-1.5">{project.title} Interface Node</h4>
-                  <p className="text-[11px] text-zinc-500 max-w-xs font-sans leading-relaxed">
+                  <p className="text-[11px] text-zinc-400 max-w-xs font-sans leading-relaxed">
                     Interactive system compiled successfully. Explore standard modules and metrics inside this report.
                   </p>
                 </div>
 
                 {/* Footer status block */}
-                <div className="px-5 py-2.5 border-t border-zinc-900 bg-zinc-900/10 flex items-center justify-between shrink-0 font-mono text-[9px] text-zinc-500">
+                <div className="px-5 py-2.5 border-t border-zinc-900 bg-zinc-900/10 flex items-center justify-between shrink-0 font-mono text-xs text-zinc-400">
                   <span>REF: {project.id.toUpperCase()}_STAGE_V1</span>
                   <span className="text-brand-500 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-ping"></span>
@@ -262,7 +262,7 @@ export default function ProjectCaseStudy() {
                       <FileCode className="w-4 h-4 text-brand-400" />
                       <span>{project.title}Engine.js</span>
                     </div>
-                    <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-sans font-bold">JavaScript</span>
+                    <span className="text-xs text-zinc-400 uppercase tracking-widest font-sans font-bold">JavaScript</span>
                   </div>
                   {/* Code editor body */}
                   <div className="p-5 overflow-auto max-h-[300px] bg-zinc-950/70">
@@ -292,7 +292,7 @@ export default function ProjectCaseStudy() {
             </ScrollReveal>
 
             {/* Footer breadcrumb */}
-            <div className="pt-8 border-t border-zinc-850/60 flex items-center justify-between text-xs text-zinc-500 font-medium font-sans">
+            <div className="pt-8 border-t border-zinc-850/60 flex items-center justify-between text-xs text-zinc-400 font-medium font-sans">
               <span>Mustafa's Engineering Case Study</span>
               <Link to="/" className="text-brand-400 hover:text-brand-300 transition-colors">
                 Back to Home
