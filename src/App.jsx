@@ -5,12 +5,13 @@ import LazySection from '@/shared/components/ui/LazySection';
 import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from '@/theme';
 import SmoothScroll from '@/shared/components/ui/SmoothScroll';
 
+import Home from '@/pages/Home';
+import Footer from '@/components/Footer';
+
 // Lazy-load top-level pages
-const Home = lazy(() => import('@/pages/Home'));
 const BlogsFeed = lazy(() => import('@/pages/BlogsFeed'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const ProjectCaseStudy = lazy(() => import('@/pages/ProjectCaseStudy'));
-const Footer = lazy(() => import('@/components/Footer'));
 
 /**
  * Standard visual fallback loading indicator for full-page routes.
@@ -76,11 +77,7 @@ export default function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                <Suspense fallback={<SectionFallback id="home-view" label="developer workspace" />}>
-                  <Home />
-                </Suspense>
-              }
+              element={<Home />}
             />
             <Route
               path="/blogs"
@@ -110,11 +107,7 @@ export default function App() {
         </main>
 
         {/* Global footer */}
-        <LazySection placeholder={null}>
-          <Suspense fallback={null}>
-            <Footer />
-          </Suspense>
-        </LazySection>
+        <Footer />
       </div>
     </Router>
     </SmoothScroll>
