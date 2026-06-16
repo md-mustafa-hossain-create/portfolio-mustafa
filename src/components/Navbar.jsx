@@ -183,8 +183,7 @@ export default function Navbar({ theme, onToggleTheme }) {
           })}
           <a
             id="nav-btn-hire"
-            href="#contact"
-            onClick={(e) => handleNavLinkClick(e, '#contact')}
+            href="mailto:hussainmustafa2001@gmail.com?subject=Job%20Opportunity"
             className="ml-2 px-4 py-2.5 text-xs font-sans font-bold tracking-wide uppercase text-white bg-zinc-900 border border-zinc-800 hover:border-brand-400/50 hover:bg-zinc-900/80 rounded-full transition-premium active:scale-95 shadow-md"
           >
             {NAV_STRINGS.BTN_HIRE}
@@ -275,8 +274,8 @@ export default function Navbar({ theme, onToggleTheme }) {
           <div className="pt-3 px-3">
             <a
               id="nav-mobile-btn-hire"
-              href="#contact"
-              onClick={(e) => handleNavLinkClick(e, '#contact')}
+              href="mailto:hussainmustafa2001@gmail.com?subject=Job%20Opportunity"
+              onClick={() => setIsOpen(false)}
               className="block w-full text-center py-3 text-xs font-sans font-bold uppercase tracking-wider text-white bg-gradient-to-r from-brand-400 to-brand-600 hover:from-brand-300 hover:to-brand-500 rounded-xl transition-premium shadow-lg shadow-brand-500/10 active:scale-98"
             >
               {NAV_STRINGS.BTN_HIRE}
