@@ -22,18 +22,6 @@ export function useContactSubmit() {
 
     setStatus('sending');
 
-    const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
-
-    if (!apiKey || apiKey.includes('your_api_key_here') || apiKey === '') {
-      console.warn("Firebase is not fully configured. Simulating Firestore write...");
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          setStatus('success');
-          resolve(true);
-        }, 1500);
-      });
-    }
-
     try {
       await addDoc(collection(db, 'messages'), {
         name,
