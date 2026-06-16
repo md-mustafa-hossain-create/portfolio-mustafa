@@ -11,7 +11,8 @@ export default function ChatUI({ isFloating, onClose }) {
     history, 
     input, 
     setInput, 
-    isLoading, 
+    isLoading,
+    isOnline,
     handleCommandSubmit, 
     clearHistory, 
     handleSuggestionClick 
@@ -55,9 +56,9 @@ export default function ChatUI({ isFloating, onClose }) {
         {/* Header Bar */}
         <div className="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4 shrink-0 select-none relative z-10">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></div>
+            <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-brand-500 animate-pulse' : 'bg-zinc-500'}`}></div>
             <div className="flex flex-col">
-              <span className="text-xs font-semibold text-white tracking-wide">Mustafa AI</span>
+              <span className="text-xs font-semibold text-white tracking-wide">Dev.Bot</span>
               <span className="text-[10px] sm:text-xs text-zinc-400">Ask about skills, education, contact</span>
             </div>
           </div>
@@ -189,12 +190,8 @@ export default function ChatUI({ isFloating, onClose }) {
         {/* Footer Status Bar */}
         <div className="mt-4 pt-3 border-t border-zinc-900 flex items-center justify-between text-[10px] sm:text-xs font-sans text-zinc-400 shrink-0 select-none relative z-10">
           <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
-            <span className="text-zinc-400 font-medium">Assistant Online</span>
-          </div>
-          <div className="text-[10px] sm:text-xs font-semibold text-brand-500/70 hover:text-brand-400 transition-colors flex items-center gap-1">
-            <Sparkles className="w-3 h-3" />
-            <span>Interactive Copilot</span>
+            <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-brand-500' : 'bg-zinc-500'}`}></span>
+            <span className="text-zinc-400 font-medium">{isOnline ? 'Assistant Online' : 'Assistant Offline'}</span>
           </div>
         </div>
 

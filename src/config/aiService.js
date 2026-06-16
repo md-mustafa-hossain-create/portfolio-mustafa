@@ -204,3 +204,5 @@ export async function getAICopilotResponse(prompt) {
 ${getFallbackResponse(prompt)}`;
   }
 }
+
+export const isAILive = !!apiKey;

@@ -1,14 +1,15 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { getAICopilotResponse } from '@/config/aiService';
+import { getAICopilotResponse, isAILive } from '@/config/aiService';
 
 const ChatContext = createContext();
 
 export function ChatProvider({ children }) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isOnline, setIsOnline] = useState(isAILive);
   const [history, setHistory] = useState([
-    { type: 'system', text: "Mustafa's AI Assistant v2.0" },
+    { type: 'system', text: "Dev.Bot v2.0" },
     { type: 'system', text: "Ask me anything about Mustafa's skills, qualifications, or GPA." },
     { type: 'system', text: "Click a quick command below to run it instantly:" },
     {
@@ -23,7 +24,7 @@ export function ChatProvider({ children }) {
 
   const clearHistory = useCallback(() => {
     setHistory([
-      { type: 'system', text: "Mustafa's AI Assistant v2.0" },
+      { type: 'system', text: "Dev.Bot v2.0" },
       { type: 'system', text: "Ask me anything about Mustafa's skills, qualifications, or GPA." },
       { type: 'system', text: "Click a quick command below to run it instantly:" },
       {
@@ -58,11 +59,18 @@ export function ChatProvider({ children }) {
     try {
       const response = await getAICopilotResponse(query);
       setHistory((prev) => [...prev, { type: 'output', text: response }]);
+      
+      if (response.startsWith("Failed to fetch live AI response")) {
+        setIsOnline(false);
+      } else {
+        setIsOnline(isAILive);
+      }
     } catch {
       setHistory((prev) => [
         ...prev,
         { type: 'output', text: "Connection failed. Please try again." }
       ]);
+      setIsOnline(false);
     } finally {
       setIsLoading(false);
     }
@@ -86,6 +94,7 @@ export function ChatProvider({ children }) {
     setInput,
     history,
     isLoading,
+    isOnline,
     clearHistory,
     executeQuery,
     handleCommandSubmit,
