@@ -129,7 +129,11 @@ export default function Navbar({ theme, onToggleTheme }) {
         <div 
           id="nav-logo"
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (!isOnHomePage) {
+              navigate('/');
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
             setIsOpen(false);
           }} 
           className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2.5 group cursor-pointer"
