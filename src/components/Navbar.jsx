@@ -262,6 +262,8 @@ export default function Navbar({ theme, onToggleTheme }) {
                   isActive 
                     ? 'text-brand-400 bg-zinc-900/50 font-semibold border-l-2 border-brand-400 pl-3' 
                     : 'text-zinc-300 hover:text-brand-400 hover:bg-zinc-900/40'
+                }`}
+              >
                 {link.name}
               </a>
             );
