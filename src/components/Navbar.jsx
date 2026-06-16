@@ -159,7 +159,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-1">
+        <div className="hidden lg:flex items-center space-x-1">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.slice(1);
             return (
@@ -211,7 +211,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         </div>
 
         {/* Mobile Actions */}
-        <div className="md:hidden flex items-center gap-2 shrink-0">
+        <div className="lg:hidden flex items-center gap-2 shrink-0">
           <button
             id="nav-btn-mobile-theme-toggle"
             type="button"
@@ -247,7 +247,7 @@ export default function Navbar({ theme, onToggleTheme }) {
       </div>
 
       {/* Mobile Drawer Menu */}
-      <div className={`md:hidden absolute top-full left-0 right-0 mt-3 transition-premium ${
+      <div className={`lg:hidden absolute top-full left-0 right-0 mt-3 transition-premium ${
         isOpen ? 'opacity-100 translate-y-0 visible scale-100' : 'opacity-0 -translate-y-4 invisible scale-95 pointer-events-none'
       }`}>
         <div className="px-3 py-5 space-y-1 bg-zinc-950/95 border border-zinc-900 backdrop-blur-2xl rounded-3xl shadow-2xl">

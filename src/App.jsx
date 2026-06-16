@@ -4,6 +4,8 @@ import Navbar from '@/components/Navbar';
 import LazySection from '@/shared/components/ui/LazySection';
 import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from '@/theme';
 import SmoothScroll from '@/shared/components/ui/SmoothScroll';
+import { ChatProvider } from '@/features/chat/context/ChatContext';
+import GlobalChatFAB from '@/features/chat/components/GlobalChatFAB';
 
 import Home from '@/pages/Home';
 import Footer from '@/components/Footer';
@@ -61,55 +63,58 @@ export default function App() {
   }, [theme]);
 
   return (
-    <SmoothScroll>
-    <Router>
-      <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300">
-        
-        {/* Navigation Bar */}
-        <Navbar
-          theme={theme}
-          onToggleTheme={() => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))}
-        />
-        
-        {/* Main routing area */}
-        <main className="flex-grow">
-          <ScrollToTop />
-          <Routes>
-            <Route
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/blogs"
-              element={
-                <Suspense fallback={<SectionFallback id="blogs-feed" label="blogs feed" />}>
-                  <BlogsFeed />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/blogs/:id"
-              element={
-                <Suspense fallback={<SectionFallback id="blog-post" label="blog article" />}>
-                  <BlogPost />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/projects/:id"
-              element={
-                <Suspense fallback={<SectionFallback id="project-case-study" label="case study" />}>
-                  <ProjectCaseStudy />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </main>
+    <ChatProvider>
+      <SmoothScroll>
+      <Router>
+        <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300">
+          
+          {/* Navigation Bar */}
+          <Navbar
+            theme={theme}
+            onToggleTheme={() => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))}
+          />
+          
+          {/* Main routing area */}
+          <main className="flex-grow">
+            <ScrollToTop />
+            <Routes>
+              <Route
+                path="/"
+                element={<Home />}
+              />
+              <Route
+                path="/blogs"
+                element={
+                  <Suspense fallback={<SectionFallback id="blogs-feed" label="blogs feed" />}>
+                    <BlogsFeed />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/blogs/:id"
+                element={
+                  <Suspense fallback={<SectionFallback id="blog-post" label="blog article" />}>
+                    <BlogPost />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/projects/:id"
+                element={
+                  <Suspense fallback={<SectionFallback id="project-case-study" label="case study" />}>
+                    <ProjectCaseStudy />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </main>
 
-        {/* Global footer */}
-        <Footer />
-      </div>
-    </Router>
-    </SmoothScroll>
+          {/* Global footer */}
+          <Footer />
+        </div>
+      </Router>
+      </SmoothScroll>
+      <GlobalChatFAB />
+    </ChatProvider>
   );
 }
