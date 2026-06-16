@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { CONTACT_STRINGS } from '@/constants/strings';
 import { useContactSubmit } from '../hooks/useContactSubmit';
@@ -16,6 +16,21 @@ export default function ContactForm() {
   // Custom hook containing all the Firebase submission logic
   const { status, submitContact } = useContactSubmit();
 
+  // Listen to URL intent parameters (like '?intent=hire') for auto-filling the message box
+  useEffect(() => {
+    const handleUrlParams = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get('intent') === 'hire') {
+        setMessage('Hi Mustafa, I am interested in hiring you for a Job Opportunity!');
+      }
+    };
+    
+    handleUrlParams(); // Check on mount
+    window.addEventListener('popstate', handleUrlParams); // Check if URL changes dynamically
+    
+    return () => window.removeEventListener('popstate', handleUrlParams);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await submitContact(name, email, message);
@@ -23,6 +38,11 @@ export default function ContactForm() {
       setName('');
       setEmail('');
       setMessage('');
+      
+      // Clean up URL parameters if they existed
+      if (window.location.search.includes('intent=')) {
+        window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+      }
     }
   };
 
