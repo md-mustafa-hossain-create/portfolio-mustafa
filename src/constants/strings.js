@@ -15,7 +15,6 @@ export const GLOBAL = {
 };
 
 export const NAV_STRINGS = {
-  BTN_HIRE: "Hire Me",
   THEME_TOGGLE_LIGHT: "Switch to dark theme",
   THEME_TOGGLE_DARK: "Switch to light theme",
 };

@@ -23,10 +23,6 @@ describe('Navbar Component', () => {
     expect(document.getElementById('nav-link-education')).toBeInTheDocument();
     expect(document.getElementById('nav-link-contact')).toBeInTheDocument();
 
-    // Verify desktop "Hire Me" button is rendered
-    const hireButton = document.getElementById('nav-btn-hire');
-    expect(hireButton).toBeInTheDocument();
-    expect(hireButton).toHaveAttribute('href', '#contact');
   });
 
   it('toggles the mobile drawer menu when clicking the hamburger menu button', () => {
