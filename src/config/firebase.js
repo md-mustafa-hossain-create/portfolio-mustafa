@@ -5,12 +5,12 @@ import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/fire
 // Your web app's Firebase configuration
 // For Vite, environment variables must start with VITE_
 const firebaseConfig = {
-  apiKey: "AIzaSyBEzwY6hQfoIJtL93XOIqCecVauX5lnC2s",
-  authDomain: "portfolio-b39db.firebaseapp.com",
-  projectId: "portfolio-b39db",
-  storageBucket: "portfolio-b39db.firebasestorage.app",
-  messagingSenderId: "226770105121",
-  appId: "1:226770105121:web:f6b18fe2f1c5d48c3e4460"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
