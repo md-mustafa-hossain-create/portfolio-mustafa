@@ -235,6 +235,27 @@ html[data-theme='light'] .text-brand-500 {
   color: var(--color-brand-700) !important;
 }
 
+/* Fix contact form success/error message contrast in light mode */
+html[data-theme='light'] .text-emerald-300 {
+  color: var(--color-brand-800) !important;
+}
+html[data-theme='light'] .bg-emerald-950\/20 {
+  background-color: color-mix(in srgb, var(--color-brand-500) 15%, transparent) !important;
+}
+html[data-theme='light'] .border-emerald-900\/30 {
+  border-color: color-mix(in srgb, var(--color-brand-600) 30%, transparent) !important;
+}
+
+html[data-theme='light'] .text-rose-300 {
+  color: #be123c !important; /* Rose 700 */
+}
+html[data-theme='light'] .bg-rose-950\/20 {
+  background-color: color-mix(in srgb, #f43f5e 15%, transparent) !important;
+}
+html[data-theme='light'] .border-rose-900\/30 {
+  border-color: color-mix(in srgb, #e11d48 30%, transparent) !important;
+}
+
 /* Fix light mode glass and bezel lighting (restore white highlights) */
 html[data-theme='light'] .glass,
 html[data-theme='light'] .glass-nav,
