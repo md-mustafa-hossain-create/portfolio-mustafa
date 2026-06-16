@@ -13,61 +13,58 @@ Here is the verified data about Mustafa:
     "full_name": "MD Mustafa Hossain",
     "pronouns": "He/Him",
     "location": "West Bengal, India",
-    "professional_title": "Aspiring Frontend Developer",
-    "current_status": "BCA graduate seeking frontend/web development opportunities",
-    "email": "mustafahossaincreate@gmail.com",
-    "github": "github.com/md-mustafa-hossain-create"
+    "professional_title": "Frontend Developer",
+    "current_status": "BCA graduate seeking frontend web development opportunities",
+    "phone": "+91 90645 37924",
+    "email": "hussainmustafa2001@gmail.com",
+    "github": "github.com/md-mustafa-hossain-create",
+    "linkedin": "linkedin.com/in/mdmustafahossain"
   },
-  "professional_summary": "BCA graduate from Brainware University with a strong interest in frontend web development and UI-focused product building. Works with HTML, CSS, JavaScript, Tailwind CSS, and React.js, and actively strengthens real-world frontend concepts (routing, state management, component architecture, performance optimization, API integration, browser behavior). Early-career developer focused on learning in public, building projects, and growing into a professional frontend role.",
+  "professional_summary": "Motivated Frontend Developer with a BCA and hands-on experience building responsive, user-friendly web applications. Skilled in HTML, CSS, JavaScript (ES6+), Tailwind CSS, and React. Proven ability to deliver clean, maintainable code through impactful academic and personal projects. Eager to contribute to a modern development team by building high-quality, cross-browser compatible interfaces.",
   "education": [
     {
       "institution": "Brainware University",
       "degree": "Bachelor of Computer Applications (BCA)",
-      "duration": "Sep 2021 - Jun 2024",
-      "grade": "9.09 CGPA"
+      "duration": "2024",
+      "grade": "9.09/10 GPA",
+      "location": "Kolkata, India"
     },
     {
       "institution": "Netaji Subhas Public School",
       "degree": "Higher Secondary (12th)",
-      "stream": "Humanities/Humanistic Studies",
-      "location": "Murshidabad, India"
+      "duration": "2019",
+      "location": "Jiaganj, India"
+    },
+    {
+      "institution": "Nawab Bahadur’s Institution",
+      "degree": "Secondary (10th)",
+      "duration": "2017",
+      "location": "Lalbagh, India"
     }
   ],
   "skills": {
-    "core": ["HTML", "CSS", "JavaScript", "Tailwind CSS", "React.js"],
-    "supporting": ["UI/UX basics", "Figma basics", "Responsive design", "Frontend architecture, API integration, React Router, Context API, state management, performance optimization, problem solving with DSA"]
+    "frontend": ["HTML5", "CSS3", "JavaScript (ES6+)", "React", "Tailwind CSS", "Flexbox", "CSS Grid"],
+    "tools_and_version_control": ["Git", "GitHub", "VS Code"],
+    "soft_skills": ["Problem-solving", "Team Collaboration", "Adaptability", "Time Management", "Attention to Detail"]
   },
   "projects": [
     {
-      "name": "Animated Webpage",
-      "description": "A web project showcasing smooth scrolling and animation effects.",
-      "technologies": ["GSAP", "HTML"],
-      "link": "https://github.com/Md-Mustafa-Hossain/animatedWebpage"
+      "name": "E-commerce Website Development",
+      "type": "Academic Group Project (2024, Kolkata)",
+      "technologies": ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
+      "description": "Led frontend development for a responsive e-commerce website, crafting a user-centric interface with optimized navigation. Collaborated with a backend developer to successfully integrate the UI with server-side functionality. Applied responsive design principles to ensure 100% cross-browser compatibility across devices."
     },
     {
-      "name": "Portfolio Website",
-      "description": "Personal portfolio website project used to present professional profile and work.",
-      "technologies": ["React.js", "Tailwind CSS", "Firebase"]
-    }
-  ],
-  "certifications": [
-    {"name": "INDUSTRIAL VISIT", "issuer": "NATURAVA", "date": "Jan 2022"},
-    {"name": "Intellectual Property Rights", "issuer": "Brainware University", "date": "Nov 2021"}
-  ],
-  "volunteering": [
-    {
-      "role": "Social Worker",
-      "organization": "Welfare Development Society",
-      "highlights": ["Organized community welfare drives", "Led volunteer teams", "Outreach and coordination", "Logistics"]
+      "name": "Personal Portfolio Website",
+      "type": "Personal Project",
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "description": "Designed and developed a fully responsive personal portfolio to establish a professional digital presence. Built interactive UI elements and smooth animations using vanilla JavaScript. Deployed on GitHub Pages."
     }
   ],
   "languages": [
-    {"language": "Bengali", "proficiency": "Full professional proficiency"},
-    {"language": "English", "proficiency": "Professional working proficiency"}
-  ],
-  "career_interests": ["Frontend/Web/UI developer roles (remote, hybrid, on-site)"],
-  "recent_technical_topics_explored": [
-    "React Router", "HOCs", "Controlled vs uncontrolled components", "Lifting state up", "Prop drilling", "Context API", "Custom hooks", "Lazy loading", "Suspense", "Single Responsibility Principle", "CORS", "API handling", "Networking basics", "Virtual DOM", "React Fiber & reconciliation", "DSA array problems"
+    {"language": "English", "proficiency": "Proficient"},
+    {"language": "Hindi", "proficiency": "Spoken"},
+    {"language": "Bengali", "proficiency": "Native"}
   ]
 }
 
@@ -100,27 +97,27 @@ const getFallbackResponse = (prompt) => {
   
   if (cleanPrompt.includes('skills') || cleanPrompt.includes('tech') || cleanPrompt.includes('stack') || cleanPrompt.includes('skill')) {
     return `Technical Stack:
-• Core: HTML5, CSS3, JavaScript, React JS
-• Styling: Tailwind CSS
-• Backend: Firebase Firestore & Hosting
-• Tools: Git, GitHub, Vite, npm`;
+• Frontend: HTML5, CSS3, JavaScript (ES6+), React, Tailwind CSS, Flexbox, CSS Grid
+• Tools: Git, GitHub, VS Code
+• Soft Skills: Problem-solving, Team Collaboration, Adaptability`;
   }
   
   if (cleanPrompt.includes('project') || cleanPrompt.includes('work') || cleanPrompt.includes('portfolio') || cleanPrompt.includes('build')) {
-    return `Mustafa builds modern web applications. His projects feature responsive designs, lazy-loading optimizations, and modular React components. Check his 'Projects' section below!`;
+    return `Mustafa builds modern web applications. His projects include an E-commerce Website Development (HTML/CSS/JS/PHP/SQL) and a Personal Portfolio Website. Check his 'Projects' section below!`;
   }
   
-  if (cleanPrompt.includes('contact') || cleanPrompt.includes('email') || cleanPrompt.includes('hire') || cleanPrompt.includes('reach') || cleanPrompt.includes('connect')) {
+  if (cleanPrompt.includes('contact') || cleanPrompt.includes('email') || cleanPrompt.includes('hire') || cleanPrompt.includes('reach') || cleanPrompt.includes('connect') || cleanPrompt.includes('phone') || cleanPrompt.includes('number')) {
     return `Contact Details:
-• Email: mustafahossaincreate@gmail.com
-• GitHub: github.com/md-mustafa-hossain-create
-• Location: Murshidabad, West Bengal, India`;
+• Email: hussainmustafa2001@gmail.com
+• Phone: +91 90645 37924
+• LinkedIn: linkedin.com/in/mdmustafahossain
+• GitHub: github.com/md-mustafa-hossain-create`;
   }
   
   if (cleanPrompt.includes('education') || cleanPrompt.includes('degree') || cleanPrompt.includes('college') || cleanPrompt.includes('university') || cleanPrompt.includes('study')) {
     return `Education:
 • Degree: Bachelor of Computer Applications (BCA)
-• University: Brainware University (West Bengal, India)
+• University: Brainware University (Kolkata, India)
 • CGPA: 9.09/10`;
   }
 
@@ -135,11 +132,15 @@ const getFallbackResponse = (prompt) => {
   }
   
   if (cleanPrompt.includes('language') || cleanPrompt.includes('speak') || cleanPrompt.includes('talk')) {
-    return `Languages: Bengali (Full professional) and English (Professional working).`;
+    return `Languages: Bengali (Native), English (Proficient), and Hindi (Spoken).`;
+  }
+
+  if (cleanPrompt.includes('10th') || cleanPrompt.includes('secondary')) {
+    return `Secondary School: Completed 10th grade at Nawab Bahadur’s Institution, Lalbagh.`;
   }
 
   if (cleanPrompt.includes('humanities') || cleanPrompt.includes('12th') || cleanPrompt.includes('school') || cleanPrompt.includes('high school')) {
-    return `High School: Completed Higher Secondary (12th) in Humanities at Netaji Subhas Public School, Murshidabad.`;
+    return `High School: Completed Higher Secondary (12th) at Netaji Subhas Public School, Jiaganj.`;
   }
 
   if (cleanPrompt.includes('virtual dom') || cleanPrompt.includes('reconciliation') || cleanPrompt.includes('react fiber')) {
