@@ -56,7 +56,6 @@ export default function ChatUI({ isFloating, onClose }) {
         {/* Header Bar */}
         <div className="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4 shrink-0 select-none relative z-10">
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-brand-500 animate-pulse' : 'bg-zinc-500'}`}></div>
             <div className="flex flex-col">
               <span className="text-xs font-semibold text-white tracking-wide">Dev.Bot</span>
               <span className="text-[10px] sm:text-xs text-zinc-400">Ask about skills, education, contact</span>
