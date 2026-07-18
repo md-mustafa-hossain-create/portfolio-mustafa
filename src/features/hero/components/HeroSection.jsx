@@ -104,15 +104,6 @@ export default function HeroSection() {
                 </a>
               </div>
             </ScrollReveal>
-
-            <ScrollReveal 
-              animation="up"
-              delay={0.85}
-              as="span"
-              className="text-xs text-zinc-400 mt-4 font-sans block"
-            >
-              {HERO_STRINGS.RESUME_NOTE}
-            </ScrollReveal>
           </div>
 
           {/* Hero Right: Terminal Mockup */}

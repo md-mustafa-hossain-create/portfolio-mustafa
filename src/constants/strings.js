@@ -31,7 +31,6 @@ export const HERO_STRINGS = {
   BTN_PROJECTS: "View Projects",
   BTN_RESUME: "Download Resume",
   BTN_CONTACT: "Contact Me",
-  RESUME_NOTE: "* Note: Replace public/resume.pdf with your actual CV",
   TERMINAL_STATUS: "ACTIVE",
   BOOT_TITLE: "Welcome to my portfolio",
 };
