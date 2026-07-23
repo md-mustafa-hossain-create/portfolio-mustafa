@@ -4,118 +4,170 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── FORMATION GENERATORS ─────────────────────────────────────────────────────
-// Each function returns an array of {x, y} target positions for N particles,
-// relative to the viewport center. These are the "shapes" the neural network
-// morphs between as the user scrolls.
+// ─── SECTION PALETTES ──────────────────────────────────────────────────────────
+// Each palette drives the node/edge/glow colors per section
+const PALETTES = [
+  { h: 158, name: 'emerald' },   // Hero     — Emerald
+  { h: 172, name: 'mint' },      // About    — Mint
+  { h: 240, name: 'indigo' },    // Skills   — Indigo
+  { h: 200, name: 'cyan' },      // Projects — Cyan
+  { h: 44,  name: 'amber' },     // Education— Amber
+  { h: 280, name: 'violet' },    // Blogs    — Violet
+  { h: 158, name: 'emerald' },   // Contact  — Emerald
+];
+
+// ─── FORMATION GENERATORS ──────────────────────────────────────────────────────
+// All formations are purposefully tech/dev themed.
+// Positions are returned as { tx, ty } relative to viewport center.
 
 /**
- * Formation 0 — HERO: Random scattered cloud (organic, floating feel)
+ * MESH NETWORK — Hero
+ * Internet-style distributed mesh topology with min-distance separation.
+ * Feels like a network infrastructure diagram.
  */
-function formCloud(n, w, h) {
-  return Array.from({ length: n }, () => ({
-    tx: (Math.random() - 0.5) * w * 0.95,
-    ty: (Math.random() - 0.5) * h * 0.9,
+function formMesh(n, w, h) {
+  const pts = [];
+  const minDist = Math.min(w, h) * 0.09;
+  let attempts = 0;
+  while (pts.length < n && attempts < n * 30) {
+    attempts++;
+    const tx = (Math.random() - 0.5) * w * 0.88;
+    const ty = (Math.random() - 0.5) * h * 0.80;
+    const ok = pts.every(p => Math.hypot(p.tx - tx, p.ty - ty) > minDist);
+    if (ok) pts.push({ tx, ty });
+  }
+  while (pts.length < n) {
+    pts.push({ tx: (Math.random() - 0.5) * w * 0.5, ty: (Math.random() - 0.5) * h * 0.5 });
+  }
+  return pts;
+}
+
+/**
+ * BINARY TREE — About
+ * DOM/AST binary tree growing downward like a component tree.
+ */
+function formTree(n, w, h) {
+  const pts = [];
+  const maxDepth = Math.ceil(Math.log2(n + 1));
+  let idx = 0;
+  for (let d = 0; d <= maxDepth && idx < n; d++) {
+    const count = Math.min(Math.pow(2, d), n - idx);
+    const xSpread = w * 0.75 / Math.pow(1.6, d);
+    const y = -h * 0.38 + d * (h * 0.75 / maxDepth);
+    for (let i = 0; i < count; i++) {
+      const xOff = count === 1 ? 0 : (i / (count - 1) - 0.5) * 2 * xSpread;
+      pts.push({ tx: xOff, ty: y });
+      idx++;
+    }
+  }
+  return pts;
+}
+
+/**
+ * CIRCUIT GRID — Skills
+ * PCB circuit board: nodes sit precisely at grid junctions.
+ * Connections follow orthogonal (H/V) traces like copper tracks.
+ */
+function formCircuit(n, w, h) {
+  const cols = Math.ceil(Math.sqrt(n * (w / h)));
+  const rows = Math.ceil(n / cols);
+  const gx = Math.min(w * 0.78, 880) / (cols - 1 || 1);
+  const gy = Math.min(h * 0.68, 520) / (rows - 1 || 1);
+  return Array.from({ length: n }, (_, i) => ({
+    tx: (i % cols) * gx - (cols - 1) * gx / 2,
+    ty: Math.floor(i / cols) * gy - (rows - 1) * gy / 2,
   }));
 }
 
 /**
- * Formation 1 — ABOUT: Brain-like dual-hemisphere cluster
+ * GIT GRAPH — Projects
+ * Horizontal git commit graph with branching lanes.
  */
-function formBrain(n, w, h) {
+function formGitGraph(n, w, h) {
+  const lanes  = [0, -1, 1, -2, 2];   // branch lane offsets
+  const laneGap = Math.min(h * 0.16, 80);
+  const colGap  = Math.min(w * 0.80, 900) / (n - 1 || 1);
+  return Array.from({ length: n }, (_, i) => ({
+    // NOTE: Each commit sits on a lane; some drift to adjacent lanes to show branching
+    tx: i * colGap - (n - 1) * colGap / 2,
+    ty: lanes[i % lanes.length] * laneGap,
+  }));
+}
+
+/**
+ * PIPELINE — Education
+ * Linear processing pipeline with node clusters at each stage.
+ */
+function formPipeline(n, w, h) {
+  const stages = 5;
+  const perStage = Math.ceil(n / stages);
+  const stageGap = Math.min(w * 0.75, 800) / (stages - 1);
   return Array.from({ length: n }, (_, i) => {
-    const side = i % 2 === 0 ? -1 : 1;
-    const angle = Math.random() * Math.PI;
-    const r = Math.random() * Math.min(w, h) * 0.28;
+    const s  = Math.floor(i / perStage);
+    const si = i % perStage;
+    // Nodes in each stage cluster vertically
+    const clusterCount = Math.min(perStage, n - s * perStage);
+    const yOff = (si - (clusterCount - 1) / 2) * Math.min(h * 0.10, 55);
     return {
-      tx: side * (Math.min(w, h) * 0.17 + Math.cos(angle) * r),
-      ty: Math.sin(angle) * r * 0.75,
+      tx: s * stageGap - (stages - 1) * stageGap / 2,
+      ty: yOff,
     };
   });
 }
 
 /**
- * Formation 2 — SKILLS: Tight grid matrix
+ * HEX GRID — Blogs
+ * Honeycomb hexagonal grid — looks like a tech dashboard / data map.
  */
-function formGrid(n, w, h) {
-  const cols = Math.ceil(Math.sqrt(n * (w / h)));
-  const rows = Math.ceil(n / cols);
-  const gapX = Math.min(w * 0.8, 900) / cols;
-  const gapY = Math.min(h * 0.7, 550) / rows;
-  return Array.from({ length: n }, (_, i) => ({
-    tx: (i % cols) * gapX - (cols - 1) * gapX * 0.5,
-    ty: Math.floor(i / cols) * gapY - (rows - 1) * gapY * 0.5,
-  }));
-}
-
-/**
- * Formation 3 — PROJECTS: Concentric orbital rings
- */
-function formOrbit(n, w, h) {
-  const rings = [0.12, 0.24, 0.36].map((r) => Math.min(w, h) * r);
-  const perRing = [Math.ceil(n * 0.15), Math.ceil(n * 0.35), Math.ceil(n * 0.5)];
+function formHexGrid(n, w, h) {
+  const r = Math.min(w, h) * 0.09;
   const pts = [];
-  rings.forEach((r, ri) => {
-    const count = perRing[ri];
-    for (let i = 0; i < count; i++) {
-      const angle = (i / count) * Math.PI * 2 + ri * 0.5;
-      pts.push({ tx: Math.cos(angle) * r, ty: Math.sin(angle) * r * 0.6 });
+  const rings = Math.ceil(Math.sqrt(n / 3));
+  const dirs  = [
+    [1, 0], [0.5, 0.866], [-0.5, 0.866],
+    [-1, 0], [-0.5, -0.866], [0.5, -0.866],
+  ];
+  pts.push({ tx: 0, ty: 0 });
+  for (let ring = 1; ring <= rings && pts.length < n; ring++) {
+    let cx = ring * r * 2 * dirs[4][0];
+    let cy = ring * r * 2 * dirs[4][1];
+    for (let side = 0; side < 6 && pts.length < n; side++) {
+      for (let step = 0; step < ring && pts.length < n; step++) {
+        pts.push({ tx: cx, ty: cy });
+        cx += dirs[side][0] * r * 2;
+        cy += dirs[side][1] * r * 1.75;
+      }
     }
-  });
-  // Fill any remainder with center cluster
-  while (pts.length < n) {
-    pts.push({ tx: (Math.random() - 0.5) * 40, ty: (Math.random() - 0.5) * 40 });
   }
   return pts.slice(0, n);
 }
 
 /**
- * Formation 4 — EDUCATION: Double helix / DNA spiral
+ * RADIAL BURST — Contact
+ * Signal transmission: nodes burst outward in concentric rings.
+ * Looks like a WiFi/API broadcast diagram.
  */
-function formHelix(n, w, h) {
-  return Array.from({ length: n }, (_, i) => {
-    const t = (i / n) * Math.PI * 5;
-    const strand = i % 2 === 0 ? 1 : -1;
-    const amplitude = Math.min(w, h) * 0.22;
-    return {
-      tx: strand * Math.cos(t) * amplitude * 0.6,
-      ty: (i / n - 0.5) * h * 0.7,
-    };
+function formRadial(n, w, h) {
+  const rings = [0.08, 0.18, 0.30].map(f => Math.min(w, h) * f);
+  const perRing = [1, Math.ceil(n * 0.28), Math.ceil(n * 0.72)];
+  const pts = [];
+  rings.forEach((r, ri) => {
+    const cnt = perRing[ri];
+    for (let i = 0; i < cnt && pts.length < n; i++) {
+      const angle = (i / cnt) * Math.PI * 2 + ri * 0.3;
+      pts.push({ tx: Math.cos(angle) * r, ty: Math.sin(angle) * r * 0.65 });
+    }
   });
+  while (pts.length < n) {
+    pts.push({ tx: (Math.random() - 0.5) * 30, ty: (Math.random() - 0.5) * 30 });
+  }
+  return pts.slice(0, n);
 }
 
-/**
- * Formation 5 — CONTACT: Tight vortex / convergence spiral
- */
-function formVortex(n, w, h) {
-  return Array.from({ length: n }, (_, i) => {
-    const t = (i / n) * Math.PI * 7;
-    const r = (1 - i / n) * Math.min(w, h) * 0.35;
-    return {
-      tx: Math.cos(t) * r,
-      ty: Math.sin(t) * r * 0.55,
-    };
-  });
-}
+const FORMATIONS = [formMesh, formTree, formCircuit, formGitGraph, formPipeline, formHexGrid, formRadial];
+const SECTION_COUNT = FORMATIONS.length;
 
-// ─── COMPONENT ────────────────────────────────────────────────────────────────
-
-/**
- * @fileoverview Scroll-driven neural network background.
- *
- * The node constellation morphs between 6 distinct geometric formations
- * (cloud → brain → grid → orbits → helix → vortex) in sync with the active
- * portfolio section. Each formation matches the section's mood and theme:
- *
- *  Prog  Section    Formation     Primary Hue
- *  0.00  Hero       Cloud         Emerald 160°
- *  0.17  About      Brain         Mint    172°
- *  0.33  Skills     Grid          Indigo  240°
- *  0.50  Projects   Orbital       Cyan    200°
- *  0.67  Education  Helix         Amber    45°
- *  0.83  Blogs      Vortex        Violet  280°
- *  1.00  Contact    Convergence   Emerald 160°
- */
+// ─── COMPONENT ─────────────────────────────────────────────────────────────────
 export default function GsapScrollBackground() {
   const canvasRef = useRef(null);
 
@@ -125,273 +177,294 @@ export default function GsapScrollBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let width  = (canvas.width  = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let W = (canvas.width  = window.innerWidth);
+    let H = (canvas.height = window.innerHeight);
+    const isRM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const handleResize = () => {
-      width  = canvas.width  = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      // Recalculate formations on resize
-      rebuildFormations();
+    const onResize = () => {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+      rebuildAll();
     };
-    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
 
-    // ── STATE driven by GSAP ScrollTrigger scrub ──
+    // ── SCROLL STATE ──
     const state = {
-      progress:     0,
-      primaryHue:   160,
-      secondaryHue: 250,
-      laserSpeed:   1.0,
-      formIdx:      0,   // active formation index (0-5)
-      morphLerp:    0,   // 0 = previous formation, 1 = current formation
+      progress:  0,
+      formIdx:   0,
+      morphLerp: 0,
+      hue:       158,
+      laserSpd:  1.0,
     };
 
-    // ── PARTICLES ─────────────────────────────────
-    const N = width < 768 ? 38 : 70;
-
-    // Each particle has a current rendered position AND two formation target slots
+    // ── PARTICLES ──
+    const N = W < 768 ? 40 : 72;
     const particles = Array.from({ length: N }, () => ({
-      x:       Math.random() * width,
-      y:       Math.random() * height,
-      // base drift velocity (very subtle ambient movement)
-      vx:      (Math.random() - 0.5) * 0.3,
-      vy:      (Math.random() - 0.5) * 0.3,
-      radius:  Math.random() * 2.4 + 0.8,
-      alpha:   Math.random() * 0.45 + 0.18,
-      // formation targets (updated on morph transitions)
-      fxFrom:  0,
-      fyFrom:  0,
-      fxTo:    0,
-      fyTo:    0,
+      x: Math.random() * W, y: Math.random() * H,
+      vx: 0, vy: 0,
+      radius: Math.random() * 2 + 0.9,
+      alpha:  Math.random() * 0.5 + 0.2,
+      // Formation target slots
+      fxFrom: 0, fyFrom: 0,
+      fxTo: 0,   fyTo: 0,
+      // Pulse state — triggered when a data packet arrives
+      pulse: 0,
     }));
 
-    // Laser beam streaks
-    const laserCount = width < 768 ? 16 : 35;
-    const lasers = Array.from({ length: laserCount }, () => ({
-      x:         Math.random() * width,
-      y:         Math.random() * height,
-      length:    Math.random() * 110 + 45,
-      speed:     Math.random() * 2.4 + 0.7,
-      alpha:     Math.random() * 0.32 + 0.08,
-      lineWidth: Math.random() * 1.5 + 0.3,
+    // ── DATA PACKETS ──
+    // Small bright dots that travel along active edges between particles
+    const PACKET_COUNT = W < 768 ? 6 : 14;
+    const packets = Array.from({ length: PACKET_COUNT }, () => ({
+      active: false,
+      fromIdx: 0, toIdx: 0,
+      t: 0,          // 0..1 along the edge
+      speed: 0.008,
     }));
 
-    // ── FORMATION BOOKKEEPING ─────────────────────
-    // 6 section formations, one per section milestone
-    const FORMATIONS = [formCloud, formBrain, formGrid, formOrbit, formHelix, formVortex];
+    // Track which pairs are connected (rebuilt per-frame based on distance)
+    let edges = [];
 
-    // Store the computed formation target positions (absolute from viewport center)
-    let formationSets = [];
-
-    function rebuildFormations() {
-      formationSets = FORMATIONS.map((fn) => fn(N, width, height));
+    function spawnPacket(p) {
+      if (edges.length < 2) return;
+      const edge = edges[Math.floor(Math.random() * edges.length)];
+      p.fromIdx = edge[0];
+      p.toIdx   = edge[1];
+      p.t       = 0;
+      p.speed   = 0.006 + Math.random() * 0.008;
+      p.active  = true;
     }
 
-    rebuildFormations();
+    // ── CIRCUIT GRID LINES ──
+    // Orthogonal H/V grid that acts like PCB traces (not diagonal)
+    const GRID_GAP = 70;
 
-    // Initialise particle formation slots to cloud (formation 0)
-    let lastFormIdx = 0;
-    applyFormation(0, 0);
+    // ── FORMATIONS ──
+    let formationSets = [];
+    function rebuildAll() {
+      formationSets = FORMATIONS.map(fn => fn(N, W, H));
+    }
+    rebuildAll();
 
+    let lastFIdx = 0;
     function applyFormation(fromIdx, toIdx) {
       const from = formationSets[Math.min(fromIdx, FORMATIONS.length - 1)];
       const to   = formationSets[Math.min(toIdx,   FORMATIONS.length - 1)];
       particles.forEach((pt, i) => {
-        pt.fxFrom = from[i].tx + width  / 2;
-        pt.fyFrom = from[i].ty + height / 2;
-        pt.fxTo   = to[i].tx   + width  / 2;
-        pt.fyTo   = to[i].ty   + height / 2;
+        pt.fxFrom = from[i].tx + W / 2;
+        pt.fyFrom = from[i].ty + H / 2;
+        pt.fxTo   = to[i].tx   + W / 2;
+        pt.fyTo   = to[i].ty   + H / 2;
       });
     }
+    // Init formation targets to mesh (index 0)
+    applyFormation(0, 0);
 
-    // ── SCROLL TRIGGER ────────────────────────────
-    // Section milestones: each 1/6 of scroll corresponds to one section
-    const SECTION_COUNT = 6;
-
+    // ── SCROLL TRIGGER ──
     const trigger = ScrollTrigger.create({
       trigger: document.body,
-      start:   'top top',
-      end:     'bottom bottom',
-      scrub:   1.4,
+      start: 'top top',
+      end:   'bottom bottom',
+      scrub: 1.5,
       onUpdate(self) {
-        const vel = Math.abs(self.getVelocity());
-
-        // Map scroll progress to formation index (0-5)
+        const vel    = Math.abs(self.getVelocity());
         const rawIdx = self.progress * (SECTION_COUNT - 1);
-        const newIdx = Math.floor(rawIdx);
-        const frac   = rawIdx - newIdx; // 0..1 within current section
+        const newIdx = Math.min(Math.floor(rawIdx), SECTION_COUNT - 1);
+        const frac   = rawIdx - newIdx;
 
-        // When formation index changes, swap From ↔ To targets
-        if (newIdx !== lastFormIdx) {
-          const prevIdx = lastFormIdx;
-          lastFormIdx = newIdx;
-          applyFormation(prevIdx, newIdx);
+        if (newIdx !== lastFIdx) {
+          applyFormation(lastFIdx, newIdx);
+          lastFIdx = newIdx;
         }
 
         gsap.to(state, {
-          progress:     self.progress,
-          primaryHue:   160 + self.progress * 120,
-          secondaryHue: 250 - self.progress * 90,
-          laserSpeed:   1 + vel * 0.0018,
-          morphLerp:    frac,
-          duration:     0.5,
-          overwrite:    'auto',
+          progress:  self.progress,
+          morphLerp: frac,
+          hue:       PALETTES[newIdx]?.h ?? 158,
+          laserSpd:  1 + vel * 0.0016,
+          duration:  0.55,
+          overwrite: 'auto',
         });
       },
     });
 
-    // ── DRAW LOOP ─────────────────────────────────
+    // ── DRAW LOOP ──
     let rafId;
-    let time = 0;
+    let t = 0;
 
     function draw() {
-      time += 0.013;
+      t += 0.011;
       const p   = state.progress;
-      const ml  = Math.min(Math.max(state.morphLerp, 0), 1); // clamp 0..1
-      const h1  = state.primaryHue;
-      const h2  = state.secondaryHue;
+      const ml  = Math.max(0, Math.min(1, state.morphLerp));
+      // NOTE: Smoothstep easing — makes formation morph feel weighted, not linear
+      const ease = ml * ml * (3 - 2 * ml);
+      const h    = state.hue;
 
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, W, H);
 
-      // ── 1. AMBIENT ORBS ─────────────────────────
-      const o1x = width  * 0.28 + Math.sin(time * 0.34) * 120 + p * width  * 0.2;
-      const o1y = height * 0.28 + Math.cos(time * 0.27) * 80  + p * height * 0.22;
-      const o1r = Math.min(width, height) * (0.38 + p * 0.12);
+      // ─ AMBIENT GLOW ORBS ─────────────────────────────────
+      const o1x = W * 0.25 + Math.sin(t * 0.3) * 110 + p * W * 0.18;
+      const o1y = H * 0.25 + Math.cos(t * 0.25) * 75;
+      const o1r = Math.min(W, H) * (0.36 + p * 0.1);
       const g1  = ctx.createRadialGradient(o1x, o1y, 0, o1x, o1y, o1r);
-      g1.addColorStop(0,    `hsla(${h1}, 80%, 52%, 0.10)`);
-      g1.addColorStop(0.45, `hsla(${h1 + 25}, 70%, 45%, 0.04)`);
+      g1.addColorStop(0,    `hsla(${h}, 80%, 50%, 0.09)`);
+      g1.addColorStop(0.5,  `hsla(${h + 20}, 70%, 44%, 0.03)`);
       g1.addColorStop(1,    'rgba(0,0,0,0)');
       ctx.fillStyle = g1;
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, W, H);
 
-      const o2x = width  * 0.72 - Math.cos(time * 0.41) * 140 - p * width  * 0.17;
-      const o2y = height * 0.72 - Math.sin(time * 0.35) * 95  - p * height * 0.17;
-      const o2r = Math.min(width, height) * 0.4;
+      const o2x = W * 0.75 - Math.cos(t * 0.38) * 130 - p * W * 0.15;
+      const o2y = H * 0.75 - Math.sin(t * 0.32) * 85;
+      const o2r = Math.min(W, H) * 0.38;
       const g2  = ctx.createRadialGradient(o2x, o2y, 0, o2x, o2y, o2r);
-      g2.addColorStop(0, `hsla(${h2}, 85%, 58%, 0.08)`);
+      g2.addColorStop(0, `hsla(${h + 40}, 85%, 56%, 0.06)`);
       g2.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = g2;
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, W, H);
 
-      // ── 2. CYBERSPACE GRID ───────────────────────
-      ctx.save();
-      ctx.translate(width / 2, height / 2);
+      // ─ CIRCUIT BOARD GRID ────────────────────────────────
+      // NOTE: This is an orthogonal H+V grid, not a diagonal one.
+      // This gives a proper PCB / tech dashboard feel.
+      const gridAlpha = 0.03 + p * 0.018;
+      ctx.strokeStyle = `hsla(${h}, 65%, 50%, ${gridAlpha})`;
+      ctx.lineWidth   = 0.7;
 
-      const spacing  = 65;
-      const gridAlpha = 0.038 + p * 0.022;
-      ctx.strokeStyle = `hsla(${h1}, 72%, 52%, ${gridAlpha})`;
-      ctx.lineWidth   = 0.8;
-      const yOff      = (time * 17 * state.laserSpeed) % spacing;
+      const xOff = (t * 14 * state.laserSpd) % GRID_GAP;
+      const yOff = (t * 9  * state.laserSpd) % GRID_GAP;
 
-      for (let i = -20; i <= 20; i++) {
-        const x = i * spacing;
+      // Vertical lines (scroll right)
+      for (let x = -xOff; x < W + GRID_GAP; x += GRID_GAP) {
         ctx.beginPath();
-        ctx.moveTo(x, -height);
-        ctx.lineTo(x * (1 + p * 0.25), height);
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
         ctx.stroke();
       }
-      for (let y = -height / 2 + yOff; y < height / 2; y += spacing) {
+      // Horizontal lines (scroll down)
+      for (let y = -yOff; y < H + GRID_GAP; y += GRID_GAP) {
         ctx.beginPath();
-        ctx.moveTo(-width, y);
-        ctx.lineTo(width,  y);
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
         ctx.stroke();
       }
-      ctx.restore();
 
-      // ── 3. LASER BEAMS ───────────────────────────
-      if (!isReducedMotion) {
-        for (const l of lasers) {
-          l.x += l.speed * state.laserSpeed * 1.5;
-          if (l.x > width + l.length) {
-            l.x = -l.length;
-            l.y = Math.random() * height;
-          }
-          const lg = ctx.createLinearGradient(l.x - l.length, l.y, l.x, l.y);
-          lg.addColorStop(0,   'rgba(0,0,0,0)');
-          lg.addColorStop(0.5, `hsla(${h1}, 90%, 62%, ${l.alpha * 0.4})`);
-          lg.addColorStop(1,   `hsla(${h1 + 15}, 100%, 72%, ${l.alpha})`);
-          ctx.beginPath();
-          ctx.moveTo(l.x - l.length, l.y);
-          ctx.lineTo(l.x, l.y);
-          ctx.strokeStyle = lg;
-          ctx.lineWidth   = l.lineWidth;
-          ctx.stroke();
-        }
-      }
-
-      // ── 4. NEURAL NETWORK NODES ─────────────────
-      // Use eased cubic interpolation for formation morphing
-      // NOTE: smoothstep easing makes the morph feel organic, not mechanical
-      const ease = ml * ml * (3 - 2 * ml);
-
+      // ─ MOVE PARTICLES TOWARD FORMATION TARGETS ───────────
       for (let i = 0; i < particles.length; i++) {
         const pt = particles[i];
-
-        // Formation target position (lerped between from → to)
         const targetX = pt.fxFrom + (pt.fxTo - pt.fxFrom) * ease;
         const targetY = pt.fyFrom + (pt.fyTo - pt.fyFrom) * ease;
 
-        // NOTE: Each particle drifts gently toward its formation target.
-        // The attraction force (0.035) is soft enough for fluid, organic motion.
-        if (!isReducedMotion) {
-          pt.vx += (targetX - pt.x) * 0.035;
-          pt.vy += (targetY - pt.y) * 0.035;
-
-          // Dampen velocity for smooth deceleration (not rubber-band snapping)
-          pt.vx *= 0.88;
-          pt.vy *= 0.88;
-
-          pt.x += pt.vx;
-          pt.y += pt.vy;
+        if (!isRM) {
+          // NOTE: Attraction spring (0.032) + damping (0.87) = organic weighted glide
+          pt.vx += (targetX - pt.x) * 0.032;
+          pt.vy += (targetY - pt.y) * 0.032;
+          pt.vx *= 0.87;
+          pt.vy *= 0.87;
+          pt.x  += pt.vx;
+          pt.y  += pt.vy;
+          pt.pulse = Math.max(0, pt.pulse - 0.04);
         } else {
-          // Reduced motion: jump directly to target
           pt.x = targetX;
           pt.y = targetY;
         }
-
-        // Draw node glow
-        const glow = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, pt.radius * 3.5);
-        glow.addColorStop(0,   `hsla(${h1}, 85%, 68%, ${pt.alpha * 0.6})`);
-        glow.addColorStop(0.5, `hsla(${h1}, 75%, 58%, ${pt.alpha * 0.25})`);
-        glow.addColorStop(1,   'rgba(0,0,0,0)');
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, pt.radius * 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = glow;
-        ctx.fill();
-
-        // Draw solid node center
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, pt.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${h1}, 85%, 70%, ${pt.alpha})`;
-        ctx.fill();
       }
 
-      // ── 5. NEURAL NETWORK EDGES (strings) ────────
-      // NOTE: Connection threshold adapts per formation:
-      //  - tight formations (grid, helix) use a shorter threshold for clean look
-      //  - spread formations (cloud, orbit) use a longer threshold for rich web
-      const connectionThresh = 140 + Math.sin(p * Math.PI) * 60;
+      // ─ BUILD EDGE LIST ────────────────────────────────────
+      // Dynamic connection threshold: tighter on grid/git formations, wider on mesh
+      // NOTE: Threshold adapts per section so connections always look intentional
+      const baseThresh   = Math.min(W, H) * 0.22;
+      const sectionBoost = lastFIdx === 0 ? 1.2 : lastFIdx === 2 ? 0.75 : lastFIdx === 3 ? 0.8 : 1.0;
+      const thresh       = baseThresh * sectionBoost;
 
+      edges = [];
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx   = particles[i].x - particles[j].x;
           const dy   = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < thresh) edges.push([i, j, dist, thresh]);
+        }
+      }
 
-          if (dist < connectionThresh) {
-            const strength = 1 - dist / connectionThresh;
-            // Strings glow brighter as nodes get closer together
-            const lineAlpha = strength * strength * 0.22;
+      // ─ DRAW NETWORK EDGES (strings) ───────────────────────
+      for (const [i, j, dist, thr] of edges) {
+        const strength  = 1 - dist / thr;
+        const lineAlpha = strength * strength * 0.20;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `hsla(${h}, 72%, 58%, ${lineAlpha})`;
+        ctx.lineWidth   = strength * 1.1;
+        ctx.stroke();
+      }
 
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `hsla(${h1}, 75%, 60%, ${lineAlpha})`;
-            ctx.lineWidth   = strength * 1.2;
-            ctx.stroke();
+      // ─ DATA PACKETS along edges ───────────────────────────
+      // NOTE: Small bright dots travel along network edges to simulate
+      // live data flow — core visual metaphor for an IT dev portfolio.
+      if (!isRM) {
+        for (const pkt of packets) {
+          if (!pkt.active) {
+            // Randomly activate idle packets
+            if (Math.random() < 0.012) spawnPacket(pkt);
+            continue;
           }
+          pkt.t += pkt.speed;
+          if (pkt.t >= 1) {
+            pkt.active = false;
+            // Pulse the destination node
+            const dest = particles[pkt.toIdx];
+            if (dest) dest.pulse = 1;
+            continue;
+          }
+          const a  = particles[pkt.fromIdx];
+          const b  = particles[pkt.toIdx];
+          if (!a || !b) { pkt.active = false; continue; }
+          const px = a.x + (b.x - a.x) * pkt.t;
+          const py = a.y + (b.y - a.y) * pkt.t;
+
+          // Draw packet: bright core + soft halo
+          const pGlow = ctx.createRadialGradient(px, py, 0, px, py, 8);
+          pGlow.addColorStop(0,   `hsla(${h}, 100%, 82%, 0.95)`);
+          pGlow.addColorStop(0.4, `hsla(${h}, 90%, 68%, 0.40)`);
+          pGlow.addColorStop(1,   'rgba(0,0,0,0)');
+          ctx.beginPath();
+          ctx.arc(px, py, 8, 0, Math.PI * 2);
+          ctx.fillStyle = pGlow;
+          ctx.fill();
+
+          // Solid bright dot core
+          ctx.beginPath();
+          ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${h}, 100%, 90%, 1)`;
+          ctx.fill();
+        }
+      }
+
+      // ─ DRAW NODES ─────────────────────────────────────────
+      for (const pt of particles) {
+        const pulseBump = pt.pulse * 3.5;
+
+        // Outer glow (brighter during pulse)
+        const glowR = pt.radius * 3.5 + pulseBump;
+        const nGlow = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, glowR);
+        nGlow.addColorStop(0,    `hsla(${h}, 85%, 65%, ${pt.alpha * 0.55 + pt.pulse * 0.45})`);
+        nGlow.addColorStop(0.5,  `hsla(${h}, 75%, 55%, ${pt.alpha * 0.18})`);
+        nGlow.addColorStop(1,    'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, glowR, 0, Math.PI * 2);
+        ctx.fillStyle = nGlow;
+        ctx.fill();
+
+        // Solid node core (square on circuit section, circle otherwise)
+        const coreR = pt.radius + pulseBump * 0.3;
+        if (lastFIdx === 2) {
+          // NOTE: Circuit section uses square nodes to match PCB junction style
+          const s = coreR * 2.2;
+          ctx.fillStyle = `hsla(${h}, 85%, 70%, ${pt.alpha})`;
+          ctx.fillRect(pt.x - s / 2, pt.y - s / 2, s, s);
+        } else {
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, coreR, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${h}, 85%, 70%, ${pt.alpha})`;
+          ctx.fill();
         }
       }
 
@@ -401,7 +474,7 @@ export default function GsapScrollBackground() {
     rafId = requestAnimationFrame(draw);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', onResize);
       cancelAnimationFrame(rafId);
       trigger.kill();
     };
