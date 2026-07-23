@@ -4,196 +4,104 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── SECTION PALETTES ──────────────────────────────────────────────────────────
-// Each palette drives the node/edge/glow colors per section
-const PALETTES = [
-  { h: 158, name: 'emerald' },   // Hero     — Emerald
-  { h: 172, name: 'mint' },      // About    — Mint
-  { h: 240, name: 'indigo' },    // Skills   — Indigo
-  { h: 200, name: 'cyan' },      // Projects — Cyan
-  { h: 44,  name: 'amber' },     // Education— Amber
-  { h: 280, name: 'violet' },    // Blogs    — Violet
-  { h: 158, name: 'emerald' },   // Contact  — Emerald
+// ─── SECTION PALETTE (hue per section) ────────────────────────────────────────
+const PALETTES = [158, 172, 240, 200, 44, 280, 158];
+
+// ─── CODE SYMBOL DEFINITIONS ──────────────────────────────────────────────────
+// Each symbol belongs to a section (0-6). When the user is in that section,
+// those symbols brighten to full prominence. Others dim to ghost opacity.
+//
+// NOTE: Sizes intentionally varied so the canvas looks layered and deep,
+// not like a flat, uniform typography grid.
+const SYMBOL_DEFS = [
+  // ── Universal / Hero (section 0) ──
+  { text: '</>',       sec: 0, size: 28, weight: '700' },
+  { text: '⚛',         sec: 0, size: 32, weight: '400' },   // React atom
+  { text: '{ }',       sec: 0, size: 22, weight: '600' },
+  { text: '=>',        sec: 0, size: 20, weight: '700' },
+  { text: '[ ]',       sec: 0, size: 18, weight: '500' },
+  { text: '<div>',     sec: 0, size: 14, weight: '400' },
+  { text: '</div>',    sec: 0, size: 13, weight: '400' },
+  { text: 'const',     sec: 0, size: 15, weight: '600' },
+  { text: 'return()',  sec: 0, size: 14, weight: '500' },
+  { text: '#root',     sec: 0, size: 13, weight: '400' },
+  { text: '<!DOCTYPE>',sec: 0, size: 12, weight: '400' },
+  { text: '//',        sec: 0, size: 18, weight: '400' },
+  { text: '< >',       sec: 0, size: 16, weight: '600' },
+
+  // ── About (section 1) ──
+  { text: 'const me =',  sec: 1, size: 14, weight: '500' },
+  { text: '{ dev }',     sec: 1, size: 16, weight: '600' },
+  { text: 'skills: []',  sec: 1, size: 13, weight: '500' },
+  { text: '"India"',     sec: 1, size: 14, weight: '400' },
+  { text: 'role:',       sec: 1, size: 15, weight: '500' },
+  { text: '<React/>',    sec: 1, size: 16, weight: '600' },
+  { text: 'export me',   sec: 1, size: 13, weight: '500' },
+  { text: '0x👨‍💻',       sec: 1, size: 18, weight: '400' },
+
+  // ── Skills (section 2) ──
+  { text: 'React.js',   sec: 2, size: 17, weight: '600' },
+  { text: 'CSS3',       sec: 2, size: 18, weight: '700' },
+  { text: 'npm run',    sec: 2, size: 14, weight: '500' },
+  { text: '.tsx',       sec: 2, size: 16, weight: '600' },
+  { text: 'vite ⚡',    sec: 2, size: 15, weight: '500' },
+  { text: 'tailwind',   sec: 2, size: 15, weight: '500' },
+  { text: 'git init',   sec: 2, size: 13, weight: '400' },
+  { text: 'tsconfig',   sec: 2, size: 12, weight: '400' },
+  { text: '<HTML5/>',   sec: 2, size: 14, weight: '500' },
+  { text: '@import',    sec: 2, size: 13, weight: '400' },
+
+  // ── Projects (section 3) ──
+  { text: 'useState()',   sec: 3, size: 16, weight: '600' },
+  { text: 'useEffect()',  sec: 3, size: 15, weight: '600' },
+  { text: 'async/await',  sec: 3, size: 14, weight: '500' },
+  { text: 'git push',     sec: 3, size: 14, weight: '500' },
+  { text: '<Router/>',    sec: 3, size: 15, weight: '600' },
+  { text: 'fetch(api)',   sec: 3, size: 14, weight: '500' },
+  { text: 'deploy 🚀',   sec: 3, size: 16, weight: '500' },
+  { text: 'firebase',     sec: 3, size: 13, weight: '400' },
+  { text: 'Props{}',      sec: 3, size: 14, weight: '500' },
+
+  // ── Education (section 4) ──
+  { text: 'class BCA',    sec: 4, size: 16, weight: '600' },
+  { text: 'extends Dev',  sec: 4, size: 14, weight: '500' },
+  { text: 'new Learn()',  sec: 4, size: 14, weight: '500' },
+  { text: '++skills',     sec: 4, size: 16, weight: '600' },
+  { text: 'graduate()',   sec: 4, size: 14, weight: '500' },
+  { text: '9.09 GPA',     sec: 4, size: 15, weight: '600' },
+  { text: 'commit -m',    sec: 4, size: 12, weight: '400' },
+
+  // ── Blogs (section 5) ──
+  { text: '<Blog/>',    sec: 5, size: 18, weight: '600' },
+  { text: 'write()',    sec: 5, size: 16, weight: '500' },
+  { text: '{title}',    sec: 5, size: 14, weight: '500' },
+  { text: '.md',        sec: 5, size: 20, weight: '700' },
+  { text: 'publish()',  sec: 5, size: 15, weight: '500' },
+  { text: '# Article', sec: 5, size: 13, weight: '400' },
+  { text: '{tags:[]}',  sec: 5, size: 13, weight: '400' },
+
+  // ── Contact (section 6) ──
+  { text: 'POST /',      sec: 6, size: 16, weight: '600' },
+  { text: '200 OK ✓',   sec: 6, size: 15, weight: '600' },
+  { text: 'hire(me)',    sec: 6, size: 18, weight: '700' },
+  { text: 'connect()',   sec: 6, size: 15, weight: '500' },
+  { text: '<Form/>',     sec: 6, size: 16, weight: '600' },
+  { text: 'email.send',  sec: 6, size: 13, weight: '400' },
+  { text: '{ open: true}', sec: 6, size: 12, weight: '400' },
 ];
 
-// ─── FORMATION GENERATORS ──────────────────────────────────────────────────────
-// All formations are purposefully tech/dev themed.
-// Positions are returned as { tx, ty } relative to viewport center.
-
-/**
- * MESH NETWORK — Hero
- * Internet-style distributed mesh topology with min-distance separation.
- * Feels like a network infrastructure diagram.
- */
-function formMesh(n, w, h) {
-  const pts = [];
-  const minDist = Math.min(w, h) * 0.09;
-  let attempts = 0;
-  while (pts.length < n && attempts < n * 30) {
-    attempts++;
-    const tx = (Math.random() - 0.5) * w * 0.88;
-    const ty = (Math.random() - 0.5) * h * 0.80;
-    const ok = pts.every(p => Math.hypot(p.tx - tx, p.ty - ty) > minDist);
-    if (ok) pts.push({ tx, ty });
-  }
-  while (pts.length < n) {
-    pts.push({ tx: (Math.random() - 0.5) * w * 0.5, ty: (Math.random() - 0.5) * h * 0.5 });
-  }
-  return pts;
-}
-
-/**
- * BINARY TREE — About
- * DOM/AST binary tree growing downward like a component tree.
- */
-function formTree(n, w, h) {
-  const pts = [];
-  const maxDepth = Math.ceil(Math.log2(n + 1));
-  let idx = 0;
-  for (let d = 0; d <= maxDepth && idx < n; d++) {
-    const count = Math.min(Math.pow(2, d), n - idx);
-    const xSpread = w * 0.75 / Math.pow(1.6, d);
-    const y = -h * 0.38 + d * (h * 0.75 / maxDepth);
-    for (let i = 0; i < count; i++) {
-      const xOff = count === 1 ? 0 : (i / (count - 1) - 0.5) * 2 * xSpread;
-      pts.push({ tx: xOff, ty: y });
-      idx++;
-    }
-  }
-  return pts;
-}
-
-/**
- * CIRCUIT GRID — Skills
- * PCB circuit board: nodes sit precisely at grid junctions.
- * Connections follow orthogonal (H/V) traces like copper tracks.
- */
-function formCircuit(n, w, h) {
-  const cols = Math.ceil(Math.sqrt(n * (w / h)));
-  const rows = Math.ceil(n / cols);
-  const gx = Math.min(w * 0.78, 880) / (cols - 1 || 1);
-  const gy = Math.min(h * 0.68, 520) / (rows - 1 || 1);
-  return Array.from({ length: n }, (_, i) => ({
-    tx: (i % cols) * gx - (cols - 1) * gx / 2,
-    ty: Math.floor(i / cols) * gy - (rows - 1) * gy / 2,
-  }));
-}
-
-/**
- * GIT GRAPH — Projects
- * Horizontal git commit graph with branching lanes.
- */
-function formGitGraph(n, w, h) {
-  const lanes  = [0, -1, 1, -2, 2];   // branch lane offsets
-  const laneGap = Math.min(h * 0.16, 80);
-  const colGap  = Math.min(w * 0.80, 900) / (n - 1 || 1);
-  return Array.from({ length: n }, (_, i) => ({
-    // NOTE: Each commit sits on a lane; some drift to adjacent lanes to show branching
-    tx: i * colGap - (n - 1) * colGap / 2,
-    ty: lanes[i % lanes.length] * laneGap,
-  }));
-}
-
-/**
- * PIPELINE — Education
- * Linear processing pipeline with node clusters at each stage.
- */
-function formPipeline(n, w, h) {
-  const stages = 5;
-  const perStage = Math.ceil(n / stages);
-  const stageGap = Math.min(w * 0.75, 800) / (stages - 1);
-  return Array.from({ length: n }, (_, i) => {
-    const s  = Math.floor(i / perStage);
-    const si = i % perStage;
-    // Nodes in each stage cluster vertically
-    const clusterCount = Math.min(perStage, n - s * perStage);
-    const yOff = (si - (clusterCount - 1) / 2) * Math.min(h * 0.10, 55);
-    return {
-      tx: s * stageGap - (stages - 1) * stageGap / 2,
-      ty: yOff,
-    };
-  });
-}
-
-/**
- * HEX GRID — Blogs
- * Honeycomb hexagonal grid — looks like a tech dashboard / data map.
- */
-function formHexGrid(n, w, h) {
-  const r = Math.min(w, h) * 0.09;
-  const pts = [];
-  const rings = Math.ceil(Math.sqrt(n / 3));
-  const dirs  = [
-    [1, 0], [0.5, 0.866], [-0.5, 0.866],
-    [-1, 0], [-0.5, -0.866], [0.5, -0.866],
-  ];
-  pts.push({ tx: 0, ty: 0 });
-  for (let ring = 1; ring <= rings && pts.length < n; ring++) {
-    let cx = ring * r * 2 * dirs[4][0];
-    let cy = ring * r * 2 * dirs[4][1];
-    for (let side = 0; side < 6 && pts.length < n; side++) {
-      for (let step = 0; step < ring && pts.length < n; step++) {
-        pts.push({ tx: cx, ty: cy });
-        cx += dirs[side][0] * r * 2;
-        cy += dirs[side][1] * r * 1.75;
-      }
-    }
-  }
-  return pts.slice(0, n);
-}
-
-/**
- * 3-TIER WEB ARCHITECTURE — Contact
- * The classic Client → API Gateway → Server / Database tiered layout.
- * Every frontend dev knows this diagram; it maps perfectly to the "reach out" theme:
- * the visitor (client) sends a request → hits the API (portfolio contact) → connects.
- *
- * Tiers are arranged as vertical columns spaced across the viewport:
- *   Left tier  — Client / Browser nodes (visitor)
- *   Mid tier   — API Gateway / Load-Balancer nodes
- *   Right tier — Server / Database nodes
- */
-function formWebArch(n, w, h) {
-  const pts = [];
-
-  // NOTE: Three vertical tier columns evenly spaced.
-  // Each tier owns ~1/3 of the nodes distributed vertically.
-  const tiers = [
-    { xFrac: -0.32, label: 'client',  nodeShare: 0.28 },  // Client tier
-    { xFrac:  0.00, label: 'api',     nodeShare: 0.38 },  // API Gateway tier
-    { xFrac:  0.32, label: 'server',  nodeShare: 0.34 },  // Server/DB tier
-  ];
-
-  const maxX = Math.min(w * 0.34, 340);
-  const maxY = Math.min(h * 0.70, 480);
-
-  tiers.forEach((tier) => {
-    const count   = Math.round(n * tier.nodeShare);
-    const tierX   = tier.xFrac * maxX / 0.32;  // scale to actual pixels
-    const spacing = maxY / (count - 1 || 1);
-    for (let i = 0; i < count && pts.length < n; i++) {
-      // NOTE: Slight horizontal jitter per node to avoid a perfectly rigid column —
-      // makes the diagram feel like a live infrastructure map, not a static slide.
-      const jitter = (Math.random() - 0.5) * Math.min(w * 0.04, 28);
-      pts.push({
-        tx: tierX + jitter,
-        ty: i * spacing - maxY / 2,
-      });
-    }
-  });
-
-  // Fill any remainder near the API tier center
-  while (pts.length < n) {
-    pts.push({ tx: (Math.random() - 0.5) * 40, ty: (Math.random() - 0.5) * maxY * 0.5 });
-  }
-
-  return pts.slice(0, n);
-}
-
-const FORMATIONS = [formMesh, formTree, formCircuit, formGitGraph, formPipeline, formHexGrid, formWebArch];
-const SECTION_COUNT = FORMATIONS.length;
-
 // ─── COMPONENT ─────────────────────────────────────────────────────────────────
+/**
+ * @fileoverview Floating frontend code symbols background.
+ *
+ * Renders a field of drifting, glowing dev/frontend symbols (</>, ⚛, useState, etc.)
+ * on an HTML5 canvas. GSAP ScrollTrigger drives:
+ *   1. Which section's symbols are prominent (bright vs ghost opacity).
+ *   2. The ambient glow orb hue — shifts per section mood palette.
+ *   3. An orthogonal PCB circuit grid in the deep background.
+ *
+ * The overall effect: stepping into a living codebase as you scroll.
+ */
 export default function GsapScrollBackground() {
   const canvasRef = useRef(null);
 
@@ -210,127 +118,95 @@ export default function GsapScrollBackground() {
     const onResize = () => {
       W = canvas.width  = window.innerWidth;
       H = canvas.height = window.innerHeight;
-      rebuildAll();
+      placeSymbols();
     };
     window.addEventListener('resize', onResize, { passive: true });
 
-    // ── SCROLL STATE ──
+    // ── SCROLL STATE ──────────────────────────────────────
     const state = {
-      progress:  0,
-      formIdx:   0,
-      morphLerp: 0,
-      hue:       158,
-      laserSpd:  1.0,
+      activeSec:  0,
+      hue:        158,
+      laserSpd:   1.0,
     };
 
-    // ── PARTICLES ──
-    const N = W < 768 ? 40 : 72;
-    const particles = Array.from({ length: N }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: 0, vy: 0,
-      radius: Math.random() * 2 + 0.9,
-      alpha:  Math.random() * 0.5 + 0.2,
-      // Formation target slots
-      fxFrom: 0, fyFrom: 0,
-      fxTo: 0,   fyTo: 0,
-      // Pulse state — triggered when a data packet arrives
-      pulse: 0,
-    }));
+    // ── SYMBOL INSTANCES ──────────────────────────────────
+    // Each definition becomes one or two drifting instances on the canvas,
+    // randomly placed across the viewport with drift velocities.
+    let symbols = [];
 
-    // ── DATA PACKETS ──
-    // Small bright dots that travel along active edges between particles
-    const PACKET_COUNT = W < 768 ? 6 : 14;
-    const packets = Array.from({ length: PACKET_COUNT }, () => ({
-      active: false,
-      fromIdx: 0, toIdx: 0,
-      t: 0,          // 0..1 along the edge
-      speed: 0.008,
-    }));
-
-    // Track which pairs are connected (rebuilt per-frame based on distance)
-    let edges = [];
-
-    function spawnPacket(p) {
-      if (edges.length < 2) return;
-      const edge = edges[Math.floor(Math.random() * edges.length)];
-      p.fromIdx = edge[0];
-      p.toIdx   = edge[1];
-      p.t       = 0;
-      p.speed   = 0.006 + Math.random() * 0.008;
-      p.active  = true;
+    function placeSymbols() {
+      symbols = SYMBOL_DEFS.map((def) => ({
+        ...def,
+        x:       Math.random() * W,
+        y:       Math.random() * H,
+        // NOTE: Very slow drift (max 0.35px/frame) so symbols are readable,
+        // not racing across the screen like a screensaver.
+        vx:      (Math.random() - 0.5) * 0.35,
+        vy:      (Math.random() - 0.5) * 0.25,
+        // Subtle rotation oscillation — adds life without distraction
+        angle:     Math.random() * 0.3 - 0.15,
+        rotSpd:    (Math.random() - 0.5) * 0.0008,
+        // Current rendered alpha (GSAP tweens this)
+        alpha:     0.06,
+        // Target alpha driven by which section is active
+        targetAlpha: 0.06,
+        // Gentle size pulse (0.9 ↔ 1.1)
+        scale:     1,
+        scaleDir:  Math.random() > 0.5 ? 1 : -1,
+        scaleSpd:  0.0004 + Math.random() * 0.0004,
+      }));
     }
+    placeSymbols();
 
-    // ── CIRCUIT GRID LINES ──
-    // Orthogonal H/V grid that acts like PCB traces (not diagonal)
-    const GRID_GAP = 70;
+    // ── GSAP SCROLL TRIGGER ───────────────────────────────
+    const SECTION_COUNT = 7;
 
-    // ── FORMATIONS ──
-    let formationSets = [];
-    function rebuildAll() {
-      formationSets = FORMATIONS.map(fn => fn(N, W, H));
-    }
-    rebuildAll();
-
-    let lastFIdx = 0;
-    function applyFormation(fromIdx, toIdx) {
-      const from = formationSets[Math.min(fromIdx, FORMATIONS.length - 1)];
-      const to   = formationSets[Math.min(toIdx,   FORMATIONS.length - 1)];
-      particles.forEach((pt, i) => {
-        pt.fxFrom = from[i].tx + W / 2;
-        pt.fyFrom = from[i].ty + H / 2;
-        pt.fxTo   = to[i].tx   + W / 2;
-        pt.fyTo   = to[i].ty   + H / 2;
-      });
-    }
-    // Init formation targets to mesh (index 0)
-    applyFormation(0, 0);
-
-    // ── SCROLL TRIGGER ──
     const trigger = ScrollTrigger.create({
       trigger: document.body,
-      start: 'top top',
-      end:   'bottom bottom',
-      scrub: 1.5,
+      start:   'top top',
+      end:     'bottom bottom',
+      scrub:   1.2,
       onUpdate(self) {
         const vel    = Math.abs(self.getVelocity());
         const rawIdx = self.progress * (SECTION_COUNT - 1);
-        const newIdx = Math.min(Math.floor(rawIdx), SECTION_COUNT - 1);
-        const frac   = rawIdx - newIdx;
-
-        if (newIdx !== lastFIdx) {
-          applyFormation(lastFIdx, newIdx);
-          lastFIdx = newIdx;
-        }
+        const newSec = Math.min(Math.round(rawIdx), SECTION_COUNT - 1);
 
         gsap.to(state, {
-          progress:  self.progress,
-          morphLerp: frac,
-          hue:       PALETTES[newIdx]?.h ?? 158,
-          laserSpd:  1 + vel * 0.0016,
-          duration:  0.55,
+          activeSec: newSec,
+          hue:       PALETTES[newSec] ?? 158,
+          laserSpd:  1 + vel * 0.0014,
+          duration:  0.5,
           overwrite: 'auto',
+        });
+
+        // NOTE: Tween target alphas for all symbols — active section goes bright,
+        // everything else dims to a very subtle ghost level.
+        symbols.forEach((sym) => {
+          sym.targetAlpha = sym.sec === newSec
+            ? 0.55 + Math.random() * 0.25   // bright: 0.55–0.80
+            : sym.sec === 0
+              ? 0.08                          // universal symbols always slightly visible
+              : 0.04;                         // others: nearly invisible ghost
         });
       },
     });
 
-    // ── DRAW LOOP ──
+    // ── DRAW LOOP ─────────────────────────────────────────
     let rafId;
     let t = 0;
+    const GRID_GAP = 72;
 
     function draw() {
-      t += 0.011;
-      const p   = state.progress;
-      const ml  = Math.max(0, Math.min(1, state.morphLerp));
-      // NOTE: Smoothstep easing — makes formation morph feel weighted, not linear
-      const ease = ml * ml * (3 - 2 * ml);
-      const h    = state.hue;
+      t += 0.01;
+      const h = state.hue;
+      const p = Math.min(Math.max(state.activeSec / (SECTION_COUNT - 1), 0), 1);
 
       ctx.clearRect(0, 0, W, H);
 
-      // ─ AMBIENT GLOW ORBS ─────────────────────────────────
-      const o1x = W * 0.25 + Math.sin(t * 0.3) * 110 + p * W * 0.18;
-      const o1y = H * 0.25 + Math.cos(t * 0.25) * 75;
-      const o1r = Math.min(W, H) * (0.36 + p * 0.1);
+      // ── 1. AMBIENT GLOW ORBS ───────────────────────────
+      const o1x = W * 0.25 + Math.sin(t * 0.28) * 100;
+      const o1y = H * 0.28 + Math.cos(t * 0.22) * 70;
+      const o1r = Math.min(W, H) * 0.42;
       const g1  = ctx.createRadialGradient(o1x, o1y, 0, o1x, o1y, o1r);
       g1.addColorStop(0,    `hsla(${h}, 80%, 50%, 0.09)`);
       g1.addColorStop(0.5,  `hsla(${h + 20}, 70%, 44%, 0.03)`);
@@ -338,164 +214,97 @@ export default function GsapScrollBackground() {
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, W, H);
 
-      const o2x = W * 0.75 - Math.cos(t * 0.38) * 130 - p * W * 0.15;
-      const o2y = H * 0.75 - Math.sin(t * 0.32) * 85;
-      const o2r = Math.min(W, H) * 0.38;
+      const o2x = W * 0.78 - Math.cos(t * 0.32) * 110;
+      const o2y = H * 0.72 - Math.sin(t * 0.27) * 80;
+      const o2r = Math.min(W, H) * 0.36;
       const g2  = ctx.createRadialGradient(o2x, o2y, 0, o2x, o2y, o2r);
-      g2.addColorStop(0, `hsla(${h + 40}, 85%, 56%, 0.06)`);
+      g2.addColorStop(0, `hsla(${h + 35}, 85%, 55%, 0.07)`);
       g2.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, W, H);
 
-      // ─ CIRCUIT BOARD GRID ────────────────────────────────
-      // NOTE: This is an orthogonal H+V grid, not a diagonal one.
-      // This gives a proper PCB / tech dashboard feel.
-      const gridAlpha = 0.03 + p * 0.018;
-      ctx.strokeStyle = `hsla(${h}, 65%, 50%, ${gridAlpha})`;
-      ctx.lineWidth   = 0.7;
+      // ── 2. ORTHOGONAL CIRCUIT GRID ─────────────────────
+      // NOTE: Strictly H+V lines — no perspective warp — PCB board feel.
+      const gridAlpha = 0.025 + p * 0.012;
+      ctx.strokeStyle = `hsla(${h}, 60%, 50%, ${gridAlpha})`;
+      ctx.lineWidth   = 0.6;
 
-      const xOff = (t * 14 * state.laserSpd) % GRID_GAP;
-      const yOff = (t * 9  * state.laserSpd) % GRID_GAP;
+      const xOff = (t * 12 * state.laserSpd) % GRID_GAP;
+      const yOff = (t * 8  * state.laserSpd) % GRID_GAP;
 
-      // Vertical lines (scroll right)
-      for (let x = -xOff; x < W + GRID_GAP; x += GRID_GAP) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, H);
-        ctx.stroke();
+      for (let x = xOff; x < W + GRID_GAP; x += GRID_GAP) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
       }
-      // Horizontal lines (scroll down)
-      for (let y = -yOff; y < H + GRID_GAP; y += GRID_GAP) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(W, y);
-        ctx.stroke();
+      for (let y = yOff; y < H + GRID_GAP; y += GRID_GAP) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
       }
 
-      // ─ MOVE PARTICLES TOWARD FORMATION TARGETS ───────────
-      for (let i = 0; i < particles.length; i++) {
-        const pt = particles[i];
-        const targetX = pt.fxFrom + (pt.fxTo - pt.fxFrom) * ease;
-        const targetY = pt.fyFrom + (pt.fyTo - pt.fyFrom) * ease;
+      // ── 3. FLOATING CODE SYMBOLS ───────────────────────
+      ctx.textBaseline = 'middle';
+      ctx.textAlign    = 'center';
 
+      for (const sym of symbols) {
+        // Smooth alpha lerp toward target
+        // NOTE: 0.06 lerp coefficient — smooth enough to animate per-frame
+        // without snapping on fast section changes.
+        sym.alpha += (sym.targetAlpha - sym.alpha) * 0.06;
+
+        if (sym.alpha < 0.012) {
+          // Too faint to draw — still update position for continuity
+          if (!isRM) {
+            sym.x = (sym.x + sym.vx + W) % W;
+            sym.y = (sym.y + sym.vy + H) % H;
+          }
+          continue;
+        }
+
+        // Drift
         if (!isRM) {
-          // NOTE: Attraction spring (0.032) + damping (0.87) = organic weighted glide
-          pt.vx += (targetX - pt.x) * 0.032;
-          pt.vy += (targetY - pt.y) * 0.032;
-          pt.vx *= 0.87;
-          pt.vy *= 0.87;
-          pt.x  += pt.vx;
-          pt.y  += pt.vy;
-          pt.pulse = Math.max(0, pt.pulse - 0.04);
-        } else {
-          pt.x = targetX;
-          pt.y = targetY;
+          sym.x = (sym.x + sym.vx + W) % W;
+          sym.y = (sym.y + sym.vy + H) % H;
+          sym.angle  += sym.rotSpd;
+          // Gentle breathing scale (0.88 ↔ 1.12)
+          sym.scale  += sym.scaleDir * sym.scaleSpd;
+          if (sym.scale > 1.12 || sym.scale < 0.88) sym.scaleDir *= -1;
         }
-      }
 
-      // ─ BUILD EDGE LIST ────────────────────────────────────
-      // Dynamic connection threshold: tighter on grid/git formations, wider on mesh
-      // NOTE: Threshold adapts per section so connections always look intentional
-      const baseThresh   = Math.min(W, H) * 0.22;
-      const sectionBoost = lastFIdx === 0 ? 1.2 : lastFIdx === 2 ? 0.75 : lastFIdx === 3 ? 0.8 : 1.0;
-      const thresh       = baseThresh * sectionBoost;
+        const effectiveSize = sym.size * sym.scale;
+        ctx.font = `${sym.weight} ${effectiveSize}px 'Fira Code', monospace`;
 
-      edges = [];
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx   = particles[i].x - particles[j].x;
-          const dy   = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < thresh) edges.push([i, j, dist, thresh]);
+        ctx.save();
+        ctx.translate(sym.x, sym.y);
+        ctx.rotate(sym.angle);
+
+        // Neon text glow — the stronger the alpha, the brighter the glow
+        const glowStrength = sym.alpha * 14;
+        ctx.shadowBlur  = glowStrength;
+        ctx.shadowColor = `hsla(${h}, 90%, 65%, ${sym.alpha * 0.9})`;
+
+        // Primary text fill
+        ctx.fillStyle = `hsla(${h}, 85%, 72%, ${sym.alpha})`;
+        ctx.fillText(sym.text, 0, 0);
+
+        // Second brighter pass for core luminance on active symbols
+        if (sym.alpha > 0.35) {
+          ctx.shadowBlur  = glowStrength * 1.8;
+          ctx.shadowColor = `hsla(${h}, 100%, 80%, ${sym.alpha * 0.5})`;
+          ctx.fillStyle   = `hsla(${h}, 100%, 88%, ${sym.alpha * 0.4})`;
+          ctx.fillText(sym.text, 0, 0);
         }
-      }
 
-      // ─ DRAW NETWORK EDGES (strings) ───────────────────────
-      for (const [i, j, dist, thr] of edges) {
-        const strength  = 1 - dist / thr;
-        const lineAlpha = strength * strength * 0.20;
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `hsla(${h}, 72%, 58%, ${lineAlpha})`;
-        ctx.lineWidth   = strength * 1.1;
-        ctx.stroke();
-      }
-
-      // ─ DATA PACKETS along edges ───────────────────────────
-      // NOTE: Small bright dots travel along network edges to simulate
-      // live data flow — core visual metaphor for an IT dev portfolio.
-      if (!isRM) {
-        for (const pkt of packets) {
-          if (!pkt.active) {
-            // Randomly activate idle packets
-            if (Math.random() < 0.012) spawnPacket(pkt);
-            continue;
-          }
-          pkt.t += pkt.speed;
-          if (pkt.t >= 1) {
-            pkt.active = false;
-            // Pulse the destination node
-            const dest = particles[pkt.toIdx];
-            if (dest) dest.pulse = 1;
-            continue;
-          }
-          const a  = particles[pkt.fromIdx];
-          const b  = particles[pkt.toIdx];
-          if (!a || !b) { pkt.active = false; continue; }
-          const px = a.x + (b.x - a.x) * pkt.t;
-          const py = a.y + (b.y - a.y) * pkt.t;
-
-          // Draw packet: bright core + soft halo
-          const pGlow = ctx.createRadialGradient(px, py, 0, px, py, 8);
-          pGlow.addColorStop(0,   `hsla(${h}, 100%, 82%, 0.95)`);
-          pGlow.addColorStop(0.4, `hsla(${h}, 90%, 68%, 0.40)`);
-          pGlow.addColorStop(1,   'rgba(0,0,0,0)');
-          ctx.beginPath();
-          ctx.arc(px, py, 8, 0, Math.PI * 2);
-          ctx.fillStyle = pGlow;
-          ctx.fill();
-
-          // Solid bright dot core
-          ctx.beginPath();
-          ctx.arc(px, py, 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${h}, 100%, 90%, 1)`;
-          ctx.fill();
-        }
-      }
-
-      // ─ DRAW NODES ─────────────────────────────────────────
-      for (const pt of particles) {
-        const pulseBump = pt.pulse * 3.5;
-
-        // Outer glow (brighter during pulse)
-        const glowR = pt.radius * 3.5 + pulseBump;
-        const nGlow = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, glowR);
-        nGlow.addColorStop(0,    `hsla(${h}, 85%, 65%, ${pt.alpha * 0.55 + pt.pulse * 0.45})`);
-        nGlow.addColorStop(0.5,  `hsla(${h}, 75%, 55%, ${pt.alpha * 0.18})`);
-        nGlow.addColorStop(1,    'rgba(0,0,0,0)');
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, glowR, 0, Math.PI * 2);
-        ctx.fillStyle = nGlow;
-        ctx.fill();
-
-        // Solid node core (square on circuit section, circle otherwise)
-        const coreR = pt.radius + pulseBump * 0.3;
-        if (lastFIdx === 2) {
-          // NOTE: Circuit section uses square nodes to match PCB junction style
-          const s = coreR * 2.2;
-          ctx.fillStyle = `hsla(${h}, 85%, 70%, ${pt.alpha})`;
-          ctx.fillRect(pt.x - s / 2, pt.y - s / 2, s, s);
-        } else {
-          ctx.beginPath();
-          ctx.arc(pt.x, pt.y, coreR, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${h}, 85%, 70%, ${pt.alpha})`;
-          ctx.fill();
-        }
+        ctx.shadowBlur = 0;
+        ctx.restore();
       }
 
       rafId = requestAnimationFrame(draw);
     }
+
+    // NOTE: Initialise all universal (sec 0) symbols at low visible alpha
+    // so the Hero section looks immediately alive on first load.
+    symbols.forEach((sym) => {
+      sym.alpha       = sym.sec === 0 ? 0.08 : 0.02;
+      sym.targetAlpha = sym.sec === 0 ? 0.55 : 0.04;
+    });
 
     rafId = requestAnimationFrame(draw);
 
