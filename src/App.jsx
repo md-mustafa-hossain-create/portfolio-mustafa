@@ -7,7 +7,8 @@ import SmoothScroll from '@/shared/components/ui/SmoothScroll';
 import { ChatProvider } from '@/features/chat/context/ChatContext';
 import GlobalChatFAB from '@/features/chat/components/GlobalChatFAB';
 
-import AnimatedScrollBackground from '@/components/AnimatedScrollBackground';
+import GsapScrollBackground from '@/components/GsapScrollBackground';
+import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 import Home from '@/pages/Home';
 import Footer from '@/components/Footer';
 
@@ -58,6 +59,9 @@ function ScrollToTop() {
 export default function App() {
   const [theme, setTheme] = useState(() => getPreferredTheme());
 
+  // Initialize GSAP ScrollTrigger 3D transforms
+  useGsapScrollTrigger();
+
   useEffect(() => {
     applyTheme(theme);
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
@@ -69,8 +73,8 @@ export default function App() {
       <Router>
         <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300 relative">
           
-          {/* Scroll-driven canvas background */}
-          <AnimatedScrollBackground />
+          {/* GSAP ScrollTrigger canvas background */}
+          <GsapScrollBackground />
 
           {/* Navigation Bar */}
           <Navbar
