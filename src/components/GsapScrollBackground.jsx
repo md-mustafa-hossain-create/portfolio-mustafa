@@ -143,28 +143,54 @@ function formHexGrid(n, w, h) {
 }
 
 /**
- * RADIAL BURST — Contact
- * Signal transmission: nodes burst outward in concentric rings.
- * Looks like a WiFi/API broadcast diagram.
+ * 3-TIER WEB ARCHITECTURE — Contact
+ * The classic Client → API Gateway → Server / Database tiered layout.
+ * Every frontend dev knows this diagram; it maps perfectly to the "reach out" theme:
+ * the visitor (client) sends a request → hits the API (portfolio contact) → connects.
+ *
+ * Tiers are arranged as vertical columns spaced across the viewport:
+ *   Left tier  — Client / Browser nodes (visitor)
+ *   Mid tier   — API Gateway / Load-Balancer nodes
+ *   Right tier — Server / Database nodes
  */
-function formRadial(n, w, h) {
-  const rings = [0.08, 0.18, 0.30].map(f => Math.min(w, h) * f);
-  const perRing = [1, Math.ceil(n * 0.28), Math.ceil(n * 0.72)];
+function formWebArch(n, w, h) {
   const pts = [];
-  rings.forEach((r, ri) => {
-    const cnt = perRing[ri];
-    for (let i = 0; i < cnt && pts.length < n; i++) {
-      const angle = (i / cnt) * Math.PI * 2 + ri * 0.3;
-      pts.push({ tx: Math.cos(angle) * r, ty: Math.sin(angle) * r * 0.65 });
+
+  // NOTE: Three vertical tier columns evenly spaced.
+  // Each tier owns ~1/3 of the nodes distributed vertically.
+  const tiers = [
+    { xFrac: -0.32, label: 'client',  nodeShare: 0.28 },  // Client tier
+    { xFrac:  0.00, label: 'api',     nodeShare: 0.38 },  // API Gateway tier
+    { xFrac:  0.32, label: 'server',  nodeShare: 0.34 },  // Server/DB tier
+  ];
+
+  const maxX = Math.min(w * 0.34, 340);
+  const maxY = Math.min(h * 0.70, 480);
+
+  tiers.forEach((tier) => {
+    const count   = Math.round(n * tier.nodeShare);
+    const tierX   = tier.xFrac * maxX / 0.32;  // scale to actual pixels
+    const spacing = maxY / (count - 1 || 1);
+    for (let i = 0; i < count && pts.length < n; i++) {
+      // NOTE: Slight horizontal jitter per node to avoid a perfectly rigid column —
+      // makes the diagram feel like a live infrastructure map, not a static slide.
+      const jitter = (Math.random() - 0.5) * Math.min(w * 0.04, 28);
+      pts.push({
+        tx: tierX + jitter,
+        ty: i * spacing - maxY / 2,
+      });
     }
   });
+
+  // Fill any remainder near the API tier center
   while (pts.length < n) {
-    pts.push({ tx: (Math.random() - 0.5) * 30, ty: (Math.random() - 0.5) * 30 });
+    pts.push({ tx: (Math.random() - 0.5) * 40, ty: (Math.random() - 0.5) * maxY * 0.5 });
   }
+
   return pts.slice(0, n);
 }
 
-const FORMATIONS = [formMesh, formTree, formCircuit, formGitGraph, formPipeline, formHexGrid, formRadial];
+const FORMATIONS = [formMesh, formTree, formCircuit, formGitGraph, formPipeline, formHexGrid, formWebArch];
 const SECTION_COUNT = FORMATIONS.length;
 
 // ─── COMPONENT ─────────────────────────────────────────────────────────────────
