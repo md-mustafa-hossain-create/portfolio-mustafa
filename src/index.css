@@ -192,7 +192,6 @@ html[data-theme='light'] body {
 }
 
 /* Centered Hardware-Accelerated Navbar Transitions */
-/* NOTE: Smooth, snappy easing function (cubic-bezier(0.25, 1, 0.5, 1)) over 300ms to eliminate visual jitter and make the scroll transition feel responsive */
 .navbar-custom {
   position: fixed;
   left: 0;
@@ -203,35 +202,35 @@ html[data-theme='light'] body {
   border-radius: 9999px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  transition: width 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              max-width 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              top 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              padding-top 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              padding-bottom 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              padding-left 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              padding-right 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              background-color 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              border-color 300ms cubic-bezier(0.25, 1, 0.5, 1),
-              box-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: width, max-width, top, padding, background-color, border-color, box-shadow;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              width 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              max-width 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              top 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              padding-top 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              padding-bottom 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, width, max-width, top, padding, background-color, border-color, box-shadow;
 }
 
 .navbar-unscrolled {
   top: 1.5rem;
   width: 95%;
   max-width: 72rem;
-  background-color: color-mix(in srgb, var(--color-zinc-950) 30%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-zinc-800) 10%, transparent);
+  background-color: rgba(9, 9, 11, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navbar-scrolled {
   top: 1rem;
-  width: 92%;
+  width: 90%;
   max-width: 64rem;
-  background-color: color-mix(in srgb, var(--color-zinc-950) 80%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-zinc-800) 15%, transparent);
+  background-color: rgba(9, 9, 11, 0.75);
+  border: 1px solid var(--color-border-card);
   box-shadow: 
-    inset 0 1px 0 color-mix(in srgb, var(--color-white) 5%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 20px 40px -10px rgba(0, 0, 0, 0.4);
 }
 
