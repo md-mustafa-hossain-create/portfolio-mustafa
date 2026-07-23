@@ -7,6 +7,7 @@ import SmoothScroll from '@/shared/components/ui/SmoothScroll';
 import { ChatProvider } from '@/features/chat/context/ChatContext';
 import GlobalChatFAB from '@/features/chat/components/GlobalChatFAB';
 
+import AnimatedScrollBackground from '@/components/AnimatedScrollBackground';
 import Home from '@/pages/Home';
 import Footer from '@/components/Footer';
 
@@ -66,8 +67,11 @@ export default function App() {
     <ChatProvider>
       <SmoothScroll>
       <Router>
-        <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300">
+        <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300 relative">
           
+          {/* Scroll-driven canvas background */}
+          <AnimatedScrollBackground />
+
           {/* Navigation Bar */}
           <Navbar
             theme={theme}
