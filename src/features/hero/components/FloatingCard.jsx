@@ -25,7 +25,7 @@ export default function FloatingCard({
         ease: 'easeInOut',
         delay: delay
       }}
-      className={`absolute glass p-3 sm:p-4 rounded-2xl flex items-center gap-3 shadow-lg select-none backdrop-blur-xl border border-white/8 z-20 ${className}`}
+      className={`absolute glass p-3 sm:p-4 rounded-2xl flex items-center gap-3 shadow-lg select-none backdrop-blur-xl border border-white/8 z-20 cursor-pointer hover:scale-105 hover:border-brand-500/30 active:scale-98 transition-all duration-300 ${className}`}
     >
       <div className="p-2 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 shrink-0">
         {icon}

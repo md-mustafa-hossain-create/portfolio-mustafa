@@ -181,7 +181,7 @@ export default function HeroSection() {
               {['React', 'JavaScript', 'Tailwind v4', 'Node.js', 'Firebase', 'Git'].map((tech) => (
                 <span 
                   key={tech} 
-                  className="px-3 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-850 hover:border-brand-500/20 text-zinc-300 hover:text-brand-400 transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-850 hover:border-brand-500/20 text-zinc-300 hover:text-brand-400 cursor-pointer hover:scale-105 active:scale-98 transition-all duration-300"
                 >
                   {tech}
                 </span>
