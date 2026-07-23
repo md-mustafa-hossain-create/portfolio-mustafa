@@ -11,7 +11,15 @@ import { EDUCATION_DATA } from '../constants/data';
  */
 export default function Education() {
   return (
-    <section id="education" className="py-20 relative overflow-hidden bg-zinc-950/40">
+    <section 
+      id="education" 
+      data-bg="#0f0c08"
+      data-surface="rgba(28, 25, 23, 0.7)"
+      data-text="#f4f4f5"
+      data-accent="#fbbf24"
+      data-border="rgba(251, 191, 36, 0.15)"
+      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-20 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Heading */}

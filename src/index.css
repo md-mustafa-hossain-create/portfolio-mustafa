@@ -77,10 +77,16 @@
 }
 
 :root {
-  --page-bg: #09090b; /* Tailwind zinc-950 */
-  --page-text: var(--color-zinc-300);
-  --scrollbar-track: #09090b;
-  --scrollbar-border: #09090b;
+  --bg: #09090b;
+  --surface: rgba(15, 15, 18, 0.65);
+  --text: #f4f4f5;
+  --accent: #10b981;
+  --border: rgba(255, 255, 255, 0.08);
+  --transition-theme: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  --page-bg: var(--bg);
+  --page-text: var(--text);
+  --scrollbar-track: var(--bg);
+  --scrollbar-border: var(--bg);
   --bezel-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.4);
 }
 
@@ -91,8 +97,13 @@ html {
 
 html[data-theme='light'] {
   color-scheme: light;
-  --page-bg: #f8fafc; /* Tailwind slate-50 */
-  --page-text: #0f172a; /* Tailwind slate-900 */
+  --bg: #f8fafc;
+  --surface: rgba(255, 255, 255, 0.85);
+  --text: #0f172a;
+  --accent: #059669;
+  --border: rgba(0, 0, 0, 0.08);
+  --page-bg: var(--bg);
+  --page-text: var(--text);
   --scrollbar-track: #f1f5f9;
   --scrollbar-border: #f1f5f9;
   --bezel-shadow: 0 10px 30px -15px rgba(15, 23, 42, 0.05);
@@ -115,8 +126,9 @@ html[data-theme='light'] {
 }
 
 body {
-  background-color: var(--page-bg);
-  color: var(--page-text);
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color var(--transition-theme), color var(--transition-theme);
   overflow-x: hidden;
 }
 
@@ -174,11 +186,12 @@ html[data-theme='light'] body {
 
 /* Edge Refracting Glassmorphic Surfaces */
 .glass {
-  background: var(--color-bg-card);
+  background: var(--surface, var(--color-bg-card));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-border-card);
+  border: 1px solid var(--border, var(--color-border-card));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transition: background-color var(--transition-theme, 0.8s ease), border-color var(--transition-theme, 0.8s ease);
   will-change: transform, backdrop-filter;
 }
 

@@ -45,7 +45,15 @@ export default function Skills() {
   }
 
   return (
-    <section id="skills" className="py-28 relative overflow-hidden bg-zinc-950/20">
+    <section 
+      id="skills" 
+      data-bg="#090814"
+      data-surface="rgba(18, 16, 38, 0.7)"
+      data-text="#f4f4f5"
+      data-accent="#818cf8"
+      data-border="rgba(129, 140, 248, 0.15)"
+      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <SectionHeader 

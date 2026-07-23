@@ -96,7 +96,15 @@ function ProjectsSectionContent() {
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
+    <section 
+      id="projects" 
+      data-bg="#070c14"
+      data-surface="rgba(15, 23, 42, 0.7)"
+      data-text="#f4f4f5"
+      data-accent="#38bdf8"
+      data-border="rgba(56, 189, 248, 0.15)"
+      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-20 relative overflow-hidden"
+    >
       <SectionErrorBoundary sectionName="Projects Section">
         <ProjectsSectionContent />
       </SectionErrorBoundary>

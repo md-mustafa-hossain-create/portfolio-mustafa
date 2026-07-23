@@ -42,7 +42,15 @@ function ContactSectionContent() {
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-20 relative overflow-hidden bg-zinc-950 border-t border-zinc-900">
+    <section 
+      id="contact" 
+      data-bg="#04120c"
+      data-surface="rgba(10, 36, 24, 0.7)"
+      data-text="#f4f4f5"
+      data-accent="#10b981"
+      data-border="rgba(16, 185, 129, 0.2)"
+      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-20 relative overflow-hidden border-t border-zinc-900/50"
+    >
       {/* Background radial gradient */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-brand-500/5 blur-[120px] pointer-events-none"></div>
 

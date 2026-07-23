@@ -20,7 +20,15 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-28 relative overflow-hidden bg-zinc-950/40 border-t border-zinc-900/50">
+    <section 
+      id="about" 
+      data-bg="#070e0a"
+      data-surface="rgba(15, 26, 20, 0.7)"
+      data-text="#f4f4f5"
+      data-accent="#34d399"
+      data-border="rgba(52, 211, 153, 0.15)"
+      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden border-t border-zinc-900/50"
+    >
       {/* Background radial ambient lights */}
       <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-brand-500/2 blur-[140px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 left-0 w-96 h-96 rounded-full bg-brand-500/1 blur-[140px] pointer-events-none"></div>

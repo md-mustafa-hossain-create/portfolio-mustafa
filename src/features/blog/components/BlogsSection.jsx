@@ -102,7 +102,15 @@ function BlogsSectionContent() {
 
 export default function BlogsSection() {
   return (
-    <section id="blogs" className="py-28 relative overflow-hidden bg-zinc-950/20">
+    <section 
+      id="blogs" 
+      data-bg="#0c0a14"
+      data-surface="rgba(23, 21, 38, 0.7)"
+      data-text="#f4f4f5"
+      data-accent="#a855f7"
+      data-border="rgba(168, 85, 247, 0.15)"
+      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden"
+    >
       {/* Background radial highlight */}
       <div className="absolute top-1/3 left-0 w-[450px] h-[450px] rounded-full bg-brand-500/2 blur-[150px] pointer-events-none"></div>
       

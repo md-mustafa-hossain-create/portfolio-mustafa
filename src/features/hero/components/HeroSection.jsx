@@ -44,10 +44,15 @@ export default function HeroSection() {
   return (
     <section 
       id="home" 
+      data-bg="#09090b"
+      data-surface="rgba(18, 18, 22, 0.7)"
+      data-text="#ffffff"
+      data-accent="#10b981"
+      data-border="rgba(16, 185, 129, 0.15)"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative min-h-[100dvh] flex items-center pt-32 pb-24 overflow-hidden border-b border-zinc-900 bg-zinc-950 transition-colors duration-500"
+      className="portfolio-section relative min-h-[100dvh] flex items-center pt-32 pb-24 overflow-hidden border-b border-zinc-900/50 transition-colors duration-700"
       style={isHovered ? {
         backgroundImage: `radial-gradient(circle 600px at ${mousePos.x}px ${mousePos.y}px, rgba(16, 185, 129, 0.04), rgba(99, 102, 241, 0.02) 50%, transparent 100%)`
       } : {}}
