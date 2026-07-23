@@ -8,7 +8,6 @@ import {
   Briefcase, 
   GraduationCap, 
   Star,
-  Code,
   Sparkles
 } from 'lucide-react';
 import { GLOBAL, HERO_STRINGS } from '@/constants/strings';
@@ -168,25 +167,7 @@ export default function HeroSection() {
               </a>
             </ScrollReveal>
 
-            {/* Tech Stack strip */}
-            <ScrollReveal 
-              animation="up"
-              delay={0.6}
-              className="flex flex-wrap items-center gap-2.5 text-xs text-zinc-400 font-sans"
-            >
-              <span className="font-bold uppercase tracking-wider text-zinc-500 mr-2 flex items-center gap-1.5">
-                <Code className="w-3.5 h-3.5" />
-                Stack:
-              </span>
-              {['React', 'JavaScript', 'Tailwind v4', 'Node.js', 'Firebase', 'Git'].map((tech) => (
-                <span 
-                  key={tech} 
-                  className="px-3 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-850 hover:border-brand-500/20 text-zinc-300 hover:text-brand-400 cursor-pointer hover:scale-105 active:scale-98 transition-all duration-300"
-                >
-                  {tech}
-                </span>
-              ))}
-            </ScrollReveal>
+
 
           </div>
 
