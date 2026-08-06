@@ -56,12 +56,31 @@ export default function GsapScrollBackground() {
       scrub:   1.0,
       onUpdate(self) {
         const vel = Math.abs(self.getVelocity());
-        const sec = Math.min(Math.round(self.progress * 6), 6);
+        
+        // Continuous interpolation across the SECTION_HUES array
+        const indexFloat = self.progress * (SECTION_HUES.length - 1);
+        const idx = Math.floor(indexFloat);
+        const nextIdx = Math.min(idx + 1, SECTION_HUES.length - 1);
+        const ratio = indexFloat - idx;
+        
+        let h1 = SECTION_HUES[idx];
+        let h2 = SECTION_HUES[nextIdx];
+        let diff = h2 - h1;
+        
+        // Shortest path interpolation for circular hue angles (0-360)
+        if (diff > 180) {
+          diff -= 360;
+        } else if (diff < -180) {
+          diff += 360;
+        }
+        
+        const targetHue = (h1 + diff * ratio + 360) % 360;
+
         gsap.to(state, {
-          hue:      SECTION_HUES[sec],
-          // NOTE: velBoost fades quickly — just a momentary speed nudge on fast scroll
+          hue:      targetHue,
+          // velBoost fades quickly — just a momentary speed nudge on fast scroll
           velBoost: Math.min(vel * 0.0008, 1.2),
-          duration: 0.6,
+          duration: 0.8,
           overwrite: 'auto',
         });
       },
@@ -101,21 +120,16 @@ export default function GsapScrollBackground() {
 
       ctx.clearRect(0, 0, W, H);
 
-      // ── 1. BACKGROUND GRADIENT ─────────────────────────
-      // A very subtle radial at center to lift the midpoint slightly
-      const bg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.75);
-      bg.addColorStop(0, `hsla(${h}, 30%, 6%, 1)`);
-      bg.addColorStop(1, `hsla(${h}, 20%, 3%, 1)`);
-      ctx.fillStyle = bg;
+      // ── 1. BACKGROUND GRADIENT (Matte base finish) ────
+      ctx.fillStyle = '#09090b';
       ctx.fillRect(0, 0, W, H);
 
-      // ── 2. AMBIENT GLOW ORBS ───────────────────────────
-      // Three large, soft, very low-opacity orbs that slowly drift.
-      // They add colour depth without drawing attention.
+      // ── 2. AMBIENT ORBS (Extremely subtle matte colors) ─
+      // Faded opacities (0.015 - 0.02) to create atmospheric depth without a shiny glow
       const orbs = [
-        { x: W * 0.20 + Math.sin(t * 0.22) * 90,  y: H * 0.25 + Math.cos(t * 0.18) * 60,  r: Math.min(W,H) * 0.50, a: 0.07, dh: 0   },
-        { x: W * 0.80 - Math.cos(t * 0.28) * 110, y: H * 0.70 - Math.sin(t * 0.22) * 70,  r: Math.min(W,H) * 0.44, a: 0.06, dh: 30  },
-        { x: W * 0.50 + Math.sin(t * 0.15) * 60,  y: H * 0.50 + Math.cos(t * 0.12) * 40,  r: Math.min(W,H) * 0.38, a: 0.04, dh: -20 },
+        { x: W * 0.20 + Math.sin(t * 0.22) * 90,  y: H * 0.25 + Math.cos(t * 0.18) * 60,  r: Math.min(W,H) * 0.50, a: 0.02, dh: 0   },
+        { x: W * 0.80 - Math.cos(t * 0.28) * 110, y: H * 0.70 - Math.sin(t * 0.22) * 70,  r: Math.min(W,H) * 0.44, a: 0.015, dh: 30  },
+        { x: W * 0.50 + Math.sin(t * 0.15) * 60,  y: H * 0.50 + Math.cos(t * 0.12) * 40,  r: Math.min(W,H) * 0.38, a: 0.01, dh: -20 },
       ];
 
       for (const o of orbs) {
@@ -127,12 +141,10 @@ export default function GsapScrollBackground() {
         ctx.fillRect(0, 0, W, H);
       }
 
-      // ── 3. DOT GRID (deep background texture) ─────────
-      // A faint grid of tiny dots — like graph paper in the dark.
-      // NOTE: Opacity is intentionally very low (0.018) — barely visible.
+      // ── 3. DOT GRID (Faint matte graph sheet texture) ──
       const gapX = 55;
       const gapY = 55;
-      ctx.fillStyle = `hsla(${h}, 60%, 60%, 0.018)`;
+      ctx.fillStyle = `hsla(${h}, 60%, 60%, 0.012)`;
       for (let gx = gapX / 2; gx < W; gx += gapX) {
         for (let gy = gapY / 2; gy < H; gy += gapY) {
           ctx.beginPath();
@@ -154,9 +166,7 @@ export default function GsapScrollBackground() {
         }
       }
 
-      // ── 5. CONNECTION LINES ────────────────────────────
-      // NOTE: Gradient lines fade to transparent at each endpoint — this gives
-      // the professional "edge-dissolved" look rather than harsh fixed-colour lines.
+      // ── 5. CONNECTION LINES (Muted, super faint links) ─
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx   = particles[i].x - particles[j].x;
@@ -165,9 +175,8 @@ export default function GsapScrollBackground() {
 
           if (dist > CONNECT_DIST) continue;
 
-          // Strength falls off quadratically → thick/bright near, faint far
           const strength = (1 - dist / CONNECT_DIST) ** 2;
-          const lineA    = strength * 0.18;
+          const lineA    = strength * 0.08;
 
           const lg = ctx.createLinearGradient(
             particles[i].x, particles[i].y,
@@ -187,19 +196,19 @@ export default function GsapScrollBackground() {
         }
       }
 
-      // ── 6. PARTICLES (nodes) ───────────────────────────
+      // ── 6. PARTICLES (Nodes with sharp solid core) ─────
       for (const p of particles) {
-        // Outer soft glow
+        // Very subtle outer glow ring
         const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4.5);
-        glow.addColorStop(0,   `hsla(${h}, 80%, 68%, ${p.a * 0.5})`);
-        glow.addColorStop(0.4, `hsla(${h}, 70%, 58%, ${p.a * 0.15})`);
+        glow.addColorStop(0,   `hsla(${h}, 80%, 68%, ${p.a * 0.15})`);
+        glow.addColorStop(0.4, `hsla(${h}, 70%, 58%, ${p.a * 0.04})`);
         glow.addColorStop(1,   'rgba(0,0,0,0)');
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r * 4.5, 0, Math.PI * 2);
         ctx.fillStyle = glow;
         ctx.fill();
 
-        // Sharp solid core
+        // Sharp solid core particle node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${h}, 85%, 78%, ${p.a})`;
