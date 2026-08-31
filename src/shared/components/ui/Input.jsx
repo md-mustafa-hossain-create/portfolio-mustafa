@@ -1,4 +1,4 @@
-import React from 'react';
+import { useId } from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -18,12 +18,13 @@ export default function Input({
   rows = 4,
   ...props
 }) {
+  const generatedId = useId();
   // Input styling classes
   const inputBaseClasses = 'w-full bg-zinc-900/40 border border-zinc-850 hover:border-zinc-700 text-text-main placeholder-zinc-500 rounded-2xl px-4 py-3 text-sm font-sans transition-all duration-300 outline-none';
   const focusClasses = 'focus:bg-zinc-900/60 focus:border-primary focus:ring-1 focus:ring-primary/20';
   const errorInputClasses = error ? 'border-rose-500/50 focus:border-rose-500 focus:ring-rose-500/20' : '';
 
-  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+  const inputId = id || generatedId;
 
   return (
     <div className={`flex flex-col items-start w-full gap-2 ${className}`}>

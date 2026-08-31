@@ -108,7 +108,7 @@ export default function ProjectCaseStudy() {
 
       {/* Ambient background soft lightings */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-[450px] md:h-[450px] rounded-full bg-brand-500/5 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 md:w-[450px] md:h-[450px] rounded-full bg-purple-500/3 blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 md:w-[450px] md:h-[450px] rounded-full bg-secondary/3 blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -185,7 +185,7 @@ export default function ProjectCaseStudy() {
             <div className="relative w-full aspect-video rounded-[2.5rem] p-1.5 bg-zinc-900/30 border border-white/5 shadow-2xl overflow-hidden group">
               <div className="w-full h-full rounded-[calc(2.5rem-0.375rem)] bg-zinc-950/80 border border-zinc-900 flex flex-col justify-between overflow-hidden relative">
                 {/* Visual grid lines backdrop */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(44,255,5,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(44,255,5,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
                 
                 {/* Header browser-like pill */}
                 <div className="px-5 py-3 border-b border-zinc-900/60 bg-zinc-900/20 flex items-center justify-between shrink-0">

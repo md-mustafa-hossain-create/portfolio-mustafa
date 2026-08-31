@@ -1,4 +1,4 @@
-import { User, GraduationCap, MapPin, Target, BookOpen, Code2, Award, Sparkles } from 'lucide-react';
+import { User, BookOpen, Code2, Award } from 'lucide-react';
 import { ABOUT_STRINGS, GLOBAL } from '../constants/strings';
 import { INFO_CARDS } from '../constants/data';
 import SectionHeader from '@/shared/components/ui/SectionHeader';
@@ -13,10 +13,9 @@ import ScrollReveal from '@/shared/components/ui/ScrollReveal';
  */
 export default function About() {
   const stats = [
-    { label: 'Learning Journey', value: '2+ Years', icon: <BookOpen className="w-4 h-4 text-brand-400" /> },
-    { label: 'UIs & Projects', value: '20+ Built', icon: <Code2 className="w-4 h-4 text-brand-400" /> },
-    { label: 'Git Contributions', value: '200+ Commits', icon: <Award className="w-4 h-4 text-brand-400" /> },
-    { label: 'Lighthouse target', value: '100% Green', icon: <Sparkles className="w-4 h-4 text-brand-400" /> }
+    { label: 'Focus', value: 'Frontend systems', icon: <Code2 className="w-4 h-4 text-brand-400" /> },
+    { label: 'Background', value: 'BCA, 9.09 / 10', icon: <BookOpen className="w-4 h-4 text-brand-400" /> },
+    { label: 'Working style', value: 'Curious & methodical', icon: <Award className="w-4 h-4 text-brand-400" /> }
   ];
 
   return (
@@ -25,14 +24,10 @@ export default function About() {
       data-bg="#070e0a"
       data-surface="rgba(15, 26, 20, 0.7)"
       data-text="#f4f4f5"
-      data-accent="#34d399"
+      data-accent="#2CFF05"
       data-border="rgba(52, 211, 153, 0.15)"
       className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden border-t border-zinc-900/50"
     >
-      {/* Background radial ambient lights */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-brand-500/2 blur-[140px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 rounded-full bg-brand-500/1 blur-[140px] pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <SectionHeader 
@@ -43,10 +38,10 @@ export default function About() {
         />
 
         {/* Redesigned Balanced Split Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
           
           {/* Left Grid: Bio Text & Storytelling Narrative */}
-          <ScrollReveal animation="left" delay={0.1} className="lg:col-span-6 text-left flex flex-col justify-between space-y-6">
+          <ScrollReveal animation="left" delay={0.1} className="md:col-span-1 lg:col-span-6 text-left flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <h3 className="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight leading-snug">
                 {ABOUT_STRINGS.BIO_HEADING}
@@ -56,7 +51,7 @@ export default function About() {
             
             <div className="space-y-4 text-zinc-400 leading-relaxed text-xs sm:text-sm font-sans">
               <p>
-                Hello! I'm <strong className="text-brand-300 font-bold">{GLOBAL.DEV_NAME}</strong>, a Bachelor of Computer Applications (BCA) graduate from <span className="text-yellow-500 font-bold font-sans">Brainware University</span>, West Bengal, India. I completed my degree with a CGPA of <strong className="text-brand-400 font-bold font-sans">9.09/10</strong>.
+                Hello! I'm <strong className="text-brand-300 font-bold">{GLOBAL.DEV_NAME}</strong>, a Bachelor of Computer Applications (BCA) graduate from <span className="text-zinc-100 font-bold font-sans">Brainware University</span>, West Bengal, India. I completed my degree with a CGPA of <strong className="text-brand-400 font-bold font-sans">9.09/10</strong>.
               </p>
               <p>
                 My passion for web development ignited during my academic years. Since then, I have focused heavily on mastering frontend development, learning how to build clean, responsive, and highly interactive user interfaces.
@@ -70,7 +65,7 @@ export default function About() {
             </div>
 
             {/* Premium Quote Card */}
-            <div className="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-900 relative overflow-hidden shadow-inner">
+            <div className="p-4 rounded-md bg-zinc-950/60 border border-zinc-900 relative overflow-hidden shadow-inner">
               <div className="absolute top-0 left-0 w-1.5 h-full bg-brand-500"></div>
               <p className="text-xs sm:text-sm font-sans italic text-zinc-300 leading-relaxed pl-3 select-none">
                 {ABOUT_STRINGS.QUOTE}
@@ -79,7 +74,7 @@ export default function About() {
           </ScrollReveal>
  
           {/* Right Grid: Core Highlights */}
-          <ScrollReveal animation="right" delay={0.2} className="lg:col-span-6 flex flex-col gap-4 justify-center">
+          <ScrollReveal animation="right" delay={0.2} className="md:col-span-1 lg:col-span-6 flex flex-col gap-4 justify-center">
             {INFO_CARDS.map((card, idx) => (
               <GlassCard
                 key={idx}
@@ -106,7 +101,7 @@ export default function About() {
         </div>
 
         {/* Achievement Metrics Dashboard Row */}
-        <ScrollReveal animation="up" delay={0.3} className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
+        <ScrollReveal animation="up" delay={0.3} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
           {stats.map((stat, idx) => (
             <GlassCard
               key={idx}

@@ -85,7 +85,7 @@ export default function BlogCard({ blog, index }) {
     </div>
   );
 
-  const containerClasses = "p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-3xl hover:border-brand-500/20 hover:scale-[1.01] transition-premium group relative cursor-pointer flex flex-col h-full shadow-md";
+  const containerClasses = "p-1 bg-zinc-900/10 border border-white/5 rounded-md hover:border-brand-500/20 transition-colors duration-200 group relative cursor-pointer flex flex-col h-full shadow-md";
 
   if (isExternal) {
     return (

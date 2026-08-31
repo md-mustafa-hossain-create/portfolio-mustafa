@@ -47,11 +47,11 @@ export default function Skills() {
   return (
     <section 
       id="skills" 
-      data-bg="#090814"
-      data-surface="rgba(18, 16, 38, 0.7)"
-      data-text="#f4f4f5"
-      data-accent="#818cf8"
-      data-border="rgba(129, 140, 248, 0.15)"
+      data-bg="#000000"
+      data-surface="rgba(45, 45, 45, 0.48)"
+      data-text="#f5f5f5"
+      data-accent="#2CFF05"
+      data-border="rgba(255, 255, 255, 0.10)"
       className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

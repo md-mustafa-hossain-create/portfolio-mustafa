@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { db } from '@/config/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 /**
  * @fileoverview Custom hook to handle contact form submission to Firebase.
@@ -23,6 +21,11 @@ export function useContactSubmit() {
     setStatus('sending');
 
     try {
+      const [{ collection, addDoc, serverTimestamp }, { db }] = await Promise.all([
+        import('firebase/firestore'),
+        import('@/config/firebase'),
+      ]);
+
       await addDoc(collection(db, 'messages'), {
         name,
         email,

@@ -2,6 +2,7 @@ import React from 'react';
 import { Code2, Folder } from 'lucide-react';
 import { useFirebaseData } from '@/hooks/useFirebaseData';
 import { PROJECTS_STRINGS } from '@/constants/strings';
+import { DEFAULT_PROJECTS } from '@/constants/data';
 import SectionHeader from '@/shared/components/ui/SectionHeader';
 import SectionErrorBoundary from '@/shared/components/ui/SectionErrorBoundary';
 import { normalizeProjects } from '../utils/projectAdapters';
@@ -11,10 +12,8 @@ import ProjectCard from './ProjectCard';
  * @fileoverview Main Projects section component.
  */
 
-const EMPTY_ARRAY = [];
-
 function ProjectsSectionContent() {
-  const { data: rawProjectList, loading } = useFirebaseData('projects', EMPTY_ARRAY);
+  const { data: rawProjectList, loading } = useFirebaseData('projects', DEFAULT_PROJECTS);
 
   // Normalize all project records to standard objects
   const projectList = React.useMemo(() => normalizeProjects(rawProjectList), [rawProjectList]);
@@ -98,11 +97,11 @@ export default function ProjectsSection() {
   return (
     <section 
       id="projects" 
-      data-bg="#070c14"
-      data-surface="rgba(15, 23, 42, 0.7)"
-      data-text="#f4f4f5"
-      data-accent="#38bdf8"
-      data-border="rgba(56, 189, 248, 0.15)"
+      data-bg="#000000"
+      data-surface="rgba(45, 45, 45, 0.48)"
+      data-text="#f5f5f5"
+      data-accent="#2CFF05"
+      data-border="rgba(255, 255, 255, 0.10)"
       className="portfolio-section min-h-[90vh] flex flex-col justify-center py-20 relative overflow-hidden"
     >
       <SectionErrorBoundary sectionName="Projects Section">

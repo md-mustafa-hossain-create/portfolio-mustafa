@@ -1,27 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Lightbulb, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NAV_LINKS } from '../constants/data';
-import { GLOBAL, NAV_STRINGS } from '../constants/strings';
+import { GLOBAL } from '../constants/strings';
 
 /**
  * @fileoverview Redesigned accessible and interactive navigation bar.
- * Features smart auto-hide on scroll, Framer Motion active capsule highlight,
- * slide-out mobile drawer, and complete keyboard trap focus & ARIA compliance.
+ * Keeps navigation persistent and lightweight, with a focused mobile drawer.
  */
-export default function Navbar({ theme, onToggleTheme }) {
+export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState('up');
   const [activeSection, setActiveSection] = useState('home');
   const drawerRef = useRef(null);
 
   const isOnHomePage = location.pathname === '/';
-  const isLightTheme = theme === 'light';
-
   const handleNavLinkClick = (e, href, searchParams = '') => {
     if (!isOnHomePage) {
       e.preventDefault();
@@ -40,23 +35,6 @@ export default function Navbar({ theme, onToggleTheme }) {
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Monitor scroll direction (Smart Auto-Hide)
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    const handleScrollDirection = () => {
-      const scrollY = window.scrollY;
-      // Scroll down threshold of 10px to prevent jitter
-      if (scrollY > lastScrollY + 10 && scrollY > 100) {
-        setScrollDirection('down');
-      } else if (scrollY < lastScrollY - 10 || scrollY <= 30) {
-        setScrollDirection('up');
-      }
-      lastScrollY = scrollY > 0 ? scrollY : 0;
-    };
-    window.addEventListener('scroll', handleScrollDirection, { passive: true });
-    return () => window.removeEventListener('scroll', handleScrollDirection);
   }, []);
 
   // Close drawer on Escape key press
@@ -146,8 +124,6 @@ export default function Navbar({ theme, onToggleTheme }) {
     };
   }, []);
 
-  const isHidden = scrollDirection === 'down' && scrolled && !isOpen;
-
   return (
     <header className="w-full flex justify-center">
       <nav 
@@ -156,7 +132,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         className={`navbar-custom px-4 sm:px-6 ${
           scrolled ? 'navbar-scrolled py-2' : 'navbar-unscrolled py-3'
         } ${
-          isHidden ? '-translate-y-32 opacity-0' : 'translate-y-0 opacity-100'
+          'translate-y-0 opacity-100'
         }`}
       >
         <div className="flex items-center justify-between h-12 flex-nowrap">
@@ -189,12 +165,12 @@ export default function Navbar({ theme, onToggleTheme }) {
               <svg viewBox="0 0 512 512" className="w-full h-full" aria-hidden="true">
                 <defs>
                   <linearGradient id="nav-brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#10b981" />
-                    <stop offset="100%" stopColor="#059669" />
+                    <stop offset="0%" stopColor="#2CFF05" />
+                    <stop offset="100%" stopColor="#2D2D2D" />
                   </linearGradient>
                   <linearGradient id="nav-glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#34d399" />
-                    <stop offset="100%" stopColor="#10b981" />
+                    <stop offset="0%" stopColor="#2CFF05" />
+                    <stop offset="100%" stopColor="#F5F5F5" />
                   </linearGradient>
                   <filter id="nav-glow" x="-20%" y="-20%" width="140%" height="140%">
                     <feGaussianBlur stdDeviation="8" result="blur" />
@@ -222,71 +198,29 @@ export default function Navbar({ theme, onToggleTheme }) {
                   id={`nav-link-${link.name.toLowerCase()}`}
                   href={link.href}
                   onClick={(e) => handleNavLinkClick(e, link.href)}
-                  className={`font-sans font-semibold text-xs px-4 py-2.5 rounded-full transition-premium relative z-10 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 ${
+                  className={`font-sans font-semibold text-xs px-4 py-2.5 rounded-md transition-colors duration-200 relative z-10 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 ${
                     isActive ? 'text-brand-400' : 'text-zinc-300 hover:text-white'
                   }`}
                 >
                   {link.name}
                   {isActive && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-zinc-900/80 border border-zinc-800 rounded-full -z-10 shadow-inner"
-                      transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                    />
+                    <span className="absolute left-4 right-4 -bottom-1 h-px bg-brand-400" />
                   )}
                 </a>
               );
             })}
             
-            <button
-              id="nav-btn-theme-toggle"
-              type="button"
-              onClick={onToggleTheme}
-              className="ml-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-premium active:scale-95 cursor-pointer z-10"
-              aria-label={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
-              title={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
-            >
-              {isLightTheme ? (
-                <Lightbulb className="w-4 h-4 text-zinc-400 transition-all duration-300" />
-              ) : (
-                <Lightbulb 
-                  className="w-4 h-4 text-brand-400 fill-brand-400 animate-pulse transition-all duration-300"
-                  style={{
-                    filter: 'drop-shadow(0 0 6px rgba(85, 255, 85, 0.65))'
-                  }}
-                />
-              )}
-            </button>
           </div>
 
           {/* Mobile Actions */}
           <div className="lg:hidden flex items-center gap-2 shrink-0">
-            <button
-              id="nav-btn-mobile-theme-toggle"
-              type="button"
-              onClick={onToggleTheme}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-850 bg-zinc-900/50 text-zinc-300 hover:border-brand-400/30 hover:text-brand-400 hover:bg-zinc-900 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-premium active:scale-95 cursor-pointer shrink-0"
-              aria-label={isLightTheme ? NAV_STRINGS.THEME_TOGGLE_DARK : NAV_STRINGS.THEME_TOGGLE_LIGHT}
-            >
-              {isLightTheme ? (
-                <Lightbulb className="w-4 h-4 text-zinc-400 transition-all duration-300" />
-              ) : (
-                <Lightbulb 
-                  className="w-4 h-4 text-brand-400 fill-brand-400 animate-pulse transition-all duration-300"
-                  style={{
-                    filter: 'drop-shadow(0 0 6px rgba(85, 255, 85, 0.65))'
-                  }}
-                />
-              )}
-            </button>
-            
             <button
               id="nav-btn-mobile-toggle"
               aria-expanded={isOpen}
               aria-controls="mobile-drawer"
               aria-haspopup="true"
               onClick={() => setIsOpen(true)}
-              className="relative w-11 h-11 flex flex-col justify-center items-center rounded-full hover:bg-zinc-900/60 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-premium shrink-0"
+              className="relative w-11 h-11 flex flex-col justify-center items-center rounded-md hover:bg-zinc-900/60 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-colors duration-200 shrink-0"
               aria-label="Toggle Menu"
             >
               <div className="w-5 flex flex-col gap-1.5 pointer-events-none">
@@ -303,7 +237,7 @@ export default function Navbar({ theme, onToggleTheme }) {
       {/* Dark glass backdrop overlay */}
       <div
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 bg-zinc-950/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-zinc-950/80 z-40 transition-opacity duration-300 ${
           isOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
         }`}
         aria-hidden="true"
@@ -316,7 +250,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         aria-modal="true"
         aria-label="Mobile Navigation Menu"
         ref={drawerRef}
-        className={`fixed top-0 right-0 h-[100dvh] w-72 bg-zinc-950/95 border-l border-zinc-900 backdrop-blur-2xl p-6 z-50 flex flex-col gap-6 shadow-2xl justify-between transition-all duration-300 transform ${
+        className={`fixed top-0 right-0 h-[100dvh] w-72 bg-zinc-950 border-l border-zinc-900 p-6 z-50 flex flex-col gap-6 shadow-2xl justify-between transition-all duration-300 transform ${
           isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0 pointer-events-none'
         }`}
       >
@@ -330,7 +264,7 @@ export default function Navbar({ theme, onToggleTheme }) {
             {/* Close button inside Drawer */}
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-full hover:bg-zinc-900 border border-transparent hover:border-zinc-800 text-zinc-400 hover:text-white transition-premium focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 cursor-pointer"
+              className="p-2 rounded-md hover:bg-zinc-900 border border-transparent hover:border-zinc-800 text-zinc-400 hover:text-white transition-colors duration-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 cursor-pointer"
               aria-label="Close menu"
             >
               <X className="w-5 h-5" />
@@ -348,7 +282,7 @@ export default function Navbar({ theme, onToggleTheme }) {
                   id={`nav-mobile-link-${link.name.toLowerCase()}`}
                   onClick={(e) => handleNavLinkClick(e, link.href)}
                   style={{ transitionDelay: isOpen ? `${idx * 40}ms` : '0ms' }}
-                  className={`px-4 py-3.5 rounded-2xl text-sm font-semibold tracking-wide transition-premium block transform focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 ${
+                  className={`px-4 py-3.5 rounded-md text-sm font-semibold tracking-wide transition-colors duration-200 block transform focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 ${
                     isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
                   } ${
                     isActive 
@@ -363,15 +297,6 @@ export default function Navbar({ theme, onToggleTheme }) {
           </div>
         </div>
 
-        {/* Drawer Footer info */}
-        <div className="text-left border-t border-zinc-900 pt-6">
-          <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest block mb-2 leading-none">
-            Logged In As
-          </span>
-          <span className="text-xs font-semibold text-zinc-400 block leading-none">
-            Recruiter / Guest
-          </span>
-        </div>
       </div>
     </header>
   );

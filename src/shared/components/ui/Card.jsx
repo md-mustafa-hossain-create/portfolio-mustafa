@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -16,7 +15,7 @@ export default function Card({
   onClick,
   ...props
 }) {
-  const baseClasses = 'relative rounded-[1.5rem] overflow-hidden transition-spring w-full';
+  const baseClasses = 'relative rounded-md overflow-hidden transition-colors duration-200 w-full';
 
   // Variant design tokens
   const variants = {
@@ -38,7 +37,7 @@ export default function Card({
 
   // Hover transitions
   const interactiveClasses = onClick || hoverEffect
-    ? 'hover:border-border-hover hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_24px_rgba(16,185,129,0.06)] cursor-pointer'
+    ? 'hover:border-border-hover hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_24px_rgba(100,254,66,0.06)] cursor-pointer'
     : 'cursor-default';
 
   // Safe keyboard focus style if interactive

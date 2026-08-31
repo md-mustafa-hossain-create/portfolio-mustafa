@@ -1,5 +1,3 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-
 /**
  * System prompt definition to constrain Gemini's responses to Mustafa's portfolio details.
  * Kept concise to prevent overflowing the chat bubble widget.
@@ -78,12 +76,6 @@ Guidelines:
 
 // Read the API Key from Vite env variables
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-// Initialize Google AI SDK only if API key is present
-let genAI = null;
-if (apiKey) {
-  genAI = new GoogleGenerativeAI(apiKey);
-}
 
 /**
  * Fallback response generator for DEMO mode when the API key is not configured.
@@ -183,13 +175,15 @@ To ask custom questions, please try again in a few minutes.
  * Calls Gemini API or falls back to local responses if API key is not set.
  */
 export async function getAICopilotResponse(prompt) {
-  if (!apiKey || !genAI) {
+  if (!apiKey) {
     // Return mock response immediately with a tiny delay to simulate network call
     await new Promise((resolve) => setTimeout(resolve, 800));
     return getFallbackResponse(prompt);
   }
 
   try {
+    const { GoogleGenerativeAI } = await import('@google/generative-ai');
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-2.5-flash',
       systemInstruction: SYSTEM_PROMPT

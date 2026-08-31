@@ -47,7 +47,7 @@ export default function ChatUI({ isFloating, onClose }) {
     : 'aspect-square glass';
 
   return (
-    <div className={`w-full max-w-md ${containerClasses} p-2 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1),_0_0_40px_rgba(16,185,129,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.15),_0_0_50px_rgba(16,185,129,0.12)] hover:border-brand-500/20 transition-all duration-500 group flex flex-col`}>
+    <div className={`w-full max-w-md ${containerClasses} p-2 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1),_0_0_40px_rgba(100,254,66,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.15),_0_0_50px_rgba(100,254,66,0.12)] hover:border-brand-500/20 transition-all duration-500 group flex flex-col`}>
       <div className="rounded-[calc(2.5rem-0.5rem)] bg-transparent p-5 flex flex-col justify-between h-full relative overflow-hidden flex-grow">
         
         {/* Glow Effect */}
@@ -112,7 +112,7 @@ export default function ChatUI({ isFloating, onClose }) {
                         key={cmd.label}
                         type="button"
                         onClick={() => handleSuggestionClick(cmd.query)}
-                        className="flex flex-col items-start p-2.5 bg-zinc-900/40 border border-zinc-850 hover:border-brand-500/40 hover:bg-brand-500/5 hover:shadow-[0_0_12px_rgba(16,185,129,0.05)] rounded-xl text-left transition-all duration-300 group/btn cursor-pointer"
+                        className="flex flex-col items-start p-2.5 bg-zinc-900/40 border border-zinc-850 hover:border-brand-500/40 hover:bg-brand-500/5 hover:shadow-[0_0_12px_rgba(100,254,66,0.05)] rounded-xl text-left transition-all duration-300 group/btn cursor-pointer"
                       >
                         <span className="text-xs text-brand-400 font-bold group-hover/btn:text-brand-300 group-hover/btn:translate-x-0.5 transition-all duration-300">
                           {cmd.label}

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 // For Vite, environment variables must start with VITE_
@@ -19,5 +19,5 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore database
 const db = getFirestore(app);
 
-export { db, collection, addDoc, serverTimestamp };
+export { db };
 export default app;

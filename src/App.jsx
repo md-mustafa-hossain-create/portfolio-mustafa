@@ -1,14 +1,6 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import LazySection from '@/shared/components/ui/LazySection';
-import { applyTheme, getPreferredTheme, THEME_STORAGE_KEY } from '@/theme';
-import SmoothScroll from '@/shared/components/ui/SmoothScroll';
-import { ChatProvider } from '@/features/chat/context/ChatContext';
-import GlobalChatFAB from '@/features/chat/components/GlobalChatFAB';
-
-import GsapScrollBackground from '@/components/GsapScrollBackground';
-import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 import Home from '@/pages/Home';
 import Footer from '@/components/Footer';
 
@@ -57,30 +49,11 @@ function ScrollToTop() {
  * @returns {React.ReactElement}
  */
 export default function App() {
-  const [theme, setTheme] = useState(() => getPreferredTheme());
-
-  // Initialize GSAP ScrollTrigger 3D transforms
-  useGsapScrollTrigger();
-
-  useEffect(() => {
-    applyTheme(theme);
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-  }, [theme]);
-
   return (
-    <ChatProvider>
-      <SmoothScroll>
       <Router>
-        <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300 relative">
-          
-          {/* GSAP ScrollTrigger canvas background */}
-          <GsapScrollBackground />
-
+        <div className="portfolio-shell min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300 relative">
           {/* Navigation Bar */}
-          <Navbar
-            theme={theme}
-            onToggleTheme={() => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))}
-          />
+          <Navbar />
           
           {/* Main routing area */}
           <main className="flex-grow">
@@ -121,8 +94,5 @@ export default function App() {
           <Footer />
         </div>
       </Router>
-      </SmoothScroll>
-      <GlobalChatFAB />
-    </ChatProvider>
   );
 }

@@ -1,4 +1,3 @@
-import MouseSpotlight from '@/components/MouseSpotlight';
 import About from '@/components/About';
 import { HeroSection } from '@/features/hero';
 import { ProjectsSection } from '@/features/projects';
@@ -14,8 +13,6 @@ import Education from '@/components/Education';
 export default function Home() {
   return (
     <div className="relative">
-      <MouseSpotlight />
-      
       {/* Sections structured with matching anchors */}
       <HeroSection />
       

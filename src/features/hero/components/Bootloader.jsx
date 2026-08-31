@@ -88,7 +88,7 @@ export default function Bootloader({ onComplete }) {
         <div className="w-full flex flex-col items-center gap-3">
           <div className="w-full h-[3px] bg-zinc-900 rounded-full overflow-hidden relative">
             <div 
-              className="h-full bg-gradient-to-r from-brand-500 to-emerald-400 rounded-full transition-all duration-75 ease-out"
+              className="h-full bg-gradient-to-r from-primary to-brand-300 rounded-full transition-all duration-75 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>

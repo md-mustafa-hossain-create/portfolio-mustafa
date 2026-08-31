@@ -47,7 +47,7 @@ export default function BlogsFeed() {
       <div className="min-h-screen bg-zinc-950 text-zinc-100 py-32 relative overflow-hidden font-sans">
         {/* Background glow highlights */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-brand-500/2 blur-[160px] pointer-events-none"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-purple-500/2 blur-[160px] pointer-events-none"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-secondary/2 blur-[160px] pointer-events-none"></div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 animate-pulse">
           {/* Navigation Breadcrumb / Back button skeleton */}
@@ -92,7 +92,7 @@ export default function BlogsFeed() {
     <div className="min-h-screen bg-zinc-950 text-zinc-100 py-32 relative overflow-hidden font-sans">
       {/* Background glow highlights */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-brand-500/2 blur-[160px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-purple-500/2 blur-[160px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-secondary/2 blur-[160px] pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

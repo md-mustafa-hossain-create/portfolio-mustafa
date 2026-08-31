@@ -23,15 +23,15 @@ function ContactSectionContent() {
         titleHighlight={CONTACT_STRINGS.SECTION_TITLE_HIGHLIGHT}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 max-w-5xl mx-auto items-stretch">
         
         {/* Info Side (Socials & Direct Contact) */}
-        <ScrollReveal animation="left" className="lg:col-span-5 flex flex-col justify-between">
+        <ScrollReveal animation="left" className="md:col-span-1 lg:col-span-5 flex flex-col justify-between">
           <ContactInfo />
         </ScrollReveal>
 
         {/* Form Side */}
-        <ScrollReveal animation="right" delay={0.15} className="lg:col-span-7">
+        <ScrollReveal animation="right" delay={0.15} className="md:col-span-1 lg:col-span-7">
           <ContactForm />
         </ScrollReveal>
 
@@ -44,16 +44,13 @@ export default function ContactSection() {
   return (
     <section 
       id="contact" 
-      data-bg="#04120c"
-      data-surface="rgba(10, 36, 24, 0.7)"
-      data-text="#f4f4f5"
-      data-accent="#10b981"
-      data-border="rgba(16, 185, 129, 0.2)"
+      data-bg="#000000"
+      data-surface="rgba(45, 45, 45, 0.48)"
+      data-text="#f5f5f5"
+      data-accent="#2CFF05"
+      data-border="rgba(255, 255, 255, 0.10)"
       className="portfolio-section min-h-[90vh] flex flex-col justify-center py-20 relative overflow-hidden border-t border-zinc-900/50"
     >
-      {/* Background radial gradient */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-brand-500/5 blur-[120px] pointer-events-none"></div>
-
       <SectionErrorBoundary sectionName="Contact Section">
         <ContactSectionContent />
       </SectionErrorBoundary>
