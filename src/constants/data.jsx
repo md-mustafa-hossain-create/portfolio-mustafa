@@ -96,10 +96,10 @@ const useAudio = () => {
     id: "devdock",
     title: "DevDock",
     category: "Developer Workspace Tool",
-    description: "An interactive, drag-and-drop workspace app that lets developers build and customize portfolios, complete with retro themes and AI copilot integrations.",
+    description: "An interactive, drag-and-drop workspace app that lets developers build and customize portfolios, complete with custom themes and modular layouts.",
     github: "https://github.com/md-mustafa-hossain-create/devdock",
     demo: "https://devdock.web.app",
-    tags: ["React", "Drag-and-Drop", "Gemini API", "LocalStore"],
+    tags: ["React", "Drag-and-Drop", "LocalStorage", "Tailwind CSS"],
     challenge: "Handling fluid visual layouts during drag-and-drop actions on mobile browsers where touch interaction events are heavily throttled.",
     solution: "Implemented CSS hardware acceleration will-change flags alongside passive touchstart events. Abstracted dragging calculations into a clean React Hook with requestAnimationFrame lerping.",
     codeSpotlight: `// Smooth transform transition lerp hook
@@ -109,7 +109,7 @@ export function useSpringTransition(value, stiffness = 0.1) {
 }`,
     metrics: [
       { label: "Drag Render FPS", value: "60 fps" },
-      { label: "AI Response speed", value: "1.2s" },
+      { label: "State Sync Latency", value: "15ms" },
       { label: "Bundle size reduction", value: "32%" }
     ]
   },
@@ -280,19 +280,19 @@ export const EDUCATION_DATA = [
 
 export const DEFAULT_BLOGS = [
   {
-    id: 'building-ai-portfolio',
-    title: 'Building an Interactive AI-Powered Developer Portfolio from Scratch',
-    summary: 'A behind-the-scenes look at the technologies, architectural decisions, and interactive features behind my developer portfolio, featuring React 19, Tailwind CSS v4, and a context-aware Gemini AI assistant.',
+    id: 'building-modern-portfolio',
+    title: 'Building a High-Performance Modern Developer Portfolio from Scratch',
+    summary: 'A behind-the-scenes look at the technologies, architectural decisions, and interactive features behind my developer portfolio, featuring React 19, Tailwind CSS v4, and modern web engineering.',
     category: 'Frontend',
-    tags: ['React', 'TailwindCSS', 'Firebase', 'Gemini API'],
+    tags: ['React', 'TailwindCSS', 'Firebase', 'Web Performance'],
     coverImage: '/assets/blog/portfolio_blog_cover.png',
     date: 'June 16, 2026',
     readTime: '5 min read',
-    content: `# Building an Interactive AI-Powered Developer Portfolio from Scratch
+    content: `# Building a High-Performance Modern Developer Portfolio from Scratch
 
 A developer portfolio is more than a place to showcase projects or host a resume. It serves as a practical demonstration of technical expertise, design thinking, and problem-solving ability. With that mindset, I approached the development of my latest portfolio with a clear objective: create an experience that goes beyond a traditional static website and reflects my passion for modern frontend development.
 
-This article provides a behind-the-scenes look at the technologies, architectural decisions, and interactive features that shaped the project—including the implementation of a context-aware AI assistant.
+This article provides a behind-the-scenes look at the technologies, architectural decisions, and interactive features that shaped the project.
 
 ## Choosing the Right Technology Stack
 
@@ -309,9 +309,6 @@ Tailwind CSS enabled rapid development of a consistent design system while makin
 - **Animations**: Framer Motion & Lenis
 Framer Motion was used to create smooth UI transitions and interactive animations, while Lenis enhanced the scrolling experience with fluid, premium-feeling motion.
 
-- **AI Integration**: Google Generative AI (Gemini API)
-The Gemini API powers the portfolio's interactive AI assistant, enabling visitors to ask questions and receive contextual responses about my background and technical skills.
-
 - **Backend & Database**: Firebase
 Firebase handles contact form submissions and dynamic blog content, providing a reliable backend solution without unnecessary complexity.
 
@@ -327,32 +324,6 @@ The interface combines deep zinc and charcoal tones with vibrant neon accents to
 Equally important were the smaller interactions. Buttons, navigation links, and content cards include subtle scaling and opacity transitions that make the interface feel responsive and polished without becoming distracting.
 
 The goal was to create an experience that feels modern, immersive, and intentionally crafted.
-
-## Dev.Bot: A Context-Aware AI Assistant
-
-The most distinctive feature of the portfolio is Dev.Bot, an integrated AI assistant designed to help visitors learn more about my experience, projects, and technical background.
-
-Instead of navigating through multiple sections of the website or scanning lengthy descriptions, recruiters and visitors can simply ask questions directly.
-
-### How It Works
-
-The assistant is powered by Google's Gemini model through the \`@google/generative-ai\` SDK.
-
-To ensure accurate and relevant responses, the model is provided with a carefully structured system prompt containing information about my background, skills, projects, and resume details. This allows the assistant to act as a personalized representative rather than a generic chatbot.
-
-### User Experience Design
-
-The assistant's presentation adapts based on context and device type.
-
-On desktop devices, Dev.Bot is embedded directly within the Hero section as an interactive terminal-like experience.
-
-On mobile devices and during scrolling interactions, it transforms into a floating action button that expands into a full-screen frosted-glass modal, ensuring accessibility without disrupting the browsing experience.
-
-### Dynamic Status Monitoring
-
-The interface continuously monitors the connection state of the AI service.
-
-If connectivity issues occur, the application gracefully handles the failure and immediately updates the status indicator from "Assistant Online" to "Offline," providing clear feedback to users.
 
 ## Performance and Application Architecture
 
@@ -380,10 +351,8 @@ This allows users to receive immediate feedback without page reloads, creating a
 
 ## Looking Ahead
 
-Building this portfolio provided valuable experience at the intersection of UI/UX design, application architecture, state management, and AI integration.
+Building this portfolio provided valuable experience at the intersection of UI/UX design, application architecture, state management, and web performance.
 
-As the project evolves, I plan to continue expanding the projects section, improving the AI assistant's knowledge base, and exploring additional integrations that further enhance communication and engagement.
-
-For now, visitors can explore the portfolio, browse project demonstrations, or interact directly with Dev.Bot to learn more about my work and technical background.`
+As the project evolves, I plan to continue expanding the projects section and exploring additional frontend techniques that further enhance user engagement.`
   }
 ];

@@ -12,7 +12,7 @@ Welcome to the repository of my personal portfolio website. This is a highly int
 
 ## 🌟 Key Features
 
-*   🖥️ **Interactive Boot Terminal**: A custom terminal-style booting loader simulation (`Bootloader.jsx` & `TerminalWindow.jsx`) welcoming visitors with typewriter animations.
+*   ✨ **Modern Responsive Hero**: Clean, focused introduction highlighting core developer signals and quick actions.
 *   🖱️ **Mouse Spotlight Effect**: A premium, smooth mouse spotlight mask overlaying the dark theme layout to elevate user interaction.
 *   ⚡ **Custom Lazy Section Loading**: Deferment of below-the-fold component mounting and associated Firebase database requests using a custom `IntersectionObserver` wrapper (`LazySection.jsx`).
 *   🔥 **Serverless Contact Form**: Real-time message submissions stored securely in Google Cloud Firestore using a custom React hook (`useFirebaseData.js`).
@@ -42,7 +42,7 @@ portfolio-mustafa/
 │   ├── assets/             # Static local media assets
 │   ├── components/         # Reusable and page section components
 │   │   ├── contact/        # ContactForm & ContactInfo components
-│   │   ├── hero/           # TerminalWindow & Typewriter bootloader components
+│   │   ├── hero/           # Hero section and profile presentation
 │   │   ├── ui/             # Reusable ProjectCard, SkillCard, SectionHeader, etc.
 │   │   └── ErrorBoundary   # Error tracking fallback layout
 │   ├── config/

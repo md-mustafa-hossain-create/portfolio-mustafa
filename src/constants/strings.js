@@ -26,8 +26,6 @@ export const HERO_STRINGS = {
   BTN_PROJECTS: "View Projects",
   BTN_RESUME: "Download Resume",
   BTN_CONTACT: "Contact Me",
-  TERMINAL_STATUS: "ACTIVE",
-  BOOT_TITLE: "Welcome to my portfolio",
 };
 
 export const ABOUT_STRINGS = {
