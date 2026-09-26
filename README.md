@@ -15,7 +15,7 @@ Welcome to the repository of my personal portfolio website. This is a highly int
 *   ✨ **Modern Responsive Hero**: Clean, focused introduction highlighting core developer signals and quick actions.
 *   🖱️ **Mouse Spotlight Effect**: A premium, smooth mouse spotlight mask overlaying the dark theme layout to elevate user interaction.
 *   ⚡ **Custom Lazy Section Loading**: Deferment of below-the-fold component mounting and associated Firebase database requests using a custom `IntersectionObserver` wrapper (`LazySection.jsx`).
-*   🔥 **Serverless Contact Form**: Real-time message submissions stored securely in Google Cloud Firestore using a custom React hook (`useFirebaseData.js`).
+*   🔥 **Serverless Contact Form**: Real-time message submissions stored securely in Google Cloud Firestore using the dedicated contact submission hook (`src/features/contact/hooks/useContactSubmit.js`).
 *   🛡️ **React Error Boundary**: A custom, dark-themed fallback screen preventing the white screen of death in case of runtime JavaScript errors.
 *   📦 **Clean Separation of Concerns**: Modularized configuration, components (adhering to Single Responsibility Principle), and centralized constants (`strings.js`, `data.jsx`).
 *   🤖 **CI/CD Pipeline**: Automated project building and deployment to Firebase Hosting upon pushing changes to the `main` branch.
@@ -39,22 +39,22 @@ portfolio-mustafa/
 ├── .github/workflows/
 │   └── deploy.yml          # GitHub Actions workflow for Firebase Hosting
 ├── src/
-│   ├── assets/             # Static local media assets
-│   ├── components/         # Reusable and page section components
-│   │   ├── contact/        # ContactForm & ContactInfo components
-│   │   ├── hero/           # Hero section and profile presentation
-│   │   ├── ui/             # Reusable ProjectCard, SkillCard, SectionHeader, etc.
-│   │   └── ErrorBoundary   # Error tracking fallback layout
+│   ├── assets/                  # Static local media assets
+│   ├── components/              # Primary single-page sections and local UI cards
 │   ├── config/
-│   │   └── firebase.js     # Firebase client setup & exports
+│   │   └── firebase.js          # Firebase client setup & exports
 │   ├── constants/
-│   │   ├── data.jsx        # Data models for projects, skills, education
-│   │   └── strings.js      # Centralized copy strings for easy updates
+│   │   ├── data.jsx             # Data models for projects, skills, education, blogs
+│   │   └── strings.js           # Centralized copy strings for easy updates
+│   ├── features/                # Domain modules: blog, contact, hero, projects
 │   ├── hooks/
-│   │   └── useFirebaseData # Firestore submission custom hook
-│   ├── App.jsx             # Main layout assembly with lazy sections
-│   ├── index.css           # Global custom stylesheet
-│   └── main.jsx            # React app entry point with ErrorBoundary wrap
+│   │   ├── useFirebaseData.js   # Firestore read hook with fallback support
+│   │   └── useGsapScrollTrigger.js
+│   ├── pages/                   # Route-level pages (home, blog feed/post, case study)
+│   ├── shared/components/ui/    # Shared UI primitives and global/section error boundaries
+│   ├── App.jsx                  # Router and route-level lazy loading
+│   ├── index.css                # Global custom stylesheet
+│   └── main.jsx                 # React app entry point with global error boundary
 ├── firebase.json           # Firebase Hosting configuration rules
 ├── firestore.rules         # Security guidelines for Firestore
 └── vite.config.js          # Vite compilation settings
@@ -120,7 +120,7 @@ In the project directory, you can run the following tasks:
 
 ## 🤖 CI/CD Deployment
 
-Deployments to **Firebase Hosting** are automated using GitHub Actions. On every commit pushed to the `main` branch, the workflow [deploy.yml](file:///.github/workflows/deploy.yml) will trigger:
+Deployments to **Firebase Hosting** are automated using GitHub Actions. On every commit pushed to the `main` branch, the workflow [`deploy.yml`](./.github/workflows/deploy.yml) will trigger:
 
 1.  Checks out the code.
 2.  Sets up Node.js v20.

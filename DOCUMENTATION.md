@@ -52,7 +52,6 @@ portfolio-mustafa/
 │   │   ├── About.jsx         # Biography, goals, and personal details card
 │   │   ├── Education.jsx     # Timeline of secondary and tertiary degrees
 │   │   ├── Footer.jsx        # Footer layout with copyrights and social links
-│   │   ├── MouseSpotlight.jsx# Overlay tracking cursor spotlight highlight
 │   │   ├── Navbar.jsx        # Responsive navigation with scrollspy hook
 │   │   └── Skills.jsx        # Skill grid utilizing SVG representations
 │   ├── config/
@@ -72,11 +71,10 @@ portfolio-mustafa/
 │   │   ├── BlogPost.jsx      # Custom Markdown-rendered blog detailed view
 │   │   ├── Home.jsx          # Segmented single-page homepage assembly
 │   │   └── ProjectCaseStudy.jsx# Layout rendering metrics, challenges, solutions
-│   ├── shared/components/ui/ # Reusable UI components (GlassCard, ScrollReveal, SectionHeader)
-│   ├── theme.js              # Theme manager for light/dark modes
+│   ├── shared/components/ui/ # Reusable UI components (SectionHeader, GlassCard, LazySection, Error Boundaries)
 │   ├── index.css             # Main stylesheet configuring fonts, themes, and glass utilities
 │   ├── App.jsx               # App routing wrapper, providers, and layout assembly
-│   └── main.jsx              # React application mounting entry point
+│   └── main.jsx              # React application mounting entry point with GlobalErrorBoundary
 ├── firebase.json             # Firebase deployment rewrites & security rules
 ├── firestore.rules           # Security rules configuring collection accesses
 └── vite.config.js            # Vite build configuration rules
@@ -89,16 +87,16 @@ portfolio-mustafa/
 ### 💾 4.1 Database Fallback & Normalizer Architecture
 To guarantee 100% uptime even during database outage, the site uses a fallback-first pattern:
 1. `useFirebaseData('blogs', DEFAULT_BLOGS)` tries to connect to Firestore and fetch the collection ordered by `order`.
-2. If connection credentials are not found, or if permissions fail (due to rules requiring Admin consoles), the hook catches the error and falls back to the static files inside [`data.jsx`](file:///d:/portfolio-mustafa/src/constants/data.jsx).
+2. If connection credentials are not found, or if permissions fail, the hook catches the error and falls back to the static files inside [`src/constants/data.jsx`](./src/constants/data.jsx).
 3. Data normalizers in `blogAdapters.js` automatically format field deviations (e.g., raw Firestore casing fields like `Title` vs `title`) into client objects.
 
 ### 📬 4.2 Contact Form Handler
 Submissions to the contact section are managed via `useContactSubmit.js`.
 - If Firebase variables are active, it records message submissions directly inside Firestore's `messages` collection.
-- Security rules in [`firestore.rules`](file:///d:/portfolio-mustafa/firestore.rules) allow anyone to create records but block all reading, updating, or deleting operations from frontend clients, protecting candidate-recruiter message histories.
+- Security rules in [`firestore.rules`](./firestore.rules) allow anyone to create records but block all reading, updating, or deleting operations from frontend clients, protecting candidate-recruiter message histories.
 
 ### 📄 4.3 Custom Markdown Rendering Engine
-To avoid heavy parser packages, [`BlogPost.jsx`](file:///d:/portfolio-mustafa/src/pages/BlogPost.jsx) incorporates a lightweight, custom Markdown engine (`renderMarkdown`):
+To avoid heavy parser packages, [`src/pages/BlogPost.jsx`](./src/pages/BlogPost.jsx) incorporates a lightweight, custom Markdown engine (`renderMarkdown`):
 - Recognizes headers (`#`, `##`, `###`), list points (`-`), code snippets (\`\`\`js ... \`\`\`), and inline code/bold elements.
 - Dynamically translates them into native React JSX components using custom Tailwind styling blocks.
 
@@ -143,7 +141,7 @@ To avoid heavy parser packages, [`BlogPost.jsx`](file:///d:/portfolio-mustafa/sr
 
 ## 🚀 6. CI/CD Deployment Workflow
 
-Deployments are automated through a **GitHub Actions** runner configured in [`.github/workflows/deploy.yml`](file:///d:/portfolio-mustafa/.github/workflows/deploy.yml).
+Deployments are automated through a **GitHub Actions** runner configured in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml).
 
 Upon pushing any change to the `main` branch:
 1. **Checkout & Cache:** Checks out the source tree and configures Node.js caching `npm` modules.
