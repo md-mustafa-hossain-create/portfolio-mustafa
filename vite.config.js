@@ -14,6 +14,11 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
+          if (id.includes('/@firebase/webchannel-wrapper/')) return 'firebase-transport';
+          if (id.includes('/@firebase/firestore/')) return 'firebase-firestore';
+          if (id.includes('/@firebase/') || id.includes('/node_modules/idb/') || id.includes('/re2js/')) {
+            return 'firebase-core';
+          }
           if (id.includes('react-router-dom')) return 'router';
           if (id.includes('react') || id.includes('react-dom')) return 'react';
           if (id.includes('framer-motion') || id.includes('gsap') || id.includes('lenis')) return 'animation';
