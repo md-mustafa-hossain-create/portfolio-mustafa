@@ -13,7 +13,16 @@ export function useContactSubmit() {
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
 
   const submitContact = async (name, email, message) => {
-    if (!name.trim() || !email.trim() || !message.trim()) {
+    const normalizedName = name.trim();
+    const normalizedEmail = email.trim();
+    const normalizedMessage = message.trim();
+    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail);
+
+    if (
+      normalizedName.length < 1 || normalizedName.length > 100 ||
+      normalizedEmail.length > 254 || !validEmail ||
+      normalizedMessage.length < 1 || normalizedMessage.length > 5000
+    ) {
       setStatus('error');
       return false;
     }
@@ -27,9 +36,9 @@ export function useContactSubmit() {
       ]);
 
       await addDoc(collection(db, 'messages'), {
-        name,
-        email,
-        message,
+        name: normalizedName,
+        email: normalizedEmail,
+        message: normalizedMessage,
         timestamp: serverTimestamp(),
       });
 

@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 
 const variants = {
@@ -35,6 +35,7 @@ export default function ScrollReveal({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin });
+  const prefersReducedMotion = useReducedMotion();
   const MotionComponent = motion[as] || motion.div;
 
   const springTransition = {
@@ -50,8 +51,8 @@ export default function ScrollReveal({
   return (
     <MotionComponent
       ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={prefersReducedMotion ? false : 'hidden'}
+      animate={prefersReducedMotion || isInView ? 'visible' : 'hidden'}
       variants={{
         hidden: selectedVariant.hidden,
         visible: {

@@ -21,7 +21,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await submitContact(name, email, message);
+    const success = await submitContact(name.trim(), email.trim(), message.trim());
     if (success) {
       setName('');
       setEmail('');
@@ -50,6 +50,7 @@ export default function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            maxLength={100}
             placeholder="Enter your name"
           />
 
@@ -61,6 +62,7 @@ export default function ContactForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            maxLength={254}
             placeholder="name@example.com"
           />
 
@@ -71,18 +73,19 @@ export default function ContactForm() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
+            maxLength={5000}
             placeholder="Hi Mustafa, I would like to talk about..."
           />
 
           {status === 'success' && (
-            <div className="flex items-center gap-2.5 p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/30 text-emerald-300 text-xs sm:text-sm">
+            <div role="status" aria-live="polite" className="flex items-center gap-2.5 p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/30 text-emerald-300 text-xs sm:text-sm">
               <CheckCircle2 className="w-5 h-5 shrink-0" />
               <span>{CONTACT_STRINGS.SUCCESS_MSG}</span>
             </div>
           )}
 
           {status === 'error' && (
-            <div className="flex items-center gap-2.5 p-4 rounded-xl bg-rose-950/20 border border-rose-900/30 text-rose-300 text-xs sm:text-sm">
+            <div role="alert" aria-live="assertive" className="flex items-center gap-2.5 p-4 rounded-xl bg-rose-950/20 border border-rose-900/30 text-rose-300 text-xs sm:text-sm">
               <AlertCircle className="w-5 h-5 shrink-0" />
               <span>{CONTACT_STRINGS.ERROR_MSG}</span>
             </div>

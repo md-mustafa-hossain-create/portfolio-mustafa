@@ -39,12 +39,17 @@ describe('Navbar Component', () => {
     // Verify mobile links exist in the document (but are hidden by styles initially)
     const mobileHomeLink = document.getElementById('nav-mobile-link-home');
     expect(mobileHomeLink).toBeInTheDocument();
+    const drawer = document.getElementById('mobile-drawer');
+    expect(drawer).toHaveAttribute('aria-hidden', 'true');
+    expect(drawer).toHaveAttribute('inert');
     
     // Toggle menu to open
     fireEvent.click(toggleButton);
 
     // Verify it is still in the document
     expect(mobileHomeLink).toBeInTheDocument();
+    expect(drawer).toHaveAttribute('aria-hidden', 'false');
+    expect(drawer).not.toHaveAttribute('inert');
   });
 
   it('closes the mobile menu when clicking a mobile navigation link', () => {

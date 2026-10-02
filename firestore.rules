@@ -20,14 +20,23 @@ service cloud.firestore {
       allow write: if false;
     }
     
-    // 4. Contact Messages: Anyone can submit a message, but no one can read or modify existing messages from the frontend.
+    // Contact messages are public submissions, so accept only the exact form
+    // schema and bound every value to limit accidental or abusive writes.
     match /messages/{message} {
-      allow create: if request.resource.data.name != null 
-                    && request.resource.data.email != null 
-                    && request.resource.data.message != null
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'message', 'timestamp'])
+                    && request.resource.data.keys().hasOnly(['name', 'email', 'message', 'timestamp'])
+                    && request.resource.data.name is string
                     && request.resource.data.name.size() > 0
-                    && request.resource.data.email.size() > 0
-                    && request.resource.data.message.size() > 0;
+                    && request.resource.data.name.size() <= 100
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() > 3
+                    && request.resource.data.email.size() <= 254
+                    && request.resource.data.email.matches('^[^ @]+@[^ @]+\.[^ @]+$')
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() > 0
+                    && request.resource.data.message.size() <= 5000
+                    && request.resource.data.timestamp is timestamp
+                    && request.resource.data.timestamp == request.time;
       allow read, update, delete: if false;
     }
     

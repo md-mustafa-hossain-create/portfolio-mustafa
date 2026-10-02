@@ -13,30 +13,45 @@ export default function SmoothScroll({ children }) {
   const lenisRef = useRef(null);
 
   useEffect(() => {
-    // Initialize Lenis with premium physics-based easing
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
-    lenisRef.current = lenis;
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let updateGsapTicker;
 
-    // Sync ScrollTrigger updates with Lenis scroll events
-    lenis.on('scroll', ScrollTrigger.update);
-
-    // Sync GSAP ticker with Lenis requestAnimationFrame
-    const updateGsapTicker = (time) => {
-      lenis.raf(time * 1000);
+    const stopSmoothScroll = () => {
+      if (!lenisRef.current) return;
+      gsap.ticker.remove(updateGsapTicker);
+      lenisRef.current.destroy();
+      lenisRef.current = null;
     };
 
-    gsap.ticker.add(updateGsapTicker);
-    gsap.ticker.lagSmoothing(0);
+    const startSmoothScroll = () => {
+      if (motionPreference.matches || lenisRef.current) return;
+
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+      });
+      lenisRef.current = lenis;
+      lenis.on('scroll', ScrollTrigger.update);
+
+      updateGsapTicker = (time) => lenis.raf(time * 1000);
+      gsap.ticker.add(updateGsapTicker);
+      gsap.ticker.lagSmoothing(0);
+    };
+
+    const updateMotionPreference = () => {
+      if (motionPreference.matches) stopSmoothScroll();
+      else startSmoothScroll();
+    };
+
+    startSmoothScroll();
+    motionPreference.addEventListener('change', updateMotionPreference);
 
     return () => {
-      gsap.ticker.remove(updateGsapTicker);
-      lenis.destroy();
+      motionPreference.removeEventListener('change', updateMotionPreference);
+      stopSmoothScroll();
     };
   }, []);
 

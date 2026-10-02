@@ -15,6 +15,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const drawerRef = useRef(null);
+  const menuButtonRef = useRef(null);
+  const wasOpenRef = useRef(false);
 
   const isOnHomePage = location.pathname === '/';
   const handleNavLinkClick = (e, href, searchParams = '') => {
@@ -79,6 +81,15 @@ export default function Navbar() {
     // Auto-focus the close button in the drawer when opened
     setTimeout(() => firstElement?.focus(), 50);
     return () => window.removeEventListener('keydown', handleTabTrap);
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      wasOpenRef.current = true;
+    } else if (wasOpenRef.current) {
+      wasOpenRef.current = false;
+      menuButtonRef.current?.focus();
+    }
   }, [isOpen]);
 
   // Scrollspy: dynamic navbar section highlighting
@@ -216,10 +227,11 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center gap-2 shrink-0">
             <button
               id="nav-btn-mobile-toggle"
+              ref={menuButtonRef}
               aria-expanded={isOpen}
               aria-controls="mobile-drawer"
               aria-haspopup="true"
-              onClick={() => setIsOpen(true)}
+              onClick={() => setIsOpen((open) => !open)}
               className="relative w-11 h-11 flex flex-col justify-center items-center rounded-md hover:bg-zinc-900/60 focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-colors duration-200 shrink-0"
               aria-label="Toggle Menu"
             >
@@ -248,6 +260,8 @@ export default function Navbar() {
         id="mobile-drawer"
         role="dialog"
         aria-modal="true"
+        aria-hidden={!isOpen}
+        inert={!isOpen}
         aria-label="Mobile Navigation Menu"
         ref={drawerRef}
         className={`fixed top-0 right-0 h-[100dvh] w-72 bg-zinc-950 border-l border-zinc-900 p-6 z-50 flex flex-col gap-6 shadow-2xl justify-between transition-all duration-300 transform ${

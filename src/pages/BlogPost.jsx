@@ -4,6 +4,7 @@ import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { useFirebaseData } from '@/hooks/useFirebaseData';
 import { DEFAULT_BLOGS } from '@/constants/data';
 import { normalizeBlogs } from '@/features/blog/utils/blogAdapters';
+import { setPageMetadata } from '@/shared/utils/pageMetadata';
 
 // Simple parser helper to convert inline markdown styles (**bold**, `code`) into React elements
 function parseInlineStyles(text) {
@@ -66,28 +67,28 @@ function renderMarkdown(md) {
     // Markdown Headers
     if (line.startsWith('# ')) {
       renderedElements.push(
-        <h1
+        <h2
           key={idx}
           className="text-2xl sm:text-3xl font-bold text-white mt-8 mb-4 tracking-tight border-b border-white/5 pb-2"
         >
           {line.slice(2)}
-        </h1>
+        </h2>
       );
       return;
     }
     if (line.startsWith('## ')) {
       renderedElements.push(
-        <h2 key={idx} className="text-lg sm:text-xl font-bold text-white mt-8 mb-4 tracking-tight">
+        <h3 key={idx} className="text-lg sm:text-xl font-bold text-white mt-8 mb-4 tracking-tight">
           {line.slice(3)}
-        </h2>
+        </h3>
       );
       return;
     }
     if (line.startsWith('### ')) {
       renderedElements.push(
-        <h3 key={idx} className="text-base sm:text-lg font-bold text-zinc-100 mt-6 mb-2">
+        <h4 key={idx} className="text-base sm:text-lg font-bold text-zinc-100 mt-6 mb-2">
           {line.slice(4)}
-        </h3>
+        </h4>
       );
       return;
     }
@@ -134,6 +135,19 @@ export default function BlogPost() {
   const blog = useMemo(() => {
     return blogList.find((b) => b.id === id);
   }, [blogList, id]);
+
+  useEffect(() => {
+    if (loading) return;
+
+    if (blog) {
+      setPageMetadata(
+        `${blog.title} | MD Mustafa Hossain`,
+        blog.summary || `Read ${blog.title}, an article by MD Mustafa Hossain.`
+      );
+    } else {
+      setPageMetadata('Article Not Found | MD Mustafa Hossain', 'The requested article could not be found.');
+    }
+  }, [blog, loading]);
 
   // Scroll spy reading progress listener with optimizations to avoid layout thrashing
   useEffect(() => {

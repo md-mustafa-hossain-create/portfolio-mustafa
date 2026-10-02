@@ -6,6 +6,7 @@ import { DEFAULT_PROJECTS } from '@/constants/data';
 import GlassCard from '@/shared/components/ui/GlassCard';
 import { normalizeProjects } from '@/features/projects/utils/projectAdapters';
 import ScrollReveal from '@/shared/components/ui/ScrollReveal';
+import { setPageMetadata } from '@/shared/utils/pageMetadata';
 
 /**
  * @fileoverview Full-page Project Case Study view (/projects/:id) displaying details.
@@ -32,6 +33,19 @@ export default function ProjectCaseStudy() {
   const project = useMemo(() => {
     return projectList.find((p) => p.id === id);
   }, [projectList, id]);
+
+  useEffect(() => {
+    if (loading) return;
+
+    if (project) {
+      setPageMetadata(
+        `${project.title} Case Study | MD Mustafa Hossain`,
+        project.description || `Explore the ${project.title} project by MD Mustafa Hossain.`
+      );
+    } else {
+      setPageMetadata('Project Not Found | MD Mustafa Hossain', 'The requested project could not be found.');
+    }
+  }, [loading, project]);
 
   // Scroll spy reading progress listener
   useEffect(() => {

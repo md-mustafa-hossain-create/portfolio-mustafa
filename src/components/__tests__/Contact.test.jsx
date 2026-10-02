@@ -42,6 +42,9 @@ describe('Contact Component', () => {
     expect(screen.getByLabelText('Your Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Email Address')).toBeInTheDocument();
     expect(screen.getByLabelText('Your Message')).toBeInTheDocument();
+    expect(screen.getByLabelText('Your Name')).toHaveAttribute('maxlength', '100');
+    expect(screen.getByLabelText('Email Address')).toHaveAttribute('maxlength', '254');
+    expect(screen.getByLabelText('Your Message')).toHaveAttribute('maxlength', '5000');
     expect(screen.getByRole('button', { name: 'Send Message' })).toBeInTheDocument();
   });
 
@@ -68,6 +71,7 @@ describe('Contact Component', () => {
     fireEvent.submit(form);
 
     expect(screen.getByText(/Oops! Please fill in all fields/i)).toBeInTheDocument();
+    expect(screen.getByRole('alert')).toHaveAttribute('aria-live', 'assertive');
   });
 
   it('simulates local success submission if Firebase key is not configured', async () => {
@@ -124,6 +128,7 @@ describe('Contact Component', () => {
     await waitFor(() => {
       expect(mockAddDoc).toHaveBeenCalledTimes(1);
       expect(screen.getByText('Thank you! Your message has been sent successfully.')).toBeInTheDocument();
+      expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
       expect(nameInput.value).toBe('');
       expect(emailInput.value).toBe('');
       expect(messageInput.value).toBe('');

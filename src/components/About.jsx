@@ -78,7 +78,7 @@ export default function About() {
             {INFO_CARDS.map((card, idx) => (
               <GlassCard
                 key={idx}
-                className="p-5 flex items-center gap-5 group cursor-pointer hover:border-brand-500/20 hover:scale-[1.01] transition-premium h-full text-left"
+              className="p-5 flex items-center gap-5 group h-full text-left"
               >
                 <div className="p-3 bg-zinc-900/60 rounded-xl border border-zinc-800 shrink-0 text-brand-400 group-hover:scale-105 group-hover:border-brand-500/20 group-hover:bg-brand-500/5 transition-premium shadow-sm">
                   {card.icon}
@@ -105,7 +105,7 @@ export default function About() {
           {stats.map((stat, idx) => (
             <GlassCard
               key={idx}
-              className="p-4 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer hover:scale-102 hover:border-brand-500/20 transition-premium h-full"
+              className="p-4 flex flex-col items-center justify-center text-center gap-1.5 group h-full"
             >
               <div className="p-2 bg-zinc-900/50 rounded-lg border border-zinc-850 shrink-0 text-brand-400 mb-0.5 group-hover:scale-105 transition-premium leading-none">
                 {stat.icon}

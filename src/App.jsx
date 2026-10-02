@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from '@/components/Navbar';
 import Home from '@/pages/Home';
 import Footer from '@/components/Footer';
+import { setPageMetadata } from '@/shared/utils/pageMetadata';
 
 // Lazy-load top-level pages
 const BlogsFeed = lazy(() => import('@/pages/BlogsFeed'));
@@ -44,6 +45,28 @@ function ScrollToTop() {
   return null;
 }
 
+function RouteMetadata() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname === '/') {
+      setPageMetadata(
+        'MD Mustafa Hossain | React Developer in India',
+        'Portfolio of MD Mustafa Hossain, a frontend developer in India building responsive, accessible React applications.'
+      );
+    } else if (pathname === '/blogs') {
+      setPageMetadata(
+        'Articles & Thoughts | MD Mustafa Hossain',
+        'Read articles and practical notes on frontend development, React, UI design, and web engineering.'
+      );
+    } else if (!pathname.startsWith('/blogs/') && !pathname.startsWith('/projects/')) {
+      setPageMetadata('Page Not Found | MD Mustafa Hossain', 'The page you requested could not be found.');
+    }
+  }, [pathname]);
+
+  return null;
+}
+
 /**
  * Main Application routing wrapper.
  * @returns {React.ReactElement}
@@ -52,6 +75,7 @@ export default function App() {
   return (
       <Router>
         <div className="portfolio-shell min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between selection:bg-brand-500/20 selection:text-brand-300 relative">
+          <RouteMetadata />
           {/* Navigation Bar */}
           <Navbar />
           
@@ -87,6 +111,7 @@ export default function App() {
                   </Suspense>
                 }
               />
+              <Route path="*" element={<div className="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center"><h1 className="text-3xl font-bold text-white">Page not found</h1><p className="mt-3 text-zinc-400">The page you requested doesn’t exist.</p></div>} />
             </Routes>
           </main>
 
