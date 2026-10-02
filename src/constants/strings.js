@@ -86,5 +86,6 @@ export const CONTACT_STRINGS = {
   FORM_SUBMIT: "Send Message",
   FORM_SUBMITTING: "Sending Message...",
   SUCCESS_MSG: "Thank you! Your message has been sent successfully.",
-  ERROR_MSG: "Oops! Please fill in all fields or check your connection."
+  ERROR_MSG: "Oops! Please fill in all fields or check your connection.",
+  TIMEOUT_MSG: "This is taking longer than expected. Your message may still finish sending, so please avoid resubmitting. If you don't hear back, email me directly."
 };

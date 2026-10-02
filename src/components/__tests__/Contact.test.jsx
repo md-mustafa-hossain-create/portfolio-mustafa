@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { act, render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import Contact from '@/features/contact/components/ContactSection';
 
@@ -133,6 +133,29 @@ describe('Contact Component', () => {
       expect(emailInput.value).toBe('');
       expect(messageInput.value).toBe('');
     });
+  });
+
+  it('shows an accessible busy state while the Firestore write is pending', async () => {
+    vi.stubEnv('VITE_FIREBASE_API_KEY', 'valid-api-key-123');
+    let resolveWrite;
+    mockAddDoc.mockReturnValueOnce(new Promise((resolve) => {
+      resolveWrite = resolve;
+    }));
+
+    render(<Contact />);
+
+    fireEvent.change(screen.getByLabelText('Your Name'), { target: { value: 'Alice Smith' } });
+    fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'alice@example.com' } });
+    fireEvent.change(screen.getByLabelText('Your Message'), { target: { value: 'Great portfolio!' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Send Message' }));
+
+    const submitButton = await screen.findByRole('button', { name: 'Sending Message...' });
+    expect(submitButton).toBeDisabled();
+    expect(submitButton).toHaveAttribute('aria-busy', 'true');
+    expect(submitButton.querySelector('svg')).toHaveClass('animate-spin');
+    expect(screen.getByRole('status')).toHaveTextContent('Sending Message...');
+
+    await act(async () => resolveWrite({ id: 'doc-pending' }));
   });
 
   it('displays error if Firestore write fails', async () => {

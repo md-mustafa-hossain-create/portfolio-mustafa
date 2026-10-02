@@ -38,7 +38,7 @@ export default function ContactForm() {
     >
       <div className="p-6 sm:p-8 flex flex-col h-full justify-center relative z-10">
         
-        <form onSubmit={handleSubmit} className="space-y-5 text-left">
+        <form onSubmit={handleSubmit} aria-busy={status === 'sending'} className="space-y-5 text-left">
           {/* 
             Sleek minimalist fields using custom variable-based border transitions.
             Refactored to use standard design system Input components.
@@ -91,15 +91,23 @@ export default function ContactForm() {
             </div>
           )}
 
+          {status === 'timeout' && (
+            <div role="alert" aria-live="assertive" className="flex items-center gap-2.5 p-4 rounded-xl bg-amber-950/20 border border-amber-900/30 text-amber-200 text-xs sm:text-sm">
+              <AlertCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
+              <span>{CONTACT_STRINGS.TIMEOUT_MSG}</span>
+            </div>
+          )}
+
           <Button
             id="contact-btn-submit"
             type="submit"
             disabled={status === 'sending'}
+            aria-busy={status === 'sending'}
             className="w-full gap-2"
           >
             {status === 'sending' ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-5 h-5 shrink-0 animate-spin motion-reduce:animate-none" aria-hidden="true" />
                 <span>{CONTACT_STRINGS.FORM_SUBMITTING}</span>
               </>
             ) : (
@@ -109,6 +117,11 @@ export default function ContactForm() {
               </>
             )}
           </Button>
+          {status === 'sending' && (
+            <span role="status" aria-live="polite" className="sr-only">
+              {CONTACT_STRINGS.FORM_SUBMITTING}
+            </span>
+          )}
         </form>
 
       </div>

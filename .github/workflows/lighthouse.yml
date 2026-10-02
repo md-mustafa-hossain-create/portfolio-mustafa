@@ -1,0 +1,36 @@
+name: Weekly mobile quality audit
+
+on:
+  schedule:
+    - cron: '30 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Audit live site on mobile
+        run: >-
+          npx --yes lighthouse@13.4.1 https://mustafa-dev-portfolio.web.app
+          --form-factor=mobile
+          --only-categories=performance,accessibility,best-practices,seo
+          --output=json
+          --output-path=./lighthouse-report.json
+          --chrome-flags="--headless --no-sandbox"
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-lighthouse-report
+          path: lighthouse-report.json
+          if-no-files-found: ignore
