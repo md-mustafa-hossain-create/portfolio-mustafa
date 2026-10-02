@@ -21,6 +21,10 @@ const app = initializeApp(firebaseConfig);
 // in Firebase Console and supplied through the environment.
 const appCheckSiteKey = import.meta.env.VITE_FIREBASE_APPCHECK_SITE_KEY;
 if (appCheckSiteKey) {
+  if (import.meta.env.DEV && typeof self !== 'undefined') {
+    self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+  }
+
   initializeAppCheck(app, {
     provider: new ReCaptchaEnterpriseProvider(appCheckSiteKey),
     isTokenAutoRefreshEnabled: true,
