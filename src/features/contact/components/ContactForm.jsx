@@ -107,7 +107,7 @@ export default function ContactForm() {
           >
             {status === 'sending' ? (
               <>
-                <Loader2 className="w-5 h-5 shrink-0 animate-spin motion-reduce:animate-none" aria-hidden="true" />
+                <Loader2 className="contact-submit-spinner w-5 h-5 shrink-0 animate-spin" aria-hidden="true" />
                 <span>{CONTACT_STRINGS.FORM_SUBMITTING}</span>
               </>
             ) : (

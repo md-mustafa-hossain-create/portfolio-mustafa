@@ -153,6 +153,7 @@ describe('Contact Component', () => {
     expect(submitButton).toBeDisabled();
     expect(submitButton).toHaveAttribute('aria-busy', 'true');
     expect(submitButton.querySelector('svg')).toHaveClass('animate-spin');
+    expect(submitButton.querySelector('svg')).toHaveClass('contact-submit-spinner');
     expect(screen.getByRole('status')).toHaveTextContent('Sending Message...');
 
     await act(async () => resolveWrite({ id: 'doc-pending' }));
