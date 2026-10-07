@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NAV_LINKS } from '../constants/data';
 import { GLOBAL } from '../constants/strings';
@@ -171,30 +172,34 @@ export default function Navbar() {
             }}
             className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2.5 group cursor-pointer focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 rounded-xl"
           >
-            {/* Hexagonal Monogram Logo */}
-            <div className="w-7 h-7 sm:w-8 sm:h-8 group-hover:scale-105 group-hover:rotate-6 transition-spring shrink-0">
-              <svg viewBox="0 0 512 512" className="w-full h-full" aria-hidden="true">
+            {/* Professional M lettermark: geometric dual-stem M with neon accent underbar and signature dot. */}
+            <div className="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-200 group-hover:scale-105 shrink-0">
+              <svg viewBox="0 0 32 32" className="w-full h-full" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                  <linearGradient id="nav-brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id="navbar-green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#2CFF05" />
-                    <stop offset="100%" stopColor="#2D2D2D" />
+                    <stop offset="100%" stopColor="#00CC00" />
                   </linearGradient>
-                  <linearGradient id="nav-glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#2CFF05" />
-                    <stop offset="100%" stopColor="#F5F5F5" />
-                  </linearGradient>
-                  <filter id="nav-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="8" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
                 </defs>
-                <polygon points="256,32 450,144 450,368 256,480 62,368 62,144" fill="#09090b" stroke="url(#nav-brand-grad)" strokeWidth="20" strokeLinejoin="round" />
-                <path d="M 210,180 L 130,256 L 210,332" stroke="url(#nav-glow-grad)" strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                <path d="M 302,180 L 382,256 L 302,332" stroke="url(#nav-glow-grad)" strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                <line x1="280" y1="160" x2="232" y2="352" stroke="#ffffff" strokeWidth="32" strokeLinecap="round" filter="url(#nav-glow)" />
+                {/* Dark rounded-square background */}
+                <rect x="0" y="0" width="32" height="32" rx="6" fill="#0a0a0a" />
+                {/* Subtle inner border */}
+                <rect x="1" y="1" width="30" height="30" rx="5" fill="none" stroke="#1f1f1f" strokeWidth="0.5" />
+                {/* Left stem of M */}
+                <rect x="5.5" y="8.5" width="3.5" height="15" rx="0.75" fill="#F5F5F5" />
+                {/* Right stem of M */}
+                <rect x="23" y="8.5" width="3.5" height="15" rx="0.75" fill="#F5F5F5" />
+                {/* Left diagonal of M */}
+                <polygon points="9,8.5 12.5,8.5 16,15 14.5,15" fill="#F5F5F5" />
+                {/* Right diagonal of M */}
+                <polygon points="23,8.5 19.5,8.5 16,15 17.5,15" fill="#F5F5F5" />
+                {/* Brand-green accent underbar */}
+                <rect x="5.5" y="25" width="21" height="1.25" rx="0.625" fill="url(#navbar-green-grad)" />
+                {/* Neon dot — signature personal touch */}
+                <circle cx="24" cy="9" r="1.5" fill="#2CFF05" />
               </svg>
             </div>
-            <span className="font-sans font-bold text-sm sm:text-base tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase whitespace-nowrap">
+            <span className="font-sans font-bold text-sm sm:text-base tracking-wider text-white transition-colors uppercase whitespace-nowrap">
               {GLOBAL.BRAND_NAME}<span className="text-brand-400 lowercase">{GLOBAL.BRAND_DOMAIN}</span>
             </span>
           </div>
@@ -215,7 +220,7 @@ export default function Navbar() {
                 >
                   {link.name}
                   {isActive && (
-                    <span className="absolute left-4 right-4 -bottom-1 h-px bg-brand-400" />
+                    <motion.span layoutId="active-navigation-indicator" transition={{ type: 'spring', stiffness: 380, damping: 30 }} className="absolute left-4 right-4 -bottom-1 h-px bg-brand-400" />
                   )}
                 </a>
               );
