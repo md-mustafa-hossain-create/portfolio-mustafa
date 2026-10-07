@@ -172,11 +172,12 @@ export default function Navbar() {
             }}
             className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2.5 group cursor-pointer focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 rounded-xl"
           >
-            {/* Professional M lettermark – clean abstract white emblem */}
-            <div className="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-200 group-hover:scale-105 shrink-0">
-              <svg viewBox="0 0 24 28" className="w-full h-full" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="0" width="24" height="28" fill="#0a0a0a" />
-                <path d="M4 24 L4 4 L8 4 L8 16 L12 9 L16 16 L16 4 L20 4 L20 24 Z" fill="#F5F5F5" />
+            {/* Refined geometric monogram */}
+            <div className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-200 group-hover:scale-105 shrink-0">
+              <svg viewBox="0 0 36 36" className="w-full h-full" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1.25" y="1.25" width="33.5" height="33.5" rx="9" fill="#111111" stroke="#454545" strokeWidth="1.5" />
+                <path d="M9.5 25.5V10.5L18 19L26.5 10.5V25.5" stroke="#F5F5F5" strokeWidth="2.75" strokeLinecap="square" strokeLinejoin="round" />
+                <path d="M9.5 28.5H26.5" stroke="#2CFF05" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </div>
             <span className="font-sans font-bold text-sm sm:text-base tracking-wider text-white transition-colors uppercase whitespace-nowrap">

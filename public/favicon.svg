@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <!-- Dark rounded-square background -->
   <rect x="0" y="0" width="512" height="512" rx="96" fill="#0a0a0a" />
-  <!-- Abstract white "M" emblem: two vertical stems and a central V, minimalistic -->
-  <path d="M128 384 L128 128 L192 128 L192 304 L256 224 L320 304 L320 128 L384 128 L384 384 Z" fill="#F5F5F5" />
+  <!-- Professional white "M" monogram -->
+  <rect x="128" y="64" width="64" height="384" fill="#FFFFFF" rx="8" />
+  <rect x="320" y="64" width="64" height="384" fill="#FFFFFF" rx="8" />
+  <polygon points="128,448 256,256 384,448" fill="#FFFFFF" />
 </svg>
