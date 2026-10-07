@@ -19,17 +19,19 @@ import ScrollReveal from '@/shared/components/ui/ScrollReveal';
  * @param {SectionHeaderProps} props
  * @returns {React.ReactElement}
  */
-export default function SectionHeader({ tag, titlePrefix, titleHighlight, subtitle }) {
+export default function SectionHeader({ tag, titlePrefix, titleHighlight, subtitle, tone = 'brand' }) {
+  const isNeutral = tone === 'neutral';
+
   return (
     <ScrollReveal animation="up" className="text-left mb-12 sm:mb-16 border-b border-zinc-800 pb-5">
-      <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-brand-400 font-sans font-semibold mb-3 whitespace-nowrap">
-        <span className="w-2 h-2 bg-brand-400 inline-block shrink-0" aria-hidden="true"></span>
+      <div className={`inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-sans font-semibold mb-3 whitespace-nowrap ${isNeutral ? 'text-zinc-400' : 'text-brand-400'}`}>
+        <span className={`w-2 h-2 inline-block shrink-0 ${isNeutral ? 'bg-zinc-500' : 'bg-brand-400'}`} aria-hidden="true"></span>
         <span>{tag}</span>
       </div>
       <h2 className="font-display uppercase text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-        {titlePrefix} <span className="text-brand-400">{titleHighlight}</span>
+        {titlePrefix} <span className={isNeutral ? 'text-zinc-200' : 'text-brand-400'}>{titleHighlight}</span>
       </h2>
-      <div className="w-16 h-1 bg-brand-500 mt-5"></div>
+      <div className={`w-16 h-1 mt-5 ${isNeutral ? 'bg-zinc-700' : 'bg-brand-500'}`}></div>
       {subtitle && (
         <p className="text-xs sm:text-sm text-zinc-400 mt-5 max-w-xl leading-relaxed">
           {subtitle}
@@ -44,4 +46,5 @@ SectionHeader.propTypes = {
   titlePrefix: PropTypes.string.isRequired,
   titleHighlight: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
+  tone: PropTypes.oneOf(['brand', 'neutral']),
 };

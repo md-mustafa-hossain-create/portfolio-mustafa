@@ -1,4 +1,5 @@
 import { Mail, MapPin } from 'lucide-react';
+import { cloneElement } from 'react';
 import { SOCIALS } from '@/constants/data';
 import { CONTACT_STRINGS, GLOBAL } from '@/constants/strings';
 import ScrollReveal from '@/shared/components/ui/ScrollReveal';
@@ -18,14 +19,14 @@ export default function ContactInfo() {
         {/* Direct Card info */}
         <div className="space-y-4 pt-4">
           <div className="flex items-center gap-4 text-zinc-300">
-            <div className="p-3 bg-zinc-900 rounded-lg border border-zinc-800">
-              <Mail className="w-5 h-5 text-brand-400" />
+            <div className="p-3 bg-zinc-900 rounded-md border border-zinc-800">
+              <Mail className="w-5 h-5 text-zinc-300" />
             </div>
             <div>
               <span className="text-xs text-zinc-400 font-sans font-semibold block">EMAIL ME</span>
               <a
                 href={`mailto:${GLOBAL.DEV_EMAIL}`}
-                className="text-sm font-semibold hover:text-brand-400 transition-colors"
+                className="text-sm font-semibold hover:text-white transition-colors"
               >
                 {GLOBAL.DEV_EMAIL}
               </a>
@@ -33,8 +34,8 @@ export default function ContactInfo() {
           </div>
 
           <div className="flex items-center gap-4 text-zinc-300">
-            <div className="p-3 bg-zinc-900 rounded-lg border border-zinc-800">
-              <MapPin className="w-5 h-5 text-brand-400" />
+            <div className="p-3 bg-zinc-900 rounded-md border border-zinc-800">
+              <MapPin className="w-5 h-5 text-zinc-300" />
             </div>
             <div>
               <span className="text-xs text-zinc-400 font-sans font-semibold block">MY LOCATION</span>
@@ -51,18 +52,24 @@ export default function ContactInfo() {
         <h4 className="text-xs font-sans font-bold uppercase tracking-wider text-zinc-400">
           {CONTACT_STRINGS.FIND_ME}
         </h4>
-        <div className="grid grid-cols-2 gap-3">
-          {SOCIALS.map((social) => (
+        <div className="grid grid-cols-2 border border-zinc-800">
+          {SOCIALS.map((social, index) => (
             <a
               key={social.name}
               id={`contact-social-${social.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`glass p-3 rounded-lg flex items-center gap-3 border border-zinc-800 transition-all duration-300 ${social.color}`}
+              className={`group flex items-center gap-3 px-3 sm:px-4 py-3.5 transition-colors duration-200 hover:bg-zinc-900/70 ${
+                index % 2 === 0 ? 'border-r border-zinc-800' : ''
+              } ${
+                index < SOCIALS.length - 2 ? 'border-b border-zinc-800' : ''
+              }`}
             >
-              {social.icon}
-              <span className="text-xs font-semibold text-zinc-300 group-hover:text-white">
+              {cloneElement(social.icon, {
+                className: 'w-4 h-4 shrink-0 text-zinc-400 transition-colors duration-200 group-hover:text-zinc-100',
+              })}
+              <span className="text-xs font-semibold text-zinc-300 transition-colors duration-200 group-hover:text-white">
                 {social.name}
               </span>
             </a>

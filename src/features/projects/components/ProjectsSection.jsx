@@ -31,7 +31,7 @@ function ProjectsSectionContent() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[1, 2, 3].map((item) => (
-            <div key={item} className="flex flex-col justify-between min-h-[340px] rounded-3xl bg-zinc-900/40 border border-zinc-800/80 p-6 animate-pulse">
+            <div key={item} className="flex flex-col justify-between min-h-[340px] rounded-md bg-zinc-900/40 border border-zinc-800/80 p-6 animate-pulse">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-10 h-10 rounded-xl bg-zinc-950/60 border border-zinc-850 flex items-center justify-center"></div>
@@ -77,8 +77,8 @@ function ProjectsSectionContent() {
         </div>
       ) : (
         /* Sleek modern empty state */
-        <div className="p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-[2rem] max-w-lg mx-auto shadow-md mt-12">
-          <div className="rounded-[calc(2rem-0.25rem)] bg-zinc-950/45 p-8 text-center font-sans">
+        <div className="p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-md max-w-lg mx-auto shadow-md mt-12">
+          <div className="rounded-md bg-zinc-950/45 p-8 text-center font-sans">
             <div className="p-3 bg-zinc-900/40 rounded-full w-12 h-12 flex items-center justify-center mx-auto text-brand-400 border border-white/5 mb-4 animate-pulse">
               <Folder className="w-5 h-5" />
             </div>
@@ -102,7 +102,7 @@ export default function ProjectsSection() {
       data-text="#f5f5f5"
       data-accent="#2CFF05"
       data-border="rgba(255, 255, 255, 0.10)"
-      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-20 relative overflow-hidden"
+      className="portfolio-section flex flex-col justify-center py-20 sm:py-24 relative overflow-hidden"
     >
       <SectionErrorBoundary sectionName="Projects Section">
         <ProjectsSectionContent />

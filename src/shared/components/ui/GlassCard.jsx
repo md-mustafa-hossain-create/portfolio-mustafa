@@ -19,9 +19,9 @@ import PropTypes from 'prop-types';
  */
 export default function GlassCard({ children, className = '', hoverEffect = true }) {
   // tracking current hover transition logic to prevent sudden layout thrashing
-  const baseClasses = "glass rounded-lg relative overflow-hidden transition-colors duration-200";
+  const baseClasses = "glass rounded-md relative overflow-hidden transition-colors duration-200";
   const hoverClasses = hoverEffect 
-    ? "hover:border-brand-500/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(100,254,66,0.1)] hover:-translate-y-1 hover:scale-[1.01] cursor-default"
+    ? "hover:border-zinc-700 hover:shadow-[0_12px_28px_rgba(0,0,0,0.22)] hover:-translate-y-0.5 cursor-default"
     : "";
   
   return (

@@ -31,12 +31,13 @@ function BlogsSectionContent() {
             icon={<BookOpen className="animate-spin" style={{ animationDuration: '3s' }} />}
             titlePrefix={BLOGS_STRINGS.SECTION_TITLE_PREFIX}
             titleHighlight={BLOGS_STRINGS.SECTION_TITLE_HIGHLIGHT}
+            tone="neutral"
           />
         </div>
 
         <div className="max-w-md mx-auto mt-12 animate-pulse">
-          <div className="p-1 bg-zinc-900/10 border border-white/5 rounded-3xl min-h-[340px]">
-            <div className="rounded-[calc(1.5rem-0.25rem)] bg-zinc-950/45 p-6 flex flex-col h-full">
+          <div className="p-1 bg-zinc-900/10 border border-white/5 rounded-md min-h-[340px]">
+            <div className="rounded-md bg-zinc-950/45 p-6 flex flex-col h-full">
               <div className="w-full h-40 bg-zinc-900 rounded-xl mb-4 text-zinc-800"></div>
               <div className="h-3 w-20 bg-zinc-900 rounded mb-3"></div>
               <div className="h-5 w-40 bg-zinc-900 rounded mb-3"></div>
@@ -60,6 +61,7 @@ function BlogsSectionContent() {
         icon={<BookOpen />}
         titlePrefix={BLOGS_STRINGS.SECTION_TITLE_PREFIX}
         titleHighlight={BLOGS_STRINGS.SECTION_TITLE_HIGHLIGHT}
+        tone="neutral"
       />
 
       {hasBlogs ? (
@@ -75,18 +77,18 @@ function BlogsSectionContent() {
           <ScrollReveal animation="up" delay={0.3} className="mt-16 text-center">
             <Link
               to="/blogs"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 border border-zinc-800 hover:border-brand-500/40 hover:bg-brand-500/5 text-zinc-300 hover:text-white rounded-full transition-premium active:scale-95 shadow-lg text-sm font-semibold font-sans"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 text-zinc-300 hover:text-white rounded-md transition-premium active:scale-95 shadow-lg text-sm font-semibold font-sans"
             >
               <span>Explore All Blogs</span>
-              <ArrowRight className="w-4 h-4 text-brand-400" />
+              <ArrowRight className="w-4 h-4 text-zinc-400" />
             </Link>
           </ScrollReveal>
         </>
       ) : (
         /* Sleek modern empty state */
-        <div className="p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-3xl max-w-lg mx-auto shadow-md mt-12">
-          <div className="rounded-[calc(1.5rem-0.25rem)] bg-zinc-950/45 p-8 text-center font-sans">
-            <div className="p-3 bg-zinc-900/40 rounded-full w-12 h-12 flex items-center justify-center mx-auto text-brand-400 border border-white/5 mb-4 animate-pulse">
+        <div className="p-1 bg-zinc-900/10 backdrop-blur-md border border-white/5 rounded-md max-w-lg mx-auto shadow-md mt-12">
+          <div className="rounded-md bg-zinc-950/45 p-8 text-center font-sans">
+            <div className="p-3 bg-zinc-900/40 rounded-full w-12 h-12 flex items-center justify-center mx-auto text-zinc-300 border border-white/5 mb-4 animate-pulse">
               <BookOpen className="w-5 h-5" />
             </div>
             <span className="text-zinc-100 font-bold block text-base mb-2">Stay Tuned for Articles</span>
@@ -109,11 +111,8 @@ export default function BlogsSection() {
       data-text="#f5f5f5"
       data-accent="#2CFF05"
       data-border="rgba(255, 255, 255, 0.10)"
-      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden"
+      className="portfolio-section flex flex-col justify-center py-20 sm:py-24 relative overflow-hidden"
     >
-      {/* Background radial highlight */}
-      <div className="absolute top-1/3 left-0 w-[450px] h-[450px] rounded-full bg-brand-500/2 blur-[150px] pointer-events-none"></div>
-      
       <SectionErrorBoundary sectionName="Blogs Section">
         <BlogsSectionContent />
       </SectionErrorBoundary>

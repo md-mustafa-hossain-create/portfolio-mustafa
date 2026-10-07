@@ -49,7 +49,7 @@ export default function ContactSection() {
       data-text="#f5f5f5"
       data-accent="#2CFF05"
       data-border="rgba(255, 255, 255, 0.10)"
-      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-20 relative overflow-hidden border-t border-zinc-900/50"
+      className="portfolio-section flex flex-col justify-center py-20 sm:py-24 relative overflow-hidden border-t border-zinc-900/50"
     >
       <SectionErrorBoundary sectionName="Contact Section">
         <ContactSectionContent />

@@ -37,7 +37,7 @@ export default function Card({
 
   // Hover transitions
   const interactiveClasses = onClick || hoverEffect
-    ? 'hover:border-border-hover hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4),_0_0_24px_rgba(100,254,66,0.06)] cursor-pointer'
+    ? 'hover:border-zinc-700 hover:shadow-[0_12px_32px_rgba(0,0,0,0.3)] cursor-pointer'
     : 'cursor-default';
 
   // Safe keyboard focus style if interactive

@@ -47,7 +47,7 @@ export default class GlobalErrorBoundary extends Component {
             
             <button
               onClick={this.handleReload}
-              className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl bg-brand-500 text-white font-medium hover:bg-brand-600 transition-colors shadow-[0_0_20px_rgba(var(--brand-500-rgb),0.3)] cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-md bg-brand-500 text-white font-medium hover:brightness-95 transition-colors shadow-lg cursor-pointer"
             >
               <RefreshCcw className="w-4 h-4" />
               Reboot System

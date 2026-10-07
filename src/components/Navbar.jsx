@@ -172,31 +172,11 @@ export default function Navbar() {
             }}
             className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2.5 group cursor-pointer focus:outline-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 rounded-xl"
           >
-            {/* Professional M lettermark: geometric dual-stem M with neon accent underbar and signature dot. */}
+            {/* Professional M lettermark – clean abstract white emblem */}
             <div className="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-200 group-hover:scale-105 shrink-0">
-              <svg viewBox="0 0 32 32" className="w-full h-full" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="navbar-green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#2CFF05" />
-                    <stop offset="100%" stopColor="#00CC00" />
-                  </linearGradient>
-                </defs>
-                {/* Dark rounded-square background */}
-                <rect x="0" y="0" width="32" height="32" rx="6" fill="#0a0a0a" />
-                {/* Subtle inner border */}
-                <rect x="1" y="1" width="30" height="30" rx="5" fill="none" stroke="#1f1f1f" strokeWidth="0.5" />
-                {/* Left stem of M */}
-                <rect x="5.5" y="8.5" width="3.5" height="15" rx="0.75" fill="#F5F5F5" />
-                {/* Right stem of M */}
-                <rect x="23" y="8.5" width="3.5" height="15" rx="0.75" fill="#F5F5F5" />
-                {/* Left diagonal of M */}
-                <polygon points="9,8.5 12.5,8.5 16,15 14.5,15" fill="#F5F5F5" />
-                {/* Right diagonal of M */}
-                <polygon points="23,8.5 19.5,8.5 16,15 17.5,15" fill="#F5F5F5" />
-                {/* Brand-green accent underbar */}
-                <rect x="5.5" y="25" width="21" height="1.25" rx="0.625" fill="url(#navbar-green-grad)" />
-                {/* Neon dot — signature personal touch */}
-                <circle cx="24" cy="9" r="1.5" fill="#2CFF05" />
+              <svg viewBox="0 0 24 28" className="w-full h-full" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="24" height="28" fill="#0a0a0a" />
+                <path d="M4 24 L4 4 L8 4 L8 16 L12 9 L16 16 L16 4 L20 4 L20 24 Z" fill="#F5F5F5" />
               </svg>
             </div>
             <span className="font-sans font-bold text-sm sm:text-base tracking-wider text-white transition-colors uppercase whitespace-nowrap">

@@ -284,6 +284,30 @@ section[id] {
   color: var(--color-brand-300);
 }
 
+/* Keep pointer feedback reserved for controls that perform an action. */
+@media (hover: hover) and (pointer: fine) {
+  a[href],
+  button:not(:disabled),
+  [role="button"],
+  label[for],
+  select,
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea {
+    cursor: text;
+  }
+
+  a[href]:active,
+  button:not(:disabled):active,
+  [role="button"]:active {
+    transform: translateY(1px);
+  }
+}
+
 
 
 /* Fix all section header capsule tag icons layout and size constraints globally */

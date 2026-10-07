@@ -2,7 +2,6 @@ import { User, BookOpen, Code2, Award } from 'lucide-react';
 import { ABOUT_STRINGS, GLOBAL } from '../constants/strings';
 import { INFO_CARDS } from '../constants/data';
 import SectionHeader from '@/shared/components/ui/SectionHeader';
-import GlassCard from '@/shared/components/ui/GlassCard';
 import ScrollReveal from '@/shared/components/ui/ScrollReveal';
 
 /**
@@ -13,9 +12,9 @@ import ScrollReveal from '@/shared/components/ui/ScrollReveal';
  */
 export default function About() {
   const stats = [
-    { label: 'Focus', value: 'Frontend systems', icon: <Code2 className="w-4 h-4 text-brand-400" /> },
-    { label: 'Background', value: 'BCA, 9.09 / 10', icon: <BookOpen className="w-4 h-4 text-brand-400" /> },
-    { label: 'Working style', value: 'Curious & methodical', icon: <Award className="w-4 h-4 text-brand-400" /> }
+    { label: 'Focus', value: 'Frontend systems', icon: <Code2 className="w-4 h-4 text-zinc-300" /> },
+    { label: 'Background', value: 'BCA, 9.09 / 10', icon: <BookOpen className="w-4 h-4 text-zinc-300" /> },
+    { label: 'Working style', value: 'Curious & methodical', icon: <Award className="w-4 h-4 text-zinc-300" /> }
   ];
 
   return (
@@ -26,7 +25,7 @@ export default function About() {
       data-text="#f4f4f5"
       data-accent="#2CFF05"
       data-border="rgba(52, 211, 153, 0.15)"
-      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden border-t border-zinc-900/50"
+      className="portfolio-section flex flex-col justify-center py-20 sm:py-24 relative overflow-hidden border-t border-zinc-900/50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -74,49 +73,49 @@ export default function About() {
           </ScrollReveal>
  
           {/* Right Grid: Core Highlights */}
-          <ScrollReveal animation="right" delay={0.2} className="md:col-span-1 lg:col-span-6 flex flex-col gap-4 justify-center">
+          <ScrollReveal animation="right" delay={0.2} className="md:col-span-1 lg:col-span-6 flex flex-col justify-center border-t border-zinc-800">
             {INFO_CARDS.map((card, idx) => (
-              <GlassCard
+              <div
                 key={idx}
-              className="p-5 flex items-center gap-5 group h-full text-left"
+                className="py-5 flex items-center gap-5 group text-left border-b border-zinc-800"
               >
-                <div className="p-3 bg-zinc-900/60 rounded-xl border border-zinc-800 shrink-0 text-brand-400 group-hover:scale-105 group-hover:border-brand-500/20 group-hover:bg-brand-500/5 transition-premium shadow-sm">
+                <div className="p-3 bg-zinc-900/60 rounded-md border border-zinc-800 shrink-0 text-zinc-300 group-hover:scale-105 group-hover:border-zinc-700 transition-premium shadow-sm">
                   {card.icon}
                 </div>
                 <div>
                   <h4 className="text-[10px] font-sans font-bold text-zinc-500 uppercase tracking-widest leading-none">
                     {card.title}
                   </h4>
-                  <p className="text-sm font-sans font-extrabold text-white mt-1.5 group-hover:text-brand-400 transition-colors leading-none">
+                  <p className="text-sm font-sans font-extrabold text-white mt-1.5 transition-colors leading-none">
                     {card.details}
                   </p>
                   <span className="text-xs text-zinc-400 block mt-1.5 leading-snug">
                     {card.sub}
                   </span>
                 </div>
-              </GlassCard>
+              </div>
             ))}
           </ScrollReveal>
 
         </div>
 
         {/* Achievement Metrics Dashboard Row */}
-        <ScrollReveal animation="up" delay={0.3} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
+        <ScrollReveal animation="up" delay={0.3} className="grid grid-cols-1 sm:grid-cols-3 mt-12 border-y border-zinc-800">
           {stats.map((stat, idx) => (
-            <GlassCard
+            <div
               key={idx}
-              className="p-4 flex flex-col items-center justify-center text-center gap-1.5 group h-full"
+              className="p-5 flex flex-col items-center justify-center text-center gap-1.5 group border-b border-zinc-800 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
             >
-              <div className="p-2 bg-zinc-900/50 rounded-lg border border-zinc-850 shrink-0 text-brand-400 mb-0.5 group-hover:scale-105 transition-premium leading-none">
+              <div className="p-2 bg-zinc-900/50 rounded-md border border-zinc-850 shrink-0 text-zinc-300 mb-0.5 group-hover:scale-105 transition-premium leading-none">
                 {stat.icon}
               </div>
               <span className="text-[10px] font-sans font-bold text-zinc-500 uppercase tracking-widest leading-none">
                 {stat.label}
               </span>
-              <p className="text-base font-sans font-black text-white mt-1 group-hover:text-brand-400 transition-colors leading-none">
+              <p className="text-base font-sans font-black text-white mt-1 transition-colors leading-none">
                 {stat.value}
               </p>
-            </GlassCard>
+            </div>
           ))}
         </ScrollReveal>
 

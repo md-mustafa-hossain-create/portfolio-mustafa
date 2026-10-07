@@ -57,7 +57,7 @@ export default function Footer() {
               id="footer-btn-scroll-top"
               href="#home"
               onClick={handleScrollTop}
-              className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-brand-400 hover:border-brand-500/30 transition-all ml-2"
+              className="p-2 bg-zinc-900 border border-zinc-800 rounded-md text-zinc-400 hover:text-white hover:border-zinc-700 transition-all ml-2"
               aria-label="Scroll to top"
             >
               <ArrowUp className="w-3.5 h-3.5" />

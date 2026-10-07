@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { CONTACT_STRINGS } from '@/constants/strings';
 import { useContactSubmit } from '../hooks/useContactSubmit';
 import Card from '@/shared/components/ui/Card';
@@ -18,6 +19,7 @@ export default function ContactForm() {
   
   // Custom hook containing all the Firebase submission logic
   const { status, submitContact } = useContactSubmit();
+  const prefersReducedMotion = useReducedMotion();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,8 +35,8 @@ export default function ContactForm() {
     <Card
       variant="glass"
       padding="none"
-      hoverEffect={true}
-      className="rounded-[2.5rem] hover:border-brand-500/20 hover:scale-[1.005] group overflow-hidden h-full"
+      hoverEffect={false}
+      className="group overflow-hidden h-full"
     >
       <div className="p-6 sm:p-8 flex flex-col h-full justify-center relative z-10">
         
@@ -77,26 +79,28 @@ export default function ContactForm() {
             placeholder="Hi Mustafa, I would like to talk about..."
           />
 
-          {status === 'success' && (
-            <div role="status" aria-live="polite" className="flex items-center gap-2.5 p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/30 text-emerald-300 text-xs sm:text-sm">
-              <CheckCircle2 className="w-5 h-5 shrink-0" />
-              <span>{CONTACT_STRINGS.SUCCESS_MSG}</span>
-            </div>
-          )}
+          <AnimatePresence mode="wait" initial={false}>
+            {status === 'success' && (
+              <motion.div key="success" role="status" aria-live="polite" initial={prefersReducedMotion ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={prefersReducedMotion ? undefined : { opacity: 0, y: -8 }} transition={{ duration: 0.2, ease: 'easeOut' }} className="flex items-center gap-2.5 p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/30 text-emerald-300 text-xs sm:text-sm">
+                <CheckCircle2 className="w-5 h-5 shrink-0" />
+                <span>{CONTACT_STRINGS.SUCCESS_MSG}</span>
+              </motion.div>
+            )}
 
-          {status === 'error' && (
-            <div role="alert" aria-live="assertive" className="flex items-center gap-2.5 p-4 rounded-xl bg-rose-950/20 border border-rose-900/30 text-rose-300 text-xs sm:text-sm">
-              <AlertCircle className="w-5 h-5 shrink-0" />
-              <span>{CONTACT_STRINGS.ERROR_MSG}</span>
-            </div>
-          )}
+            {status === 'error' && (
+              <motion.div key="error" role="alert" aria-live="assertive" initial={prefersReducedMotion ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={prefersReducedMotion ? undefined : { opacity: 0, y: -8 }} transition={{ duration: 0.2, ease: 'easeOut' }} className="flex items-center gap-2.5 p-4 rounded-xl bg-rose-950/20 border border-rose-900/30 text-rose-300 text-xs sm:text-sm">
+                <AlertCircle className="w-5 h-5 shrink-0" />
+                <span>{CONTACT_STRINGS.ERROR_MSG}</span>
+              </motion.div>
+            )}
 
-          {status === 'timeout' && (
-            <div role="alert" aria-live="assertive" className="flex items-center gap-2.5 p-4 rounded-xl bg-amber-950/20 border border-amber-900/30 text-amber-200 text-xs sm:text-sm">
-              <AlertCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
-              <span>{CONTACT_STRINGS.TIMEOUT_MSG}</span>
-            </div>
-          )}
+            {status === 'timeout' && (
+              <motion.div key="timeout" role="alert" aria-live="assertive" initial={prefersReducedMotion ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={prefersReducedMotion ? undefined : { opacity: 0, y: -8 }} transition={{ duration: 0.2, ease: 'easeOut' }} className="flex items-center gap-2.5 p-4 rounded-xl bg-amber-950/20 border border-amber-900/30 text-amber-200 text-xs sm:text-sm">
+                <AlertCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
+                <span>{CONTACT_STRINGS.TIMEOUT_MSG}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <Button
             id="contact-btn-submit"

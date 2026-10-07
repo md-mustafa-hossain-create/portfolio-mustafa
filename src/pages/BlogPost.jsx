@@ -212,7 +212,7 @@ export default function BlogPost() {
         </p>
         <Link
           to="/blogs"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-brand-500/20 text-xs font-semibold text-zinc-400 hover:text-brand-400 rounded-xl transition-premium cursor-pointer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-xs font-semibold text-zinc-400 hover:text-white rounded-md transition-premium cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Blogs</span>
@@ -238,7 +238,7 @@ export default function BlogPost() {
         <div className="mb-10 flex items-center justify-start">
           <Link
             to="/blogs"
-            className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-900/60 border border-zinc-850 hover:border-brand-500/20 text-xs font-semibold text-zinc-400 hover:text-brand-400 rounded-xl transition-premium cursor-pointer"
+            className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-900/60 border border-zinc-850 hover:border-zinc-700 text-xs font-semibold text-zinc-400 hover:text-white rounded-md transition-premium cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Blogs</span>
@@ -295,7 +295,7 @@ export default function BlogPost() {
           <span>MD Mustafa Hossain</span>
           <Link
             to="/blogs"
-            className="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1 transition-colors animate-fade-in"
+            className="text-brand-400 hover:text-white font-semibold flex items-center gap-1 transition-colors animate-fade-in"
           >
             <span>Back to Blogs</span>
           </Link>

@@ -1,43 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <!-- Primary neon-green brand gradient (matches brand-400: #2CFF05) -->
-    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2CFF05" />
-      <stop offset="100%" stop-color="#00CC00" />
-    </linearGradient>
-    <!-- Subtle glow filter for the accent bar -->
-    <filter id="bar-glow" x="-30%" y="-80%" width="160%" height="400%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
-
   <!-- Dark rounded-square background -->
   <rect x="0" y="0" width="512" height="512" rx="96" fill="#0a0a0a" />
-
-  <!-- Subtle inner border ring -->
-  <rect x="20" y="20" width="472" height="472" rx="80" fill="none" stroke="#1f1f1f" stroke-width="2" />
-
-  <!--
-    Custom "M" lettermark:
-    Two vertical stems with diagonal centre strokes — geometric, structured, confident.
-    Built on a 512x512 grid with ample breathing room.
-  -->
-  <!-- Left stem -->
-  <rect x="96" y="144" width="52" height="224" rx="8" fill="#F5F5F5" />
-  <!-- Right stem -->
-  <rect x="364" y="144" width="52" height="224" rx="8" fill="#F5F5F5" />
-  <!-- Left diagonal (M left-centre) -->
-  <polygon points="148,144 200,144 256,248 230,248" fill="#F5F5F5" />
-  <!-- Right diagonal (M right-centre) -->
-  <polygon points="364,144 312,144 256,248 282,248" fill="#F5F5F5" />
-
-  <!-- Brand-green accent underbar — the signature mark -->
-  <rect x="96" y="388" width="320" height="12" rx="6" fill="url(#green-grad)" filter="url(#bar-glow)" />
-
-  <!-- Neon green dot — punctuation / personal touch -->
-  <circle cx="396" cy="148" r="18" fill="#2CFF05" />
+  <!-- Abstract white "M" emblem: two vertical stems and a central V, minimalistic -->
+  <path d="M128 384 L128 128 L192 128 L192 304 L256 224 L320 304 L320 128 L384 128 L384 384 Z" fill="#F5F5F5" />
 </svg>

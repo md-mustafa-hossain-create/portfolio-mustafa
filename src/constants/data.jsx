@@ -48,19 +48,19 @@ export const ROLES = [
 
 export const INFO_CARDS = [
   {
-    icon: <GraduationCap className="w-5 h-5 text-brand-400" />,
+    icon: <GraduationCap className="w-5 h-5 text-zinc-300" />,
     title: 'Education',
     details: 'BCA Graduate',
     sub: 'Brainware University · 9.09/10 CGPA',
   },
   {
-    icon: <MapPin className="w-5 h-5 text-brand-400" />,
+    icon: <MapPin className="w-5 h-5 text-zinc-300" />,
     title: 'Location',
     details: 'Murshidabad',
     sub: 'West Bengal, India',
   },
   {
-    icon: <Target className="w-5 h-5 text-brand-400" />,
+    icon: <Target className="w-5 h-5 text-zinc-300" />,
     title: 'Goal',
     details: 'Internship / Job',
     sub: 'React Developer roles',
@@ -139,25 +139,25 @@ export const SOCIALS = [
     name: 'LinkedIn',
     icon: <LinkedinIcon className="w-5 h-5 text-brand-400" />,
     url: 'https://www.linkedin.com/in/mdmustafahossain',
-    color: 'hover:text-brand-400 hover:border-brand-500/30'
+    color: 'hover:text-white hover:border-zinc-700'
   },
   {
     name: 'GitHub',
     icon: <GithubIcon className="w-5 h-5 text-zinc-300" />,
     url: 'https://github.com/md-mustafa-hossain-create',
-    color: 'hover:text-brand-400 hover:border-brand-500/30'
+    color: 'hover:text-white hover:border-zinc-700'
   },
   {
     name: 'Twitter / X',
     icon: <TwitterIcon className="w-5 h-5 text-brand-400" />,
     url: 'https://x.com/MDMustafaHussa7',
-    color: 'hover:text-brand-400 hover:border-brand-500/30'
+    color: 'hover:text-white hover:border-zinc-700'
   },
   {
     name: 'Email Direct',
     icon: <Mail className="w-5 h-5 text-brand-400" />,
     url: 'mailto:hussainmustafa2001@gmail.com',
-    color: 'hover:text-brand-400 hover:border-brand-500/30'
+    color: 'hover:text-white hover:border-zinc-700'
   }
 ];
 

@@ -53,14 +53,12 @@ export default function SkillCard({ skill, index }) {
       className="h-full"
     >
       <GlassCard className="p-1.5 group h-full">
-        <div className="absolute top-0 right-0 w-28 h-28 bg-brand-500/5 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500"></div>
-        
         <div className="rounded-md bg-transparent p-6 flex items-center gap-4 h-full relative z-10">
-          <div className="p-3 bg-zinc-950/80 rounded-xl border border-zinc-800/80 group-hover:scale-110 group-hover:border-zinc-700 transition-premium shrink-0 flex items-center justify-center backdrop-blur-sm shadow-sm">
+          <div className="p-3 bg-zinc-950/80 rounded-md border border-zinc-800/80 group-hover:scale-105 group-hover:border-zinc-700 transition-premium shrink-0 flex items-center justify-center backdrop-blur-sm shadow-sm">
             {renderIcon(skill)}
           </div>
           <div className="text-left">
-            <h3 className="text-base font-bold text-white group-hover:text-brand-400 transition-colors">
+            <h3 className="text-base font-bold text-white transition-colors">
               {skill.name || skill.Name}
             </h3>
             <p className="text-xs text-zinc-400 mt-1 leading-snug">

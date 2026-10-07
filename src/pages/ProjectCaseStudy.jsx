@@ -103,7 +103,7 @@ export default function ProjectCaseStudy() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-brand-500/20 text-xs font-semibold text-zinc-400 hover:text-brand-400 rounded-xl transition-premium cursor-pointer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-xs font-semibold text-zinc-400 hover:text-white rounded-md transition-premium cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Home</span>
@@ -133,7 +133,7 @@ export default function ProjectCaseStudy() {
           <div className="lg:col-span-5 lg:sticky lg:top-32 h-fit flex flex-col items-start text-left space-y-6">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-900/60 border border-zinc-850 hover:border-brand-500/20 text-xs font-semibold text-zinc-400 hover:text-brand-400 rounded-xl transition-premium cursor-pointer mb-2"
+              className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-900/60 border border-zinc-850 hover:border-zinc-700 text-xs font-semibold text-zinc-400 hover:text-white rounded-md transition-premium cursor-pointer mb-2"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Portfolio</span>
@@ -184,7 +184,7 @@ export default function ProjectCaseStudy() {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-3 bg-brand-500 hover:bg-brand-400 text-black font-bold rounded-2xl text-xs font-sans transition-all duration-200 hover:scale-[1.01] active:scale-[0.98]"
+                className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-3 bg-brand-500 hover:brightness-95 text-black font-bold rounded-md text-xs font-sans transition-all duration-200 active:scale-[0.98]"
               >
                 <ExternalLink className="w-4 h-4" />
                 <span>Live Demonstration</span>
@@ -196,8 +196,8 @@ export default function ProjectCaseStudy() {
           <div className="lg:col-span-7 space-y-8 text-left">
             
             {/* Mockup Canvas Screen representing App layout */}
-            <div className="relative w-full aspect-video rounded-[2.5rem] p-1.5 bg-zinc-900/30 border border-white/5 shadow-2xl overflow-hidden group">
-              <div className="w-full h-full rounded-[calc(2.5rem-0.375rem)] bg-zinc-950/80 border border-zinc-900 flex flex-col justify-between overflow-hidden relative">
+            <div className="relative w-full aspect-video rounded-md p-1.5 bg-zinc-900/30 border border-white/5 shadow-2xl overflow-hidden">
+              <div className="w-full h-full rounded-md bg-zinc-950/80 border border-zinc-900 flex flex-col justify-between overflow-hidden relative">
                 {/* Visual grid lines backdrop */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(44,255,5,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(44,255,5,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
                 
@@ -216,7 +216,7 @@ export default function ProjectCaseStudy() {
 
                 {/* Central dynamic presentation area */}
                 <div className="flex-grow flex flex-col items-center justify-center p-6 text-center z-10">
-                  <div className="p-4 bg-brand-500/5 border border-brand-500/10 rounded-3xl mb-4 text-brand-400 group-hover:scale-105 transition-transform duration-500">
+                  <div className="p-4 bg-brand-500/5 border border-brand-500/10 rounded-md mb-4 text-brand-400">
                     <Cpu className="w-10 h-10" />
                   </div>
                   <h4 className="text-base font-bold text-white mb-1.5">{project.title} Interface Node</h4>
@@ -308,7 +308,7 @@ export default function ProjectCaseStudy() {
             {/* Footer breadcrumb */}
             <div className="pt-8 border-t border-zinc-850/60 flex items-center justify-between text-xs text-zinc-400 font-medium font-sans">
               <span>Mustafa's Engineering Case Study</span>
-              <Link to="/" className="text-brand-400 hover:text-brand-300 transition-colors">
+              <Link to="/" className="text-brand-400 hover:text-white transition-colors">
                 Back to Home
               </Link>
             </div>

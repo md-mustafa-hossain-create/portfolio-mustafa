@@ -23,14 +23,14 @@ export default function BlogCard({ blog, index }) {
   const isExternal = !!blog.externalUrl;
   
   const cardContent = (
-    <div className="rounded-[calc(1.5rem-0.25rem)] bg-zinc-950/45 p-4 flex flex-col h-full font-sans">
+    <div className="rounded-md bg-zinc-950/45 p-4 flex flex-col h-full font-sans">
       {/* Thumbnail */}
       {blog.coverImage && (
-        <div className="relative w-full h-40 rounded-xl overflow-hidden mb-4 shrink-0 bg-zinc-900">
+        <div className="relative w-full h-40 rounded-md overflow-hidden mb-4 shrink-0 bg-zinc-900">
           <img
             src={blog.coverImage}
             alt={blog.title}
-            className="w-full h-full object-cover group-hover:scale-[1.02] transition-premium"
+            className="w-full h-full object-cover"
           />
           <span className="absolute top-3 left-3 bg-zinc-950/80 border border-white/10 text-xs font-semibold text-zinc-300 px-2 py-0.5 rounded-full backdrop-blur-md">
             {blog.category}
@@ -52,7 +52,7 @@ export default function BlogCard({ blog, index }) {
       </div>
 
       {/* Title & Summary */}
-      <h3 className="text-sm sm:text-base font-bold text-white leading-snug group-hover:text-brand-400 transition-colors line-clamp-2 shrink-0">
+      <h3 className="text-sm sm:text-base font-bold text-white leading-snug line-clamp-2 shrink-0">
         {blog.title}
       </h3>
       <p className="text-xs text-zinc-400 mt-2 line-clamp-3 leading-relaxed flex-grow font-normal">
@@ -68,7 +68,7 @@ export default function BlogCard({ blog, index }) {
             </span>
           ))}
         </div>
-        <div className="text-xs font-semibold text-brand-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+        <div className="text-xs font-semibold text-zinc-300 flex items-center gap-1">
           {isExternal ? (
             <>
               {BLOGS_STRINGS.EXTERNAL_LINK}
@@ -85,7 +85,7 @@ export default function BlogCard({ blog, index }) {
     </div>
   );
 
-  const containerClasses = "p-1 bg-zinc-900/10 border border-white/5 rounded-md hover:border-brand-500/20 transition-colors duration-200 group relative cursor-pointer flex flex-col h-full shadow-md";
+  const containerClasses = "p-1 bg-zinc-900/10 border border-white/5 rounded-md hover:border-zinc-700 transition-colors duration-200 group relative cursor-pointer flex flex-col h-full shadow-md";
 
   if (isExternal) {
     return (

@@ -17,18 +17,18 @@ export default function Button({
   ...props
 }) {
   // Base classes for design system buttons
-  const baseClasses = 'inline-flex items-center justify-center font-sans font-semibold rounded-none select-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-200';
+  const baseClasses = 'inline-flex items-center justify-center font-sans font-semibold rounded-md select-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-200';
 
   // Variant design tokens (WCAG compliant contrast values)
   const variants = {
     // Primary: High contrast dark text on signal amber
-    primary: 'bg-primary hover:bg-brand-600 text-zinc-950',
+    primary: 'bg-primary hover:brightness-95 text-zinc-950',
     // Secondary: Warm copper action for visual contrast
     secondary: 'bg-secondary hover:bg-secondary-hover text-zinc-950',
     // Outline: Transparent bg, thin white border, highlight text
-    outline: 'bg-transparent border border-zinc-700 hover:border-primary text-text-main hover:text-primary',
+    outline: 'bg-transparent border border-zinc-700 hover:border-zinc-500 text-text-main hover:text-white',
     // Text: Clean borderless link-style button
-    text: 'bg-transparent border-none text-text-muted hover:text-primary p-0 shadow-none hover:translate-x-0.5',
+    text: 'bg-transparent border-none text-text-muted hover:text-white p-0 shadow-none',
   };
 
   // Size scale tokens (margins / paddings / heights)

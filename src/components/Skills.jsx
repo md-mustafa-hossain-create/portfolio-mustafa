@@ -52,7 +52,7 @@ export default function Skills() {
       data-text="#f5f5f5"
       data-accent="#2CFF05"
       data-border="rgba(255, 255, 255, 0.10)"
-      className="portfolio-section min-h-[90vh] flex flex-col justify-center py-28 relative overflow-hidden"
+      className="portfolio-section flex flex-col justify-center py-20 sm:py-24 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
