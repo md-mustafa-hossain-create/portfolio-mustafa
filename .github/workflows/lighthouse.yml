@@ -29,7 +29,7 @@ jobs:
 
       - name: Upload Lighthouse report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: mobile-lighthouse-report
           path: lighthouse-report.json
